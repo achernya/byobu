@@ -1,0 +1,2 @@
+# Default windows
+screen -t shell 0 motd+shell

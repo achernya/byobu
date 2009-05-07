@@ -1,0 +1,96 @@
+#!/bin/sh -e
+#
+#    logo: determine which logo to use
+#    Copyright (C) 2008 Canonical Ltd.
+#
+#    Authors: Dustin Kirkland <kirkland@canonical.com>
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, version 3 of the License.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+PKG="byobu"
+
+if [ "$1" = "--detail" ]; then
+	MARKUP="false"
+else
+	MARKUP="true"
+fi
+
+print_logo() {
+	distro="$1"
+	if echo "$distro" | grep -qsi "ubuntu"; then
+		$MARKUP && printf "\005{=b kr}\\\\\005{= ky}o\005{=b kY}/" || printf "\\o/"
+	elif echo "$distro" | grep -qsi "altlinux"; then
+		logo="alt"
+		$MARKUP && printf "\005{= Yk}$logo" || printf "$logo"
+	elif echo "$distro" | grep -qsi "arch"; then
+		logo=" A "
+		$MARKUP && printf "\005{=b wb}$logo" || printf "$logo"
+	elif echo "$distro" | grep -qsi "centos"; then
+		logo="****"
+		$MARKUP && printf "\005{= gw}*\005{= mw}*\005{= yw}*\005{= bw}*\005{=b Wk}" || printf "$logo"
+	elif echo "$distro" | grep -qsi "debian"; then
+		logo=" @ "
+		$MARKUP && printf "\005{= wr}$logo" || printf "$logo"
+	elif echo "$distro" | grep -qsi "fedora"; then
+		logo=" f "
+		$MARKUP && printf "\005{=b bw}$logo" || printf "$logo"
+	elif echo "$distro" | grep -qsi "foresight"; then
+		logo="<@>"
+		$MARKUP && printf "\005{=b Wg}$logo" || printf "$logo"
+	elif echo "$distro" | grep -qsi "gentoo"; then
+		logo=" > "
+		$MARKUP && printf "\005{=b cw}$logo" || printf "$logo"
+	elif echo "$distro" | grep -qsi "mandriva"; then
+		logo=" (* "
+		$MARKUP && printf "\005{=b kc} (\005{=b ky}* " || printf "$logo"
+	elif echo "$distro" | grep -qsi "redhat"; then
+		logo=" RH "
+		$MARKUP && printf "\005{= Rk}$logo" || printf "$logo"
+	elif echo "$distro" | grep -qsi "slackware"; then
+		logo=",S "
+		$MARKUP && printf "\005{=u Bk}$logo" || printf "$logo"
+	elif echo "$distro" | grep -qsi "suse"; then
+		logo="SuSE"
+		$MARKUP && printf "\005{= Wg}$logo" || printf "$logo"
+	elif echo "$distro" | grep -qsi "xandros"; then
+		logo=" X "
+		$MARKUP && printf "\005{= Wr}$logo" || printf "$logo"
+	else
+		false
+	fi
+}
+
+if [ -r "$HOME/.$PKG/logo" ]; then
+	# Allow users to define their own logo
+	cat "$HOME/.$PKG/logo" && exit 0 || true
+fi
+
+if [ -r "$HOME/.$PKG/distro" ]; then
+	# Allow manual override of distro
+	distro=`cat "$HOME/.$PKG/distro"`
+	print_logo "$distro" && exit 0 || true
+fi
+
+if [ -r "/etc/issue" ]; then
+	# Otherwise, check /etc/issue
+	distro=`cat /etc/issue`
+	print_logo "$distro" && exit 0 || true
+fi
+
+# This can be a very expensive operation, do it only
+# if all other methods fail
+distro=`lsb_release -s -a 2>/dev/null`
+print_logo "$distro" && exit 0 || true
+
+# No idea!
+printf " ? "

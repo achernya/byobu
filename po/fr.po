@@ -1,0 +1,164 @@
+# Byobu
+# Copyright (C) 2008 Dustin Kirkland
+# This file is distributed under the same license as the Byobu package.
+# Nicolas Barcet <nicolas.barcet@ubuntu.com>, 2008.
+#
+#: byobu-config:306
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-04-16 18:04-0500\n"
+"PO-Revision-Date: 2008-12-17 23:42+0100\n"
+"Last-Translator: Nicolas Barcet <nicolas.barcet@ubuntu.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: byobu-config:71
+msgid "Remove screen by default at login"
+msgstr ""
+
+#: byobu-config:73
+msgid "Install screen by default at login"
+msgstr ""
+
+#: byobu-config:77
+msgid "Help"
+msgstr ""
+
+#: byobu-config:78
+msgid "Change screen profile"
+msgstr ""
+
+#: byobu-config:79
+msgid "Toggle status notifications"
+msgstr ""
+
+#: byobu-config:80
+msgid "Change keybinding set"
+msgstr ""
+
+#: byobu-config:81
+msgid "Change escape sequence"
+msgstr ""
+
+#: byobu-config:82
+msgid "Create new window(s)"
+msgstr ""
+
+#: byobu-config:83
+msgid "Manage default windows"
+msgstr ""
+
+#: byobu-config:85
+msgid "Exit"
+msgstr ""
+
+#: byobu-config:87 byobu-config:472
+msgid " Byobu Configuration Menu"
+msgstr ""
+
+#: byobu-config:98
+msgid "Okay"
+msgstr ""
+
+#: byobu-config:98 byobu-config:134 byobu-config:150
+#: byobu-config:185 byobu-config:313 byobu-config:355
+#: byobu-config:433
+msgid "Cancel"
+msgstr ""
+
+#: byobu-config:116 byobu-config:143 byobu-config:157
+#: byobu-config:326 byobu-config:380 byobu-config:388
+#: byobu-config:461
+msgid "Menu"
+msgstr ""
+
+#: byobu-config:117
+msgid "Byobu Help"
+msgstr ""
+
+#: byobu-config:134 byobu-config:150 byobu-config:185
+#: byobu-config:313 byobu-config:355 byobu-config:433
+msgid "Apply"
+msgstr ""
+
+#: byobu-config:136
+msgid "Which profile would you like to use?"
+msgstr ""
+
+#: byobu-config:142 byobu-config:156 byobu-config:325
+#: byobu-config:387 byobu-config:459
+msgid "Message"
+msgstr ""
+
+#: byobu-config:151
+msgid "Which set of keybindings would you like to use?"
+msgstr ""
+
+#: byobu-config:165
+msgid "Title: "
+msgstr ""
+
+#: byobu-config:167
+msgid "Command: "
+msgstr ""
+
+#: byobu-config:169
+msgid "Presets: "
+msgstr ""
+
+#: byobu-config:183
+msgid "Add to default windows"
+msgstr ""
+
+#: byobu-config:187
+msgid "Create new window(s):"
+msgstr ""
+
+#: byobu-config:314
+msgid "Toggle status notifications:"
+msgstr ""
+
+#: byobu-config:347
+msgid "Windows:"
+msgstr ""
+
+#: byobu-config:357
+msgid "Select window(s) to create by default:"
+msgstr ""
+
+#: byobu-config:377
+msgid "Screen will be launched automatically next time you login."
+msgstr ""
+
+#: byobu-config:385
+msgid "Screen will not be used next time you login."
+msgstr ""
+
+#: byobu-config:432
+msgid "Escape key: ctrl-"
+msgstr ""
+
+#: byobu-config:435
+msgid "Change escape sequence:"
+msgstr ""
+
+#: byobu-config:473
+msgid "<Tab>/<Alt-Tab> between elements | <Return> Validates"
+msgstr ""
+
+#~ msgid "Error:"
+#~ msgstr "Erreur :"
+
+#~ msgid "exists, but is not a symlink"
+#~ msgstr "existe, mais n'est pas un lien symbolique"
+
+#~ msgid "recommended"
+#~ msgstr "recommandé"
+
+#~ msgid "Choose"
+#~ msgstr "Choisir"

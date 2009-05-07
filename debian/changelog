@@ -1,0 +1,801 @@
+byobu (2.1) jaunty; urgency=low
+
+  * byobu-export: touch an empty .byobu/profile, silence error message
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 06 May 2009 15:33:47 -0500
+
+byobu (2.0-0ubuntu1) karmic; urgency=low
+
+  Renaming project screen-profiles to byobu
+  * bin/users: make the --detail output match the status output
+  * bin/ec2-cost, bin/hostname, bin/ip-address, bin/logo,
+    bin/mem-available, bin/network-down, bin/network-up,
+    bin/updates-available, debian/postrm, debian/preinst,
+    debian/release.sh, debian/rules, screen, screen-launcher-install,
+    screen-profiles, screen-profiles-export, screen-profiles-status,
+    select-screen-profile: abstract the package name (currently,
+    screen-profiles) to a variable
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 05 May 2009 23:04:06 -0500
+
+screen-profiles (1.54-0ubuntu1) karmic; urgency=low
+
+  * bin/ip-address: don't color the whitespace
+  * bin/cpu-count: don't echo blank line in detailed status
+  * bin/updates-available: print "None" in detailed status, if no updates
+    are available
+  * screen-profiles-status: ensure that all detail scripts get a chance
+    to run
+  * debian/copyright: there have *never* been icons in screen-profiles;
+    remove the CC2.5 license statement, as this was erroneously copied over
+    from another package for the initial packaging
+  * screen-profiles-status: color code and format the detailed status output
+  * screen-profiles-status-detail: use less -R to render ansi escaped
+    color formatting correctly; seed the search pattern with the header
+    for each section
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Sat, 02 May 2009 14:29:06 -0500
+
+screen-profiles (1.53-0ubuntu1) karmic; urgency=low
+
+  * screen: some users gripe about the default launched window being
+    called "motd+shell", LP: #369397
+  * motd+shell, screen: clean up temp file
+  * bin/users, screen-profiles.1: when counting users, count remote ssh
+    sessions
+  * bin/ec2-cost: update location of ec2_version file
+  * debian/install, screen-profiles-export, screen-profiles-status,
+    screen-profiles-status.1: move status gathering scripts from /var/lib
+    to /usr/lib, LP: #369368
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 29 Apr 2009 18:57:27 -0500
+
+screen-profiles (1.52-0ubuntu1) karmic; urgency=low
+
+  * bin/updates-available: drop leading "Inst" in detailed report
+  * bin/logo: add logo for altlinux
+  * screen: drop the -t title, causes hangs if user defines shelltitle,
+    LP: #368925
+  * profiles/profile.skel: swap the position of ip-address and menu
+  * screen-profiles.1: document all notifications, LP: #369040
+  * profiles/common, screen: create a temp file to use on screen launch,
+    consisting of the profile plus the windows, but don't source default
+    windows otherwise as this breaks F5-refresh, LP: #368786
+  * screen-profiles: ensure that all registered keybindings get updated
+    if the user changes their escape sequence, LP: #368937
+  * screen-launcher-install, screen-launcher-uninstall: support
+    screen-by-default installation for zsh users, LP: #368960
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 29 Apr 2009 02:28:48 -0500
+
+screen-profiles (1.51-0ubuntu1) karmic; urgency=low
+
+  * bin/cpu-freq: only print cpu-freq if available
+  * bin/hostname: hostname -s fails sometimes, it seems
+  * screen: respect $SCREENRC environment variable, LP: #367250
+  * bin/ip-address: add an ip-address status script
+
+  Detailed status
+  * bin/*: add special actions if --detail is specified; basically,
+    print all relevant information on stdout without formatting
+  * screen-profiles-status: add support for --detail, loop through
+    all status scripts with --detail specified
+  * screen-profiles-status-detail: wrapper using sensible-pager
+  * screen-profiles-status-detail.1: documentation added
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 27 Apr 2009 21:55:38 -0500
+
+screen-profiles (1.50-0ubuntu1) jaunty; urgency=low
+
+  * keybindings/common, screen-profiles, select-screen-profile: add a
+    carriage return to the F5-refresh keybinding
+  * keybindings/common, doc/help.txt: change F8 from advanced help to
+    window re-titling (over time, this is far more useful than adv help)
+  * profiles/plain: renamed to NONE to more clearly convey the fact that
+    if you choose this profile, you are not, in fact, using a supplied
+    screen-profile; correct broken symlinks in the 'screen' script
+  * select-screen-profile: set the default, recommended, simple profile
+    to 'light'
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 23 Apr 2009 16:59:59 -0500
+
+screen-profiles (1.49-0ubuntu1) jaunty; urgency=low
+
+  * motd+shell: should use exec to run shell, LP: #365115
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 22 Apr 2009 21:50:00 -0500
+
+screen-profiles (1.48-0ubuntu1) jaunty; urgency=low
+
+  Drop the distro name in generated profiles
+  * debian/install: fix installation of profiles
+  * debian/rules: don't create the ubuntu profile symlink
+  * debian/screen-profiles-extras.install: no longer need to install
+    the distro-specific profiles
+  * profiles/generate: generate profiles which do not have ubuntu-
+    prepended
+  * select-screen-profile: remove the ubuntu specific profile handling
+  * screen: fix broken symlinks to ubuntu-* profiles
+  * screen-profiles: drop special ubuntu handling
+  * screen-profiles-export: drop ubuntu prepending
+
+  * screen: default to the light profile, if unspecified; this should be
+    acceptable now that the F9:Menu prompt is always shown, and from there,
+    any user can easily change their profile; just touch the windows config
+    file since F5 reloads reopens all windows; launch with motd+shell if
+    no args to screen are specified
+  * keybindings/common: don't force users to name a window on F2 window
+    creation
+  * debian/postrm: remove the || true on the diversion removal, per Debian
+    ITP; I suppose we want to know if the diversion removal failed
+  * screen-profiles, screen-profiles-status: default uptime status to 'on',
+    generally useful, and pretty compact
+  * bin/mem-available: fix subtle bug where whitespace is printed if in a
+    totally default (no status file) configuration
+  * screen-profiles-status.1, debian/rules: manpage added
+  * screen-profiles-export: randomly generate tarball name, if unspecified
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 21 Apr 2009 16:45:35 -0500
+
+screen-profiles (1.47-0ubuntu1) jaunty; urgency=low
+
+  * screen-profiles-status: stop grepping after one match, subtle perf
+    improvement
+  * bin/logo: lsb_release is really expensive, try /etc/issue first,
+    and fall back to lsb_release if that fails
+  * bin/date, bin/time: last release installed 644 for some reason?
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Sat, 18 Apr 2009 16:10:35 -0500
+
+screen-profiles (1.46-0ubuntu1) jaunty; urgency=low
+
+  * bin/date, bin/time, screen-profiles-status, screen-profiles-export,
+    screen-profiles: allow for configuring on/off the date and time
+    status, LP: #359050
+  * bin/logo: added logos for foresight and xandros
+  * bin/battery: use the more intense yellow for lower battery percentage
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 17 Apr 2009 10:26:40 -0500
+
+screen-profiles (1.45-0ubuntu1) jaunty; urgency=low
+
+  [ Dustin Kirkland ]
+  * bin/cpu-freq: fix for powerpc LP: #352286, fix for arm LP: #362157,
+    always report in GHz, round to nearest hundred
+  * bin/uptime: don't print seconds, since we don't update often enough
+  * bin/*: route and ifconfig are in /sbin, fully qualify
+  * Performance improvements, LP: #360759
+    - screen-profiles-status: use home bin scripts, if available first,
+      then fallback to system-wide, allows for local overrides; comment
+      out nice and ionice calls;  this *really* slows down startup
+    - bin/release: eliminate one expensive lsb_release call
+    - bin/updates-available: background updates checking processes,
+      let them write to cache, and let the next cache check pick up the
+      changes
+  * debian/control: add a versioned dependency on python-newt, as
+    screen-profiles appears to crash on gutsy systems (but is okay on
+    hardy systems), LP: #346603
+
+  [ Jon Bernard <bernardj@gmail.com> ]
+  * debian/control: fix typo in screen-profiles-extras description
+
+  [ Steven Danna <ssd7@pitt.edu> ]
+  * bin/battery: hide percentage when battery is in charged state
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 16 Apr 2009 13:40:00 -0500
+
+screen-profiles (1.44-0ubuntu1) jaunty; urgency=low
+
+  * bin/updates-available: print one ! for updates, two !! for security
+    updates available (should have a unit for each item)
+  * profiles/profile.skel: updates-available and reboot-required should
+    be over with the rest of the status
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 08 Apr 2009 14:43:23 -0700
+
+screen-profiles (1.43-0ubuntu1) jaunty; urgency=low
+
+  [ Dustin Kirkland ]
+  New status notifiers, LP: #357911
+  * bin/logo: allow users to define their own logo
+  * bin/processes: display a count of the running processes
+  * bin/network-down, bin/network-up: added network transmit status
+  * bin/wifi-quality: show wireless signal quality
+  * bin/*, profiles/profile.skel: make all status scripts handle their
+    own colors and trailing whitespace;  this should help alleviate the
+    16-color-change limitation on un-patched screens;  it also simplifies
+    the hardstatus string significantly, LP: #357917
+  * profiles/profile.skel: move reboot-required and updates-available to
+    the early part of the status string, since these require action
+  * screen-profiles-status: new, central script for all status actions;
+    allows us to centralize some things, like enable/disable checking
+    and process nice-ness, LP: #357923
+
+  [ Raphaël Pinson and Dustin Kirkland ]
+  * bin/battery, bin/users, bin/uptime, profiles/common, screen-profiles:
+    added new status items for battery state, number of users, and system
+    uptime, LP: #357911
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 08 Apr 2009 11:49:15 -0700
+
+screen-profiles (1.42-0ubuntu1) jaunty; urgency=low
+
+  [ Dustin Kirkland ]
+  * bin/cpu-freq: fix cpu freq for powerpc hardware, LP: #352286;
+    use 2 decimals for GHz (bring this down to 1 decimal when cpus hit 10GHz)
+  * debian/postinst, debian/prerm, screen: remove some maintainer hacks
+    that should be cleaned up before Jaunty GA, LP: #352291
+  * po/*: screen-profiles-export translation template
+  * profiles/common: added 'altscreen on', which cleans the screen for
+    programs that support this, such as vi and emacs, LP: #349677
+  * bin/logo, profiles/common, profiles/generate: dynamically print logo
+    LP: #352632
+  * screen-profiles-export, screen-profiles-export.1: drop distro selection,
+    no longer needed
+  * added logo for Arch linux
+
+  [ Adi Roiban ]
+  * debian/install, debian/rules, po/POTFILES.python, po/POTFILES.sh,
+    po/es.po, po/fr.po, po/screen-profiles.pot: LP: #347521, i18n support
+    in the screen-profiles build and install
+
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 31 Mar 2009 17:31:10 -0500
+
+screen-profiles (1.41-0ubuntu1) jaunty; urgency=low
+
+  [ Dustin Kirkland ]
+  * profiles/logos/gentoo: added a gentoo logo
+  * profiles/logos/mandriva: added a mandriva logo
+  * profiles/generate-profiles: reorganize cleaning and echo's
+  * debian/rules: generate profiles as part of the build, rather than
+    get-orig-source
+  * bin/release: determine release from /etc/issue if lsb-release not found;
+    don't use fully qualified path for lsb_release as it seems this has moved
+    around (see Dapper); for Ubuntu use -d, but use -r -i for other os's
+  * licenses updated to GPLv3 (dropped "or later" clause)
+  * screen-profiles-export: new script, for exporting a profile to systems
+    where screen-profiles are not installed
+  * screen-profiles-export.1: manpage for new script
+  * debian/install: install screen-profiles-export
+  * profiles/generate-profiles renamed to profiles/generate
+
+  [ James Wilcox ]
+  * bin/updates-available: support SUSE's zypper
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Sat, 28 Mar 2009 13:31:39 -0500
+
+screen-profiles (1.40-0ubuntu1) jaunty; urgency=low
+
+  * bin/updates-available: cache /var/run/updates-available locally, to
+    persist across reboots, LP: #344993
+  * profiles/logos/suse: added a simple SuSE green on white logo
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 18 Mar 2009 14:17:30 -0500
+
+screen-profiles (1.39-0ubuntu1) jaunty; urgency=low
+
+  * debian/screen-profiles-extras.install: new package, providing the
+    additional, color profiles, LP: #342244
+  * debian/control: suggest screen-profiles-extra, and create the package
+  * screen: recommend the screen-profiles-extras package, if the user's
+    chosen profile isn't readable
+  * select-screen-profile: silence stderr on ls
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 13 Mar 2009 12:53:09 -0500
+
+screen-profiles (1.38-0ubuntu1) jaunty; urgency=low
+
+  * screen-profiles: add support for toggling on/off each status item
+  * bin/arch: new status notifier, default is 'off'
+  * bin/*: speed these up by dropping the 'basename' shell call
+  * profiles/common: change the refresh on status items that don't change
+    to once-a-day; add arch
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 13 Mar 2009 00:18:59 -0500
+
+screen-profiles (1.37-0ubuntu1) jaunty; urgency=low
+
+  * bin/menu: make internationalizable menu prompt
+  * debian/rules: get-po from menu
+  * bin/*: test if enabled/disabled before executing, LP: #341557
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 12 Mar 2009 02:33:59 -0500
+
+screen-profiles (1.36-0ubuntu1) jaunty; urgency=low
+
+  * profiles/profile.skel: Menu:<F9> white text on dark background
+  * profiles/logos/debian: red on white for the Debian logo
+  * bin/release: improve printing of release information
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 10 Mar 2009 16:44:54 -0500
+
+screen-profiles (1.35-0ubuntu1) jaunty; urgency=low
+
+  [ Adrien Cunin ]
+  * Fixed Vcs-Bzr url
+  * Don't install README as changelog, it's already installed as doc
+  * Fixed bin/whoami's header which had bin/hostname's one
+  * Minor fix in the french translation
+
+  [ Dustin Kirkland ]
+  * bin/ec2-cost: fix &2>1 typo, LP: #339774
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 08 Mar 2009 23:41:23 -0500
+
+screen-profiles (1.34-0ubuntu1) jaunty; urgency=low
+
+  Fixes for LP: #339186
+  * screen-profiles: remove welcome screen toggle support; collapsed into a
+    tooltip on the status line
+  * windows/common: remove screen-profiles default window; now launched from
+    tooltip
+  * profiles/profile.skel: add Menu:F9 tool tip to far right of window bar
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Sat, 07 Mar 2009 08:51:16 -0600
+
+screen-profiles (1.33-0ubuntu1) jaunty; urgency=low
+
+  * screen-launcher: add little bash hack to ensure that PROMPT_COMMAND gets
+    displayed and gnome-title is updated, LP: #338722
+  * debian/control: build-depend on gettext-base, in case the builder needs to
+    run get-po
+  * bin/ec2-cost: trivial interface detection fix, nice the apt checks
+  * bin/hostname: improve performance
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Sat, 07 Mar 2009 01:11:20 -0600
+
+screen-profiles (1.32-0ubuntu1) jaunty; urgency=low
+
+  * bin/ec2-cost: since route -n is being used, must grep for 0.0.0.0,
+    LP: #336955
+  * debian/postinst, debian/prerm: add/remove symlink for bin scripts to
+    /var/lib/screen-profiles (should be removed before Jaunty GA)
+  * profiles/common, debian/install: install helper scripts into
+    /var/lib/screen-profiles rather than /usr/share/screen-profiles/bin,
+    LP: #336961
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 02 Mar 2009 17:46:42 -0600
+
+screen-profiles (1.31-0ubuntu1) jaunty; urgency=low
+
+  * keybindings/common, profiles/common, profiles/plain,
+    profiles/profile.skel: replace ~ with $HOME, LP: #336208
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 01 Mar 2009 10:26:13 -0600
+
+screen-profiles (1.30-ubuntu1) jaunty; urgency=low
+
+  * screen-profiles: note <F5> profile refresh key, LP: #335922; use single
+    <Back> button instead of 2 <Okay> <Exit> buttons when there's only really
+    one path, LP: #335923; standardize all buttons to the same words
+  * screen: revert "clear" changes
+  * select-screen-profile: align profile options properly, LP: #335943;
+    order profile options better, LP: #335944; match "F5" text to that in
+    screen-profiles
+  * doc/help.txt: improve help text
+  * po/*: text updated
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Sat, 28 Feb 2009 12:19:04 -0600
+
+screen-profiles (1.29-0ubuntu1) jaunty; urgency=low
+
+  * bin/ec2-cost: add --force, and --detail mode for stand-alone runs; test for
+    existence of /etc/ec2-version for Amazon instance (LP: #335274), allow
+    local use to turn ec2-cost on
+  * bin/updates-available, keybindings/common, profiles/common, screen,
+    screen-profiles, select-screen-profile, select-screen-profile.1: updated
+    to collapse ~/.screenrc-* into ~/.screen-profiles/*, LP: #335275
+  * screen: added a hack to move ~/.screenrc-* into ~/.screen-profiles/*;
+    this hack should be removed after Jaunty GA (only affects upgrading
+    Alpha users), clear after screen exit (cleans up misleading status bar)
+  * screen-launcher: drop santizer code; no longer necessary; handled by the
+    screen wrapper, and screen patched to ignore missing sourced files.
+  * bin/ec2-cost: speed up route with -n
+  * screen-profiles.1: Add a note about PuTTY's odd key mapping for F1-F4,
+    LP: #317550
+  * keybindings/common, doc/help.txt: Change F5 from kill window to hot-reload
+    profile (killing a window is easy enough, with 'exit' command)
+  * profiles/*: provide other colored profiles
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 27 Feb 2009 16:20:41 -0600
+
+screen-profiles (1.28-0ubuntu1) jaunty; urgency=low
+
+  * bin/ec2-cost: update the hostname regex to work with the latest Ubuntu
+    ec2 beta, LP: #335274
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 26 Feb 2009 22:50:12 -0600
+
+screen-profiles (1.27-0ubuntu1) jaunty; urgency=low
+
+  * Fix for LP: #333189:
+    - keybindings/common: add profile reload shortcut, "ctrl-a ~"
+    - screen-profiles: updated messages to point to ^a ~
+    - po/*: updated for the new messages
+  * Fix for LP: #333180
+    - screen-profiles: add toggle for auto launch of welcome
+    - po/*: updated for the new messages
+  * Fix for LP: #332890
+    - bin/updates-available: prefer /var/run/updates-available over
+      ~/.screenrc-updates-available, if touched more recently
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 23 Feb 2009 14:59:26 -0600
+
+screen-profiles (1.26-0ubuntu1) jaunty; urgency=low
+
+  Fixes for LP: #331648
+  * bin/whoami: report user logged in
+  * bin/hostname: report hostname
+  * profiles/common, debian/install: add whoami, hostname
+  * profiles/profile.skel: append user@host to the far right of window bar
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 19 Feb 2009 10:55:04 -0600
+
+screen-profiles (1.25-0ubuntu1) jaunty; urgency=low
+
+  * screen: don't prompt with select-screen-profile, if ~/.screenrc exists
+    and ~/.screenrc-profile does not, LP: #330322
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 16 Feb 2009 20:41:24 -0600
+
+screen-profiles (1.24-0ubuntu1) jaunty; urgency=low
+
+  * screen-profiles: remove the scroll bar on the help page, LP: #330276
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 16 Feb 2009 16:34:32 -0600
+
+screen-profiles (1.23-0ubuntu1) jaunty; urgency=low
+
+  * profiles/common, profiles/plain: remove double-sourcing of /etc/screenrc,
+    LP: #328365
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 11 Feb 2009 23:26:46 -0600
+
+screen-profiles (1.22-0ubuntu1) jaunty; urgency=low
+
+  * profiles/plain: rather than symlinking to /etc/screenrc, source it, and
+    then source ~/.screenrc to ensure that the user's local customizations
+    are loaded, LP: #328312
+  * debian/install: install plain profile
+  * debian/rules: drop the symlink to /etc/screenrc
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 11 Feb 2009 22:22:03 -0600
+
+screen-profiles (1.21-0ubuntu1) jaunty; urgency=low
+
+  * motd+shell, motd+shell.1: trivial script to print the motd then launch
+    a shell; manpage accordingly, fixes for LP: #328066
+  * windows/common: use motd+shell for shell window, drop motd window
+  * debian/install: install motd+shell
+  * debian/rules: install motd+shell.1 manpage
+  * doc/help.txt, screen-profiles: try hard to get the help text to fit
+    on a tty console screen
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 11 Feb 2009 08:58:24 -0600
+
+screen-profiles (1.20-0ubuntu1) jaunty; urgency=low
+
+  * profiles/logos/*: remove unneeded trailing formatting
+  * screen-launcher-install: no longer need the pruning code, since we just
+    call screen-launcher-uninstall
+  * bin/*: added gpl/copyright header
+  * bin/ec2-cost, profiles/common, debian/install: initial script for
+    estimating ec2 cost
+  * bin/updates-available: write out local cache of updates available; add !
+    only if there are security updates
+  * debian/rules: drop po4a rule, no longer valid
+  * screen-profiles-helper renamed to screen-profiles; updated all references
+    LP: #315886
+  * select-screen-profile, screen-profiles: update translation handling
+    and inline documentation
+  * bin/reboot-required: simplified
+  * bin/cpu-freq: simplified, made more efficient
+  * bin/cpu-count: simplified
+  * bin/ec2-cost: exit immediately if not running in EC2
+  * profiles/common: run cpu-freq, mem-used, and reboot-required every 2
+    seconds (as these are cheap and dynamic)
+  * profiles/skel: add ec2-cost to status bar
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 09 Feb 2009 15:07:29 -0600
+
+screen-profiles (1.19-0ubuntu1) jaunty; urgency=low
+
+  * screen: wrapper script should add a -c arg, and specify your chosen
+    profile, and ensure that .screenrc at least exists, prevent recursion
+    from happening to upgrading users by pruning source of ~/.screenrc-profile
+    from ~/.screenrc, LP: #323756
+  * screen-launcher-install: test executability of screen-launcher; install to
+    .profile unconditionally, and only .bash_profile and .bash_login if they
+    exist; sanitize the environment; LP: #319691, LP: #321869
+  * screen-launcher-uninstall: test writability of file to prune; prune from
+    .profile, .bash_profile, and .bash_login
+  * screen-profiles-helper: update auto-launch-on-login detection accordingly
+  * windows/common: start counting at 1, add a window for watching /etc/motd
+  * profiles/profile.skel, profiles/*: source the user's local ~/.screenrc
+    as a last step (allowing for overrides)
+  * select-screen-profile: don't mess with the user's ~/.screenrc file here;
+    only set up the ~/.screenrc-profile symlink
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 03 Feb 2009 10:24:28 +0100
+
+screen-profiles (1.18-0ubuntu1) jaunty; urgency=low
+
+  * debian/install: install all non-ubuntu profiles into
+    /usr/share/screen-profiles/profiles/misc; install the ubuntu-light
+    profile as "ubuntu-light"
+  * debian/rules: call the generate-profiles script as part of the
+    get-orig-source target; dh_link the ubuntu-light profile to ubuntu (to
+    maintain legacy compatibility to existing ~/.screenrc-profile's)
+  * profiles/debian,fedora,redhat,ubuntu: removed since these are auto
+    generated now
+  * profiles/debian-dark,debian-light,fedora-dark,fedora-light,redhat-dark,
+    redhat-light,ubuntu-dark,ubuntu-light: new, autogenerated profiles
+  * profiles/generate-profiles: shell script that will generate profiles
+    using a skel file and a set of custom "logos"
+  * profiles/logos/*: extracted the unique logo component of each profile
+    and dropped in here
+  * profiles/profile.skel: skeleton profile functionality, to be sed-upon
+    by the generate-profiles script
+  * select-screen-profile: some hackery to work around the fact that we now
+    have a 'misc' directory in the profile listing, as well as a possibly
+    duplicated ubuntu and ubuntu-light profiles
+  * select-screen-profile & screen: move the environment sanitation code
+    to the screen script, such that it is executed each time screen is run,
+    rather than on screen profile selection only
+  * screen-profiles-helper: add support for keybinding selection, LP: #321735
+  * debian/install, keybindings/none: install an empty set of keybindings for
+    the "none" selection
+  * profiles/common: strip out the automatic loading of the common
+    keybindings now that each user sets this in their local
+  * profiles/generate-profiles, profiles/profile.skel: drop the grep of the
+    caption, put it the skeleton
+  * select-screen-profile: remove (), LP: #322833
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Sat, 31 Jan 2009 19:40:51 +0100
+
+screen-profiles (1.17-0ubuntu1) jaunty; urgency=low
+
+  * screen: wrapper script for calling select-screen-profile on a per-user,
+    first-run basis
+  * preinst, postrm: maintainer scripts to dpkg-divert screen to screen.real
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 27 Jan 2009 15:47:46 -0500
+
+screen-profiles (1.16-0ubuntu1) jaunty; urgency=low
+
+  * select-screen-profile: limit erroneous attempts to 5; make the "plain"
+    profile default; remove the "recommended" pointer
+  * screen-profiles-helper: drop the "recommended" pointer
+  * doc/help.txt: make the help text more readable
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 27 Jan 2009 14:42:27 -0500
+
+screen-profiles (1.15-0ubuntu1) jaunty; urgency=low
+
+  * profiles/ubuntu: Ubuntu pseudo-logo looks better on dark black
+  * select-screen-profile: append -light to default Ubuntu profile
+  * debian/rules, debian/install: automatically generate and install an
+    ubuntu-dark themed profile, thanks to Tyler Willingham for the
+    inspiration
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 26 Jan 2009 15:22:44 -0600
+
+screen-profiles (1.14-0ubuntu1) jaunty; urgency=low
+
+  * bin/mem-used: fix calculation to account for buffers and cache
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 22 Jan 2009 23:03:39 -0600
+
+screen-profiles (1.13-0ubuntu1) jaunty; urgency=low
+
+  * bin/updates-available: fix bug when no updates are available
+  * bin/mem-used, profiles/common, profiles/ubuntu: add memory usage
+    information
+  * doc/help.txt: updated help page
+  * keybindings/common: F12 -> lockscreen
+  * debian/control, bin/*: remove dependencing on bc by using awk
+  * profiles/common: print the \o/ logo on a slightly darker background to
+    make it easier to see; print the mem-used after the mem-avail and a comma
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 21 Jan 2009 23:58:56 -0600
+
+screen-profiles (1.12-0ubuntu1) jaunty; urgency=low
+
+  [ Dustin Kirkland ]
+  * profiles/common, select-screen-profile: add support for sourcing
+    individual user's ~/.screenrc-keybindings file
+  * screen-launcher: sanitize user environment by touching sourced files,
+    in case they don't exist
+  * Updated several scripts license header to point to the GPLv3, which
+    is the license this package uses (not GPLv2)
+
+  [ Dustin Kirkland and Nicolas Barcet]
+  * screen-profiles-helper: add HOME, SHARE, DOC global variables and use
+    them where possible; add functionality to change the escape key
+    sequence; dynamically populate current escape sequence in the help.txt
+    display, LP: #317675
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 21 Jan 2009 01:39:31 -0600
+
+screen-profiles (1.11-0ubuntu1) jaunty; urgency=low
+
+  * profiles/ubuntu: change cpu/memory colors to match those of the gnome
+    panel system monitor colors for cpu/memory
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 20 Jan 2009 15:43:31 -0600
+
+screen-profiles (1.10-0ubuntu1) jaunty; urgency=low
+
+  * debian/control: debhelper 6; add explanation to the description as to why
+    the Suggests are useful; add Enhances note
+  * debian/rules: use -i in the binary-indep section, remove unneeded dh_clean
+    arguments
+  * profiles/ubuntu: remove the |-separators
+  * bin/updates-available: allow for faster startup by skipping the apt-check
+    on initial run
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 19 Jan 2009 22:45:25 -0600
+
+screen-profiles (1.9-0ubuntu1) jaunty; urgency=low
+
+  [Nicolas Barcet]
+  * use gettext in screen-profiles-helper (LP: #317245)
+
+  [ Dustin Kirkland ]
+  * keybindings/common: fix leading whitespace on new window creation
+    LP: #317558
+  * keybindings/common, doc/help.txt: change the default escape sequence
+    back to ctrl-a
+  * profiles/common, bin/updates-available: the updates-available script now
+    caches its value, expiring that value every 60 minutes; so subsequent
+    checks are much cheaper;  we can allow the screen status script to run
+    more frequently now, since most will be cache checks; we'll really benefit
+    from this in Jaunty
+  * debian/control: remove buildeps on gettext, po4a, which are only called
+    in the prebuild; depend on ${misc:Depends} with debhelper >= 5
+  * debian/rules: use dh_testdir in get-orig-source, dh_clean to clean up
+    build; run as 'debian/rules get-orig-source'; removing dh_installdirs as
+    its not needed; add dh_md5sums
+  * debian/dirs: not needed, removing
+  * debian/copyright: updated to use canonical.com address, attribute
+    Canonical copyright, and mention Nick as co-author
+  * select-screen-profile.1: fixed typo
+  * bin/*, *: use -e for shell scripts
+  * bin/updates-available: cache updates available count in the user's
+    homedir, rather than world-writable /var/tmp (race conditions exist)
+  * screen-launcher.1, screen-profiles-helper.1: new manpages
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 16 Jan 2009 16:45:05 -0600
+
+screen-profiles (1.8-0ubuntu1) jaunty; urgency=low
+
+  [ Dustin Kirkland ]
+  * screen-profiles-helper: fix crash on startup, when
+    ~/.screen-profiles-helper does not exist
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 12 Jan 2009 09:11:15 -0600
+
+screen-profiles (1.7-0ubuntu1) jaunty; urgency=low
+
+  [ Dustin Kirkland ]
+  * screen-install, screen-remove: renamed to screen-launcher-install,
+    screen-launcher-uninstall
+
+  [ Nicolas Barcet ]
+  * Add toggles to fix bugs LP: #315884 and LP: #315885 for help screen and
+    install of screen by defaults
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 12 Jan 2009 00:53:20 -0600
+
+screen-profiles (1.6-0ubuntu1) jaunty; urgency=low
+
+  [ Dustin Kirkland ]
+  * debian/install: no need to install the debian profile in ubuntu
+  * debian/rules: clean up comments
+  * profiles/ubuntu: zero-fill the hour component of the timestamp
+  * bin/updates-available: add some rudimentary caching mechanism for updates,
+    will make screen launch *much* faster on <= Ubuntu 8.10
+  * screen-install, screen-remove: renamed to screen-launcher-install,
+    screen-launcher-uninstall
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 12 Jan 2009 00:47:19 -0600
+
+screen-profiles (1.5-0ubuntu1) jaunty; urgency=low
+
+  [ Dustin Kirkland ]
+  * bin/mem-available: added a memory count script
+  * bin/load-average: added a load average script
+  * debian/install, profiles/common, profiles/ubuntu.screenrc:
+    updated with mem and load status scripts
+  * profiles/common: fix scrollback, LP: #309393
+  * profiles/*.screenrc: renamed to drop the ".screenrc" bit as this was
+    unnecessary;  this will break early users, they will need to re-run
+    select-screen-profile to fix
+  * screen-launcher, screen-install, debian/install: install screen-launcher
+    to /usr/bin, drop the symlinking to ~/.screen-launcher, just install by
+    adding /usr/bin/screen-launcher to ~/.bashrc; install screen-launcher
+    to both bashrc and bash_profile
+
+  [Nicolas Barcet]
+  * Allow selecting which windows are opened by default in
+    screen-profiles-helper
+  * Allow help message not to be displayed when starting
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 09 Jan 2009 17:45:03 -0600
+
+screen-profiles (1.4-0ubuntu1) jaunty; urgency=low
+
+  [ Dustin Kirkland ]
+  * profiles/*: Fix tab mangling, LP: #309882; print cpu count in black;
+    remove darker background color of the Ubuntu logo, name, and clock
+  * keybindings/common: use F7 for scrollback mode
+  * doc/help.txt: updated F7 documentation
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 07 Jan 2009 17:44:18 -0600
+
+screen-profiles (1.3-0ubuntu1) jaunty; urgency=low
+
+  [ Dustin Kirkland ]
+  * doc/help.txt: Updated to reflect new F-key mappings
+  * keybindings/common: Map F6 to detach session
+  * select-screen-profile: Test link against arg
+  * bin/cpu-count: remove whitespace
+  * bin/release: get rid of "(development branch)" string
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 07 Jan 2009 15:43:35 -0600
+
+screen-profiles (1.2-0ubuntu1) jaunty; urgency=low
+
+  [ Jamie Strandboge ]
+  * update help.txt
+
+  [ Dustin Kirkland ]
+  * bin/updates-available: add missing print statements
+  * keybindings/common: rework the common keybindings to use the F-keys
+    to ensure that they work in both gnome-terminal and the tty console
+
+  [Nicolas Valcárcel]
+  * Spanish translations
+
+  [ Nicolas Barcet ]
+  * First try at screen-profile-helper
+  * Allow select-screen-profile to not run interactively
+  * screen-profile-helper allows to create new windows
+  * screen-profile-helper allows to select profiles
+  * screen-profile-helper allows to install screen by default
+  * Now uses python-newt instead of python-dialog
+  * Add framework for useful windows creation
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 06 Jan 2009 19:44:44 -0600
+
+screen-profiles (1.1-0ubuntu1) jaunty; urgency=low
+
+  [ Nicolas Barcet ]
+  * Key binding framework basis
+  * Added some sensible key bindings
+  * First pot and translation to french
+
+  [ Dustin Kirkland ]
+  * created keybindings directory, moved keybindings there
+  * removed po4a directory, in favor of Nick's po directory
+  * changed 'less' to /usr/bin/sensible-pager, depend on debianutils
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 17 Dec 2008 23:46:45 -0600
+
+screen-profiles (1.0-0ubuntu1) jaunty; urgency=low
+
+  [ Dustin Kirkland ]
+  * Initial upload (LP: #308789)
+    - ubuntu, debian, redhat, fedora profiles
+    - select-screen-profile utility
+    - add dependency on gettext-base (LP: #308509), add translation framework
+    - define 10,000 lines of scrollback
+    - ctrl-a c opens new window and prompts for name
+    - don't display ominous red 0! when no updates available (LP: #308215)
+
+  [ Nicolas Barcet ]
+  * Allow local modification of .screenrc (LP: #308216)
+  * Add some nice defaults to ubuntu.screenrc
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 16 Dec 2008 17:42:52 -0600

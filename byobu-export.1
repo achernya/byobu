@@ -1,0 +1,31 @@
+.TH screen\-launcher 1 "28 Mar 2009" byobu "byobu"
+.SH NAME
+byobu\-export \- create a byobu archive for export
+
+.SH SYNOPSIS
+.BI "byobu\-export [\-c COLOR] \-f TARGET.tar.gz"
+
+.SH OPTIONS
+.TP
+.B \-c COLOR
+Optional parameter specifying the desired color scheme.  If omitted, the program will interactively prompt for this value.
+.TP
+.B \-f TARGET.tar.gz
+If TARGET.tar.gz is unspecified, a randomly generated filename will be used.
+
+.SH DESCRIPTION
+\fBbyobu\-export\fP is a program that creates a monolithic .screenrc profile, and copies the status notification scripts into an archive file.  This archive can then be extracted on a target system where \fBbyobu\fP is not installed (perhaps because the program is not packaged for that distribution, or perhaps because the administrator has not installed the package).
+
+.SH "SEE ALSO"
+.PD 0
+.TP
+\fBscreen\fP(1), \fBbyobu\fP(1)
+
+.TP
+\fIhttp://launchpad.net/byobu\fP
+.PD
+
+.SH AUTHOR
+This manpage was written by Dustin Kirkland <kirkland@canonical.com> for Ubuntu systems (but may be used by others).  Permission is granted to copy, distribute and/or modify this document under the terms of the GNU General Public License, Version 3 published by the Free Software Foundation.
+
+On Debian systems, the complete text of the GNU General Public License can be found in /usr/share/common-licenses/GPL.
