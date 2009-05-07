@@ -1,6 +1,6 @@
 #!/bin/sh -e
 #
-#    ip-address - report a host's ip-address
+#    disk-used: print the current disk usage
 #    Copyright (C) 2008 Canonical Ltd.
 #
 #    Authors: Dustin Kirkland <kirkland@canonical.com>
@@ -20,12 +20,17 @@
 PKG="byobu"
 
 if [ "$1" = "--detail" ]; then
-	/sbin/ifconfig | grep "inet addr" | sed 's/^\s*//' | sed 's/\s*$//'
+	df -h
 	exit 0
 fi
 
-space=
-grep -qs "^hostname=1$" "$HOME/.$PKG/status" && space=" "
-grep -qs "^whoami=1$" "$HOME/.$PKG/status" && space=" "
+whitespace=
+if [ -r "$HOME/.$PKG/status" ]; then
+	grep -qs "^date=1$" "$HOME/.$PKG/status" && whitespace=" "
+fi
 
-printf "%s\005{=b }%s\005{-}" "$space" $(hostname -i 2>/dev/null)
+# Default to /, but let users override
+[ -r "$HOME/.$PKG/disk" ] && MP=`cat "$HOME/.$PKG/disk"` || MP="/"
+
+df -h "$MP" | tail -n 1 | awk '{print "\005{= MW}" $5 "\005{-}"}'
+printf "%s" "$whitespace"
