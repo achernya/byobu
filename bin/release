@@ -17,7 +17,7 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-if which lsb_release >/dev/null; then
+if which lsb_release >/dev/null 2>&1; then
 	if [ "$1" = "--detail" ]; then
 		lsb_release -a 2>/dev/null
 		exit 0
@@ -26,21 +26,21 @@ if which lsb_release >/dev/null; then
 	r=$(lsb_release -s -d)
 	if echo "$r" | grep -qs "^Ubuntu .*\..*\..*$"; then
 		# Use the -d if an Ubuntu LTS
-		printf "\005{=b }%s\005{-} " "$r"
+		printf "\005{+b }%s\005{-} " "$r"
 	else
 		# But for other distros the description
 		# is too long, so build from -i and -r
 		i=$(lsb_release -s -i)
 		r=$(lsb_release -s -r)
-		printf "\005{=b }%s %s\005{-} " "$i" "$r"
+		printf "\005{+b }%s %s\005{-} " "$i" "$r"
 	fi
 elif [ -r "/etc/issue" ]; then
 	if [ "$1" = "--detail" ]; then
 		cat /etc/issue
 		exit 0
 	fi
-	# Otherwise, grab part of /etc/issue
-	printf "\005{=b }%s\005{-} " $(head -n1 /etc/issue | awk '{print $1}')
+	# Otherwise, grab part of /etc/issue, ideally the distro and version
+	printf "\005{+b }%s\005{-} " $(head -n1 /etc/issue | sed "s/ [^0-9]* / /" | awk '{print $1 " " $2}')
 else
 	echo "Unknown"
 fi

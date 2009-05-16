@@ -1,3 +1,42 @@
+byobu (2.4-0ubuntu1) karmic; urgency=low
+
+  [ Dustin Kirkland ]
+  * byobu: support Debian/Ubuntu's diversion of screen to screen.real,
+    as well as RH, which does not divert the real screen binary
+  * debian/release.sh: handle version incrementing in the rpm specfile
+  * bin/disk-used: fix situations where df output wraps to the next
+    line
+  * bin/logo: check that lsb_release is available before using it
+  * bin/release: try to grab both distro and version from /etc/issue
+    if that's what we're forced to use
+  * bin/updates-available: improve counting of yum updates available
+  * bin/ip-address,whoami,release,hostname: use +b rather than =b,
+    colors look bad on the light* profiles
+  * bin/ip-address: hostname -i doesn't always work, use ifconfig
+    instead, LP: #376080
+  * bin/network-down,network-up,updates-available: use /var/run/screen
+    for status cache files, to keep from waking up the disk
+  * bin/battery: color the entire battery the same way, only use 3 tones,
+    Green/Yellow/Red (6 was too confusing), always use black text on
+    capital G/Y/R background
+  * byobu-export: tar files with owner/group as root/root, LP: #371025
+  * byobu, debian/install, motd+shell, profiles/byoburc: launch screen
+    with a simple config file that includes the chosen profile plus
+    the chosen windows; but on refresh, only reload the chosen profile;
+    revert previous hack that did this by creating a temporary config
+    file and broke on hardy, LP: #375309
+  * screen-launcher: don't use the -x argument if launching a new screen,
+    as this fails to launch default windows, LP: #375768
+  * debian/control: suggest vim, for better handling of status details
+
+  [ David Duffey ]
+  * rpm/byobu.spec: initial specfile for RH packaging
+
+  [ Dustin Kirkland ]
+  * -
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Sat, 16 May 2009 21:06:53 +0100
+
 byobu (2.3-0ubuntu1) karmic; urgency=low
 
   * byobu-status-detail: foldcolumn=2, print bars on the left side

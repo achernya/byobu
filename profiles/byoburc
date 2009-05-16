@@ -1,7 +1,8 @@
-#!/bin/sh -e
+###############################################################################
+#    Load both the profile, and the default windows, used at startup but not
+#    profile refresh
 #
-#    whoami - report current logged in user
-#    Copyright (C) 2008 Canonical Ltd.
+#    Copyright (C) 2009 Canonical Ltd.
 #
 #    Authors: Dustin Kirkland <kirkland@canonical.com>
 #
@@ -16,10 +17,7 @@
 #
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+###############################################################################
 
-if [ "$1" = "--detail" ]; then
-	grep "^$USER:" /etc/passwd
-	exit 0
-fi
-
-printf "\005{+b }%s\005{-}" $(whoami)
+source $HOME/.byobu/profile
+source $HOME/.byobu/windows
