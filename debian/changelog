@@ -1,3 +1,10 @@
+byobu (2.7-0ubuntu1) karmic; urgency=low
+
+  * debian/postinst: clean up old screen -> byobu symlink before undoing
+    the dpkg-divert, LP: #382462
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 01 Jun 2009 13:46:40 -0500
+
 byobu (2.6-0ubuntu1) karmic; urgency=low
 
   * byobu, debian/postrm, debian/preinst, debian/rules, screen-launcher:
