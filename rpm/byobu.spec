@@ -1,12 +1,12 @@
 Name:           byobu
-Version:        2.4
+Version:        2.6
 Release:        1%{?dist}
 Summary:        a set of useful profiles and a profile-switcher for GNU screen
 
 Group:          Applications/System
 License:        GPL
 URL:            http://launchpad.net/byobu
-Source0:        http://code.launchpad.net/byobu/trunk/2.4/+download/byobu_2.4.orig.tar.gz
+Source0:        http://code.launchpad.net/byobu/trunk/2.6/+download/byobu_2.6.orig.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:	noarch
 
@@ -116,6 +116,8 @@ rm -rf $RPM_BUILD_ROOT
 /usr/lib/byobu/processes
 /usr/lib/byobu/reboot-required
 /usr/lib/byobu/release
+/usr/lib/byobu/temp-c
+/usr/lib/byobu/temp-f
 /usr/lib/byobu/time
 /usr/lib/byobu/updates-available
 /usr/lib/byobu/uptime

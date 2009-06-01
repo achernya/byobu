@@ -1,3 +1,30 @@
+byobu (2.6-0ubuntu1) karmic; urgency=low
+
+  * byobu, debian/postrm, debian/preinst, debian/rules, screen-launcher:
+    remove the dpkg diversion on /usr/bin/screen as this has proven
+    to be controversial; users will need to call "byobu" to launch
+    a byobu-style screen session; LP: #330322
+  * bin/network-*: set rate=0 when rate is negative (ie, on startup)
+  * bin/temp-*: better support for temperature zones, LP: #380885
+  * byobu: If the user is running byobu with some arguments, but has
+    not selected their profile yet, don't bother them with profile
+    selection at this time, LP: #330322
+  * screen-launcher-install: handle non-interactive shells correctly,
+    LP: #380761
+  * keybindings/common: add keybindings, @=config, R=reload, LP: #380944
+  * po/ru.po: added russian translation, thanks Slava, LP: #380977
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 01 Jun 2009 09:11:22 -0500
+
+byobu (2.5-0ubuntu1) karmic; urgency=low
+
+  * bin/temp-c, bin/temp-f, byobu-config, byobu-config.1, byobu-status,
+    profiles/common, profiles/profile.skel, rpm/byobu.spec: added a
+    cpu temperature indicator
+  * byobu-export: echo the version to file, in an exported byobu tarball
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 22 May 2009 18:51:49 +0200
+
 byobu (2.4-0ubuntu1) karmic; urgency=low
 
   [ Dustin Kirkland ]
@@ -31,9 +58,6 @@ byobu (2.4-0ubuntu1) karmic; urgency=low
 
   [ David Duffey ]
   * rpm/byobu.spec: initial specfile for RH packaging
-
-  [ Dustin Kirkland ]
-  * -
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Sat, 16 May 2009 21:06:53 +0100
 
