@@ -1,4 +1,22 @@
-byobu (2.4) unreleased; urgency=low
+byobu (2.6) unreleased; urgency=low
+
+  * byobu, debian/postrm, debian/preinst, debian/rules, screen-launcher:
+    remove the dpkg diversion on /usr/bin/screen as this has proven
+    to be controversial; users will need to call "byobu" to launch
+    a byobu-style screen session
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 26 May 2009 16:47:40 +0200
+
+byobu (2.5-0ubuntu1) karmic; urgency=low
+
+  * bin/temp-c, bin/temp-f, byobu-config, byobu-config.1, byobu-status,
+    profiles/common, profiles/profile.skel, rpm/byobu.spec: added a
+    cpu temperature indicator
+  * byobu-export: echo the version to file, in an exported byobu tarball
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 22 May 2009 18:51:49 +0200
+
+byobu (2.4-0ubuntu1) karmic; urgency=low
 
   [ Dustin Kirkland ]
   * byobu: support Debian/Ubuntu's diversion of screen to screen.real,
@@ -14,6 +32,11 @@ byobu (2.4) unreleased; urgency=low
     colors look bad on the light* profiles
   * bin/ip-address: hostname -i doesn't always work, use ifconfig
     instead, LP: #376080
+  * bin/network-down,network-up,updates-available: use /var/run/screen
+    for status cache files, to keep from waking up the disk
+  * bin/battery: color the entire battery the same way, only use 3 tones,
+    Green/Yellow/Red (6 was too confusing), always use black text on
+    capital G/Y/R background
   * byobu-export: tar files with owner/group as root/root, LP: #371025
   * byobu, debian/install, motd+shell, profiles/byoburc: launch screen
     with a simple config file that includes the chosen profile plus
@@ -27,7 +50,7 @@ byobu (2.4) unreleased; urgency=low
   [ David Duffey ]
   * rpm/byobu.spec: initial specfile for RH packaging
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 15 May 2009 17:16:44 +0100
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Sat, 16 May 2009 21:06:53 +0100
 
 byobu (2.3-0ubuntu1) karmic; urgency=low
 

@@ -52,8 +52,8 @@ print_updates() {
 	exit 0
 }
 
-cache=/var/run/updates-available
-mycache=$HOME/.$PKG/updates-available
+cache="/var/run/updates-available"
+mycache="/var/run/screen/S-$USER/$PKG.updates-available"
 now=`date +%s`
 cache_timestamp=`stat -c "%Y" $cache 2>/dev/null || echo 0`
 mycache_timestamp=`stat -c "%Y" $mycache 2>/dev/null || echo 0`
@@ -74,7 +74,7 @@ fi
 if [ -r $mycache -a -O $mycache ]; then
 	diff=`expr $now - $mycache_timestamp`
 	if [ $diff -lt $EXPIRATION ]; then
-		print_updates `cat $mycache`
+		print_updates `cat $mycache | grep "^[0-9]" | sed "s/ .*$//"`
 	fi
 else
 	# Otherwise, let's quickly clear the cache, and then recreate it with

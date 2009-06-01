@@ -56,32 +56,15 @@ for bat in $BATS; do
    fi
 
    full=$(search "$infofile" "last full capacity: *\(.*\) m[AW]h")
-   warn=$(search "$infofile" "design capacity warning: \(.*\) m[AW]h")
-   low=$(search "$infofile" "design capacity low: \(.*\) m[AW]h")
-
    rem=$(search "$statefile" "remaining capacity: *\(.*\) m[AW]h")
-   if [ "$rem" -lt "$low" ]; then
-      cap_color="{= rk}"
-   elif [ "$rem" -lt "$warn" ]; then
-      cap_color="{= yk}"
-   else
-      cap_color="{= gk}"
-   fi
-
 
    percent=$( echo "$rem" "$full" | awk '{printf "%.0f",  100*$1/$2}')
-   if [ "$percent" -lt 17 ]; then
-	per_color="{= rk}"
-   elif [ "$percent" -lt 33 ]; then
+   if [ "$percent" -lt 33 ]; then
 	per_color="{= Rk}"
-   elif [ "$percent" -lt 50 ]; then
-	per_color="{= Yk}"
    elif [ "$percent" -lt 67 ]; then
-	per_color="{= yk}"
-   elif [ "$percent" -lt 83 ]; then
-	per_color="{= Gk}"
+	per_color="{= Yk}"
    else
-	per_color="{= gk}"
+	per_color="{= Gk}"
    fi
    percent="$percent%"
 
@@ -103,5 +86,5 @@ for bat in $BATS; do
          ;;
    esac
 
-   printf "\005%s%s\005{-}\005%s|%s|\005{-} " "$per_color" "$percent" "$cap_color" "$sign"
+   printf "\005%s%s|%s|\005{-} " "$per_color" "$percent" "$sign"
 done
