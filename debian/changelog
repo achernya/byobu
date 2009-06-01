@@ -1,11 +1,26 @@
-byobu (2.6) unreleased; urgency=low
+byobu (2.7) unreleased; urgency=low
+
+  * UNRELEASED
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 01 Jun 2009 09:17:28 -0500
+
+byobu (2.6-0ubuntu1) karmic; urgency=low
 
   * byobu, debian/postrm, debian/preinst, debian/rules, screen-launcher:
     remove the dpkg diversion on /usr/bin/screen as this has proven
     to be controversial; users will need to call "byobu" to launch
-    a byobu-style screen session
+    a byobu-style screen session; LP: #330322
+  * bin/network-*: set rate=0 when rate is negative (ie, on startup)
+  * bin/temp-*: better support for temperature zones, LP: #380885
+  * byobu: If the user is running byobu with some arguments, but has
+    not selected their profile yet, don't bother them with profile
+    selection at this time, LP: #330322
+  * screen-launcher-install: handle non-interactive shells correctly,
+    LP: #380761
+  * keybindings/common: add keybindings, @=config, R=reload, LP: #380944
+  * po/ru.po: added russian translation, thanks Slava, LP: #380977
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 26 May 2009 16:47:40 +0200
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 01 Jun 2009 09:11:22 -0500
 
 byobu (2.5-0ubuntu1) karmic; urgency=low
 
