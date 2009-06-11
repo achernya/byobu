@@ -1,6 +1,7 @@
 #!/bin/sh -e
 
 PKG="byobu"
+MAJOR=2
 
 error() {
 	echo "ERROR: $@"
@@ -9,7 +10,7 @@ error() {
 
 head -n1 debian/changelog | grep "unreleased" || error "This version must be 'unreleased'"
 
-i=1
+./debian/rules get-orig-source
 bzr bd
 sed -i "s/) unreleased;/-0ubuntu1~ppa1) hardy;/" debian/changelog
 bzr bd -S
@@ -19,14 +20,14 @@ sed -i "s/ppa2) intrepid;/ppa3) jaunty;/" debian/changelog
 bzr bd -S
 sed -i "s/~ppa3) jaunty;/) karmic;/" debian/changelog
 bzr bd -S
-curver=`head -n1 debian/changelog | sed "s/^.*(2.//" | sed "s/-.*$//"`
-bzr tag --delete 2.$curver || true
-bzr tag 2.$curver
-ver=`expr $curver + 1`
-dch -v "2.$ver" "UNRELEASED"
-sed -i "s/2.$ver) .*;/2.$ver) unreleased;/" debian/changelog
-sed -i "s/^Version:.*$/Version:        2.$ver/" rpm/$PKG.spec
-sed -i "s%^Source0:.*$%Source0:        http://code.launchpad.net/$PKG/trunk/2.$ver/+download/byobu_2.$ver.orig.tar.gz%" rpm/$PKG.spec
+minor=`head -n1 debian/changelog | sed "s/^.*($MAJOR.//" | sed "s/-.*$//"`
+bzr tag --delete "$MAJOR.$minor" || true
+bzr tag "$MAJOR.$minor"
+nextminor=`expr $minor + 1`
+dch -v "$MAJOR.$nextminor" "UNRELEASED"
+sed -i "s/$MAJOR.$nextminor) .*;/$MAJOR.$nextminor) unreleased;/" debian/changelog
+sed -i "s/^Version:.*$/Version:        $MAJOR.$nextminor/" rpm/$PKG.spec
+sed -i "s%^Source0:.*$%Source0:        http://code.launchpad.net/$PKG/trunk/$MAJOR.$nextminor/+download/byobu_$MAJOR.$nextminor.orig.tar.gz%" rpm/$PKG.spec
 
 gpg --armor --sign --detach-sig ../"$PKG"_*.orig.tar.gz
 
@@ -43,7 +44,7 @@ echo "  dput $PKG-ppa ../*ppa*changes"
 echo
 echo "To commit and push:"
 echo "  bzr cdiff"
-echo "  bzr commit -m 'releasing 2.$curver, opening 2.$ver' && bzr push lp:$PKG"
+echo "  bzr commit -m 'releasing $MAJOR.$minor, opening $MAJOR.$nextminor' && bzr push lp:$PKG"
 echo
 echo "Publish tarball at:"
 echo "  https://launchpad.net/$PKG/trunk/+addrelease"
