@@ -1,6 +1,6 @@
 #!/bin/sh -e
 #
-#    network-up: calculate the network transmit rate
+#    ip_address - report a host's ip address
 #    Copyright (C) 2008 Canonical Ltd.
 #
 #    Authors: Dustin Kirkland <kirkland@canonical.com>
@@ -19,31 +19,16 @@
 
 PKG="byobu"
 
-cache="/var/run/screen/S-$USER/$PKG.network-up"
-
-interface=`/sbin/route -n | tail -n 1 | sed "s/^.* //"`
-unit="kB/s"
-
 if [ "$1" = "--detail" ]; then
-	/sbin/ifconfig "$interface" | sed 's/\s*$//'
+	/sbin/ifconfig | grep "inet addr" | sed 's/^\s*//' | sed 's/\s*$//'
 	exit 0
 fi
 
-t1=`stat -c %Y "$cache"` 2>/dev/null || t1=0
-t2=`date +%s`
+. "$HOME/.$PKG/status" 2>/dev/null || true
+[ "$hostname" = "1" ] && space=" "
+[ "$whoami" = "1" ] && space=" "
 
-if [ $t2 -le $t1 ]; then
-	rate=0
-else
-	x1=`cat "$cache"` 2>/dev/null || tx1=0
-	x2=`/sbin/ifconfig "$interface" | grep "TX bytes" | sed "s/^.*TX bytes://" | sed "s/ .*$//"`
-	echo "$x2" > "$cache"
-	rate=`echo "$t1" "$t2" "$x1" "$x2" | awk '{printf "%.0f", ($4 - $3) / ($2 - $1) / 1024 }'`
-	if [ "$rate" -lt 0 ]; then
-		rate=0
-	elif [ "$rate" -gt 1024 ]; then
-		rate=`echo "$rate" | awk '{printf "%.1f", $1/1024}'`
-		unit="MB/s"
-	fi
-fi
-printf "^\005{=b mw}$rate\005{-}\005{= mw}$unit\005{-} "
+interface=`/sbin/route -n | tail -n 1 | sed "s/^.* //"`
+ipaddr=`/sbin/ifconfig "$interface" | grep "inet addr:" | sed "s/^.*inet addr://" | sed "s/ .*$//"`
+
+printf "%s\005{+b }%s\005{-}" "$space" "$ipaddr"

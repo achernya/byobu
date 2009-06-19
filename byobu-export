@@ -65,9 +65,11 @@ choose() {
 		fi
 		count=`expr $count + 1`
 		if ! test $selected -gt 0 2>/dev/null; then
-			read -p "`gettext 'Choose'` [1 -$i]: " -r selected
+			echo -n "`gettext 'Choose'` [1 -$i]: "
+			selected=`head -n1`
 		elif ! test $selected -le $i 2>/dev/null; then
-			read -p "`gettext 'Choose'` [1 -$i]: " -r selected
+			echo -n "`gettext 'Choose'` [1 -$i]: "
+			selected=`head -n1`
 		else
 			break
 		fi
@@ -89,7 +91,7 @@ status_config() {
 	# Enable user@host in its place
 	for i in $(ls /usr/lib/$PKG/); do
 		case "$i" in
-			cpu-count|cpu-freq|date|hostname|load-average|logo|mem-available|mem-used|reboot-required|release|time|updates-available|whoami)
+			cpu_count|cpu_freq|date|hostname|load_average|logo|mem_available|mem_used|reboot_required|release|time|updates_available|whoami)
 				echo "$i=1"
 			;;
 			*)
@@ -183,7 +185,8 @@ else
 	echo "$file" | grep -qs "\.tar\.gz$" || error "Target file must be a '.tar.gz' archive"
 	if [ -e "$file" ]; then
 		echo `gettext "File exists"` " [$file]"
-		read -p "`gettext 'Remove file? [y/N] '`" -r remove
+		echo -n "`gettext 'Remove file? [y/N] '`"
+		remove=`head -n1`
 		if [ "$remove" = "Y" -o "$remove" = "y" ]; then
 			rm -f "$file"
 		else
@@ -220,7 +223,7 @@ PROFILE="$DIR/.screenrc"
 STATUS="$DIR/.$PKG/status"
 mkdir -p "$DIR/.$PKG/bin"
 touch "$DIR/.$PKG/profile"
-[ -x /usr/bin/dpkg-query ] && /usr/bin/dpkg-query --show --showformat '${Package} ${Version}\n' $PKG > "$DIR/.$PKG/version"
+dpkg-query --show --showformat '${Package} ${Version}\n' $PKG > "$DIR/.$PKG/version" 2>/dev/null || true
 echo "http://launchpad.net/$PKG" >> "$DIR/.$PKG/version"
 
 # Copy status scripts

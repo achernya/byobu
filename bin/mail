@@ -1,7 +1,7 @@
 #!/bin/sh -e
 #
-#    cpu-count: count cpu's on a systems
-#    Copyright (C) 2008 Canonical Ltd.
+#    mail: notify the user if they have system mail
+#    Copyright (C) 2009 Canonical Ltd.
 #
 #    Authors: Dustin Kirkland <kirkland@canonical.com>
 #
@@ -17,9 +17,10 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+mailfile="/var/spool/mail/$USER"
 if [ "$1" = "--detail" ]; then
-	grep -i "^model name" /proc/cpuinfo
+	ls -alF "$mailfile" 2>&1
 	exit 0
 fi
-count=`getconf _NPROCESSORS_ONLN`
-[ "$count" = "1" ] || printf "%sx" "$count"
+
+[ -s "$mailfile" ] && printf "\005{= wk}[M]\005{-} " || exit 0
