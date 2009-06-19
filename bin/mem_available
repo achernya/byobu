@@ -1,6 +1,6 @@
 #!/bin/sh -e
 #
-#    load-average: grab the current load average
+#    mem_available: grab the current memory available
 #    Copyright (C) 2008 Canonical Ltd.
 #
 #    Authors: Dustin Kirkland <kirkland@canonical.com>
@@ -17,9 +17,25 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+PKG="byobu"
+
 if [ "$1" = "--detail" ]; then
-	cat /proc/loadavg
+	free
 	exit 0
 fi
 
-printf "\005{= Yk}%s\005{-} " $(cat /proc/loadavg | cut -d " " -f -1)
+. "$HOME/.$PKG/status" 2>/dev/null || true
+[ "$mem_used" = "1" ] && comma="," || whitespace=" "
+
+mem=`free | grep -m 1 "^Mem:" | awk '{print $2}'`
+if [ $mem -ge 1048576 ]; then
+	mem=$(echo "$mem" | awk '{ printf "%.1f", $1 / 1048576 }')
+	unit="GB"
+elif [ $mem -ge 1024 ]; then
+	mem=$(echo "$mem" | awk '{ printf "%.0f", $1 / 1024 }')
+	unit="MB"
+else
+	mem="$mem"
+	unit="KB"
+fi
+printf "\005{= gW}%s$unit%s\005{-}%s" "$mem" "$comma" "$whitespace"

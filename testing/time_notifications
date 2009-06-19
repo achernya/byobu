@@ -1,0 +1,16 @@
+#!/bin/bash
+
+RUNS=100
+
+loop() {
+	for j in $(seq 1 $RUNS); do
+		./bin/$1 >/dev/null
+	done
+}
+
+TIMEFORMAT="%R"
+for i in $(ls bin); do
+	freq=`grep "byobu-status $i" ./profiles/common | awk '{print $3}'`
+	echo -n "$i $freq "
+	time loop $i
+done

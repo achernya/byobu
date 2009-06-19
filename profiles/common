@@ -26,34 +26,41 @@ vbell off
 msgwait 1
 
 # Define status commands
-backtick 99  86400 86400 byobu-status logo
-backtick 100 3600 3600 byobu-status release
-backtick 101 10 10 byobu-status updates-available
-backtick 102 2 2 byobu-status reboot-required
-backtick 103 2 2 byobu-status cpu-freq
-backtick 104 86400 86400 byobu-status cpu-count
-backtick 105 86400 86400 byobu-status mem-available
-backtick 106 2 2 byobu-status load-average
-backtick 107 2 2 byobu-status mem-used
-backtick 108 600 600 byobu-status ec2-cost
-backtick 109 3600 3600 byobu-status hostname
-backtick 110 86400 86400 byobu-status whoami
-backtick 111 86400 86400 byobu-status menu
-backtick 112 86400 86400 byobu-status arch
-backtick 113 30 30 byobu-status battery
-backtick 114 10 10 byobu-status users
-backtick 115 60 60 byobu-status uptime
-backtick 116 2 2 byobu-status processes
-backtick 117 2 2 byobu-status network-up
-backtick 118 2 2 byobu-status network-down
-backtick 119 2 2 byobu-status wifi-quality
-backtick 120 86400 86400 byobu-status date
-backtick 121 86400 86400 byobu-status time
-backtick 122 3600 3600 byobu-status ip-address
-backtick 123 86400 86400 byobu-status disk-available
-backtick 124 2 2 byobu-status disk-used
-backtick 125 30 30 byobu-status temp-c
-backtick 126 30 30 byobu-status temp-f
+#   Use prime number intervals, to decrease collisions, which
+#   yields some less expensive status updates.
+#   ~86000 ~1 day
+#   ~600   ~10 minutes
+#   ~180   ~3 minutes
+#   ~60    ~1 minute
+backtick 99  	86011	86011		byobu-status logo
+backtick 100	599	599		byobu-status release
+backtick 101 	181	181		byobu-status updates_available
+backtick 102 	5	5		byobu-status reboot_required
+backtick 103 	2	2		byobu-status cpu_freq
+backtick 104 	86017	86017		byobu-status cpu_count
+backtick 105 	86027	86027		byobu-status mem_available
+backtick 106 	2	2		byobu-status load_average
+backtick 107 	13	13		byobu-status mem_used
+backtick 108 	601	601		byobu-status ec2_cost
+backtick 109 	607	607		byobu-status hostname
+backtick 110 	86029	86029		byobu-status whoami
+backtick 111 	86069	86069		byobu-status menu
+backtick 112 	86077	86077		byobu-status arch
+backtick 113 	61	61		byobu-status battery
+backtick 114 	11	11		byobu-status users
+backtick 115 	29	29		byobu-status uptime
+backtick 116 	7	7		byobu-status processes
+backtick 117 	3	3		byobu-status network
+backtick 118 	86083	86083		true
+backtick 119 	17	17		byobu-status wifi_quality
+backtick 120 	86111	86111		byobu-status date
+backtick 121 	86113	86113		byobu-status time
+backtick 122 	613	613		byobu-status ip_address
+backtick 123 	13	13		byobu-status disk
+backtick 124 	86117	86117		true
+backtick 125 	19	19		byobu-status temp_c
+backtick 126 	19	19		byobu-status temp_f
+backtick 127 	5	5		byobu-status mail
 
 hardstatus alwayslastline
 
