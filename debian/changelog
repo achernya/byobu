@@ -1,3 +1,9 @@
+byobu (2.13-0ubuntu2) karmic; urgency=low
+
+  * debian/postinst: remove set -x debugging
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 21 Jun 2009 21:11:40 -0500
+
 byobu (2.13-0ubuntu1) karmic; urgency=low
 
   [ Dustin Kirkland ]
