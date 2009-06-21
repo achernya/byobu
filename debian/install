@@ -7,12 +7,14 @@ profiles/black usr/share/byobu/profiles
 profiles/dark usr/share/byobu/profiles
 profiles/light usr/share/byobu/profiles
 keybindings/* usr/share/byobu/keybindings
+statusrc etc/byobu
 windows/common usr/share/byobu/windows
 select-screen-profile usr/bin
 byobu usr/bin
 byobu-config usr/bin
 byobu-status usr/bin
 byobu-status-detail usr/bin
+byobu-janitor usr/bin
 screen-launcher-install usr/share/byobu
 screen-launcher-uninstall usr/share/byobu
 motd+shell usr/bin
