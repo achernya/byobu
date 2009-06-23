@@ -1,8 +1,58 @@
-byobu (2.13) unreleased; urgency=low
+byobu (2.15) unreleased; urgency=low
 
-  * UNRELEASED
+  * profiles/common: defutf8 on seems like a sane default, at this point,
+    LP: #301447
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 19 Jun 2009 00:50:53 -0500
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 22 Jun 2009 13:12:17 -0500
+
+byobu (2.14-0ubuntu1) karmic; urgency=low
+
+  * debian/postinst: remove set -x debugging
+  * debian/control: create dummy screen-profiles and screen-profiles-extras
+    packages, to handle seamless upgrades from screen-profiles -> byobu
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 22 Jun 2009 11:28:14 -0500
+
+byobu (2.13-0ubuntu1) karmic; urgency=low
+
+  [ Dustin Kirkland ]
+  * bin/updates_available: direct which out to devnull
+  * screen-launcher-install: no need to check for executability of
+    screen-launcher
+  * byobu-config: improve the verbage of some of the menus, per
+    review with the Canonical Design Team
+  * statusrc, byobu-status, byobu-export, debian/install: source default
+    status states, rather than the big case statement, performance
+    improvement for all status, also reduces the number of places to
+    touch when a new status script is added
+  * byobu-status: move all of the cleanup hacks to byobu-janitor; create
+    a find_script() function that allows for scripts in both /usr/lib and
+    $HOME/.byobu
+  * byobu, byobu-janitor, debian/install, profiles/common,
+    profiles/profile.skel: remove janitorial logic scattered across
+    several scripts and put it in a single place; call this script before
+    launching byobu, and then only once a day or when the user refreshes
+    their profile
+  * bin/reboot_required, byobu-janitor, byobu-status, byobu.1,
+    debian/postinst: display an <F5> next to the reboot symbol, if a byobu
+    reload is required; flag this in the postinst, after upgrading byobu
+  * byobu-config: add note about ctrl-a-R to reload profile, flag the
+    reload-required file when making changes
+  * byobu-janitor: add fix for the collapsed disk* and network* status
+    items
+  * byobu-config, windows/common: add some examples in the common windows
+    file, all disabled by default;  in byobu-config, if the user's windows
+    file is empty, show the examples in the default window management
+    panel
+  * bin/ec2_cost, bin/ip_address, bin/network: get default interface from
+    /proc/net/route, much more efficient
+  * bin/network: read bytes sent/received straight from /proc; more
+    efficient
+
+  [ Ciemon Dunville ]
+  * byobu.1: reflect the keybinding toggle change to Ctrl-a-!
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 21 Jun 2009 12:44:19 -0500
 
 byobu (2.12-0ubuntu1) karmic; urgency=low
 

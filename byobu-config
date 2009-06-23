@@ -27,11 +27,13 @@ from ConfigParser import SafeConfigParser
 from snack import *
 
 HOME=os.getenv("HOME")
+USER=os.getenv("USER")
 PKG="byobu"
 SHARE='/usr/share/'+PKG
 DOC='/usr/share/doc/'+PKG
 DEF_ESC="A"
-RELOAD = "If you are using the default set of keybindings, press\n<F5> to activate these changes.\n\nOtherwise, exit this screen session and start a new one."
+RELOAD = "If you are using the default set of keybindings, press\n<F5> or <ctrl-a-R> to activate these changes.\n\nOtherwise, exit this screen session and start a new one."
+RELOAD_FLAG="/var/run/screen/S-"+USER+"/"+PKG+".reload-required"
 ESC = ''
 snack.hotkeys[ESC] = ord(ESC)
 snack.hotkeys[ord(ESC)] = ESC
@@ -54,6 +56,10 @@ def ioctl_GWINSZ(fd):                  #### TABULATION FUNCTIONS
         return None
     return cr
 
+def reload_required():
+    f = open(RELOAD_FLAG,'w')
+    f.close()
+
 def terminal_size():                    ### decide on *some* terminal size
     cr = ioctl_GWINSZ(0) or ioctl_GWINSZ(1) or ioctl_GWINSZ(2)  # try open fds
     if not cr:                                                  # ...then ctty
@@ -72,14 +78,14 @@ def terminal_size():                    ### decide on *some* terminal size
 
 def menu(screen, size, isInstalled):
     if isInstalled:
-        installtext=_("Remove screen by default at login")
+        installtext=_("Byobu currently launches at login (toggle)")
     else:
-        installtext=_("Install screen by default at login")
+        installtext=_("Byobu currently does not launch at login (toggle)")
 
 
     li = Listbox(height = 8, width = 60, returnExit = 1)
     li.append(_("Help"), 1)
-    li.append(_("Change screen profile"), 2)
+    li.append(_("Change Byobu's colors"), 2)
     li.append(_("Toggle status notifications"), 3)
     li.append(_("Change keybinding set"), 4)
     li.append(_("Change escape sequence"), 5)
@@ -141,6 +147,7 @@ def profile(screen, size):
 
     if bb.buttonPressed(g.runOnce()) != "cancel":
         commands.getoutput('select-screen-profile --set %s' % li.current())
+	reload_required()
         button = messagebox(screen, 60, 4, _("Message"), _(RELOAD), \
             buttons=((_("Menu"), )))
     return 100
@@ -157,6 +164,7 @@ def keybindings(screen, size):
     g.add(bb, 0, 1, padding=(1,1,0,0))
     if bb.buttonPressed(g.runOnce()) != "cancel":
         switch_keybindings(li.current())
+	reload_required()
         button = messagebox(screen, 60, 4, _("Message"), _(RELOAD), \
             buttons=((_("Menu"), )))
     return 100
@@ -226,7 +234,13 @@ def appendwindow(win):
         f.close()
 
 def readwindows():
-    f=open(HOME+'/.'+PKG+'/windows', 'r')
+    if not os.path.isfile(HOME+'/.'+PKG+'/windows'):
+        windowsfile=SHARE+'/windows/common'
+    elif os.path.getsize(HOME+'/.'+PKG+'/windows') == 0:
+        windowsfile=SHARE+'/windows/common'
+    else:
+        windowsfile=HOME+'/.'+PKG+'/windows'
+    f=open(windowsfile)
     try:
         li=[]
         for line in f.readlines():
@@ -330,6 +344,7 @@ def togglestatus(screen, size):
                 item[0] = r.getEntryValue(count)[1]
             count=count+1
         writestatus(itemlist)
+	reload_required()
         button = messagebox(screen, 60, 4, _("Message"), _(RELOAD), \
             buttons=((_("Menu"), )))
     return 100
@@ -360,7 +375,7 @@ def defaultwindows(screen, size):
             r.append(win[1],count,selected=win[0])
        count=count+1
 
-    bb = ButtonBar(screen, ((_("Apply"), "apply"), (_("Cancel"), "cancel"), ESC), compact = 1)
+    bb = ButtonBar(screen, ((_("Apply"), "apply"), (_("Cancel"), "cancel", ESC)), compact = 1)
 
     g = GridForm(screen, _("Select window(s) to create by default:"), 2, 4 )
     g.add(rl, 0, 0, anchorLeft=1, anchorTop=1, padding=(4,0,0,1))
@@ -382,7 +397,7 @@ def install(screen, size, isInstalled):
     if not isInstalled:
         out = commands.getoutput("bash /usr/share/"+PKG+"/screen-launcher-install")
         if out == "":
-            out = _("Screen will be launched automatically next time you login.")
+            out = _("Byobu will be launched automatically next time you login.")
 
         button = messagebox(screen, 60, 2, "Message", out, \
         buttons=((_("Menu"), )))
@@ -390,7 +405,7 @@ def install(screen, size, isInstalled):
     else:
         out = commands.getoutput("bash /usr/share/"+PKG+"/screen-launcher-uninstall")
         if out == "":
-            out = _("Screen will not be used next time you login.")
+            out = _("Byobu will not be used next time you login.")
 
         button = messagebox(screen, 60, 2, _("Message"), out, \
         buttons=((_("Menu"), )))
@@ -459,6 +474,7 @@ def chgesc(screen, size):
     screen.popWindow()
     if bb.buttonPressed(which) != "cancel":
         setesckey(esc.value())
+	reload_required()
         button = messagebox(screen, 60, 4, _("Message"), \
             _(RELOAD), \
             buttons=((_("Menu"), )))
@@ -473,7 +489,7 @@ def main():
     size = terminal_size()
     screen = SnackScreen()
     screen.drawRootText(1,0,_(' Byobu Configuration Menu'))
-    screen.pushHelpLine(_('<Tab>/<Alt-Tab> between elements | <Return> Validates'))
+    screen.pushHelpLine(_('<Tab>/<Alt-Tab> between elements | <Enter> selects | <Esc> exits'))
 
     config = SafeConfigParser()
 
