@@ -78,9 +78,9 @@ def terminal_size():                    ### decide on *some* terminal size
 
 def menu(screen, size, isInstalled):
     if isInstalled:
-        installtext=_("Byobu currently launches at login (toggle)")
+        installtext=_("Byobu currently launches at login (toggle off)")
     else:
-        installtext=_("Byobu currently does not launch at login (toggle)")
+        installtext=_("Byobu currently does not launch at login (toggle on)")
 
 
     li = Listbox(height = 8, width = 60, returnExit = 1)
@@ -89,7 +89,7 @@ def menu(screen, size, isInstalled):
     li.append(_("Toggle status notifications"), 3)
     li.append(_("Change keybinding set"), 4)
     li.append(_("Change escape sequence"), 5)
-    li.append(_("Create new window(s)"), 6)
+    li.append(_("Create new windows"), 6)
     li.append(_("Manage default windows"), 7)
     li.append(installtext, 8)
     bb = ButtonBar(screen, (("Exit", "exit", ESC),), compact=1)
@@ -136,7 +136,7 @@ def help(screen, size, config):
 def profile(screen, size):
     li = Listbox(height = 8, width = 60, scroll = 1, returnExit = 1)
 
-    for choice in commands.getoutput('select-screen-profile -l').splitlines():
+    for choice in commands.getoutput('byobu-select-profile -l').splitlines():
         li.append(choice, choice)
 
     bb = ButtonBar(screen, ((_("Apply"), "apply"), (_("Cancel"), "cancel", ESC)), compact = 1)
@@ -146,7 +146,7 @@ def profile(screen, size):
     g.add(bb, 0, 1, padding=(1,1,0,0))
 
     if bb.buttonPressed(g.runOnce()) != "cancel":
-        commands.getoutput('select-screen-profile --set %s' % li.current())
+        commands.getoutput('byobu-select-profile --set %s' % li.current())
 	reload_required()
         button = messagebox(screen, 60, 4, _("Message"), _(RELOAD), \
             buttons=((_("Menu"), )))
@@ -395,7 +395,7 @@ def defaultwindows(screen, size):
 
 def install(screen, size, isInstalled):
     if not isInstalled:
-        out = commands.getoutput("bash /usr/share/"+PKG+"/screen-launcher-install")
+        out = commands.getoutput("bash /usr/share/"+PKG+"/byobu-launcher-install")
         if out == "":
             out = _("Byobu will be launched automatically next time you login.")
 
@@ -403,7 +403,7 @@ def install(screen, size, isInstalled):
         buttons=((_("Menu"), )))
         return 100
     else:
-        out = commands.getoutput("bash /usr/share/"+PKG+"/screen-launcher-uninstall")
+        out = commands.getoutput("bash /usr/share/"+PKG+"/byobu-launcher-uninstall")
         if out == "":
             out = _("Byobu will not be used next time you login.")
 
@@ -493,7 +493,7 @@ def main():
 
     config = SafeConfigParser()
 
-    isInstalled = (commands.getoutput('grep screen-launcher '+(HOME+'/.profile')) != "")
+    isInstalled = (commands.getoutput('grep byobu-launcher '+(HOME+'/.profile')) != "")
 
     tag = 100
 

@@ -1,3 +1,25 @@
+byobu (2.16-0ubuntu1) karmic; urgency=low
+
+  * byobu-config, doc/help.txt: update the verbage of some text
+  * byobu-config, byobu-janitor, byobu-select-profile, debian/install,
+    debian/rules, po/POTFILES.sh, rpm/byobu.spec: rename select-screen-profile
+    to byobu-select-profile; fits our namespace better
+  * byobu-config, byobu-launcher, byobu-launcher-install,
+    byobu-launcher-uninstall, debian/install, debian/rules,
+    rpm/byobu.spec: rename to byobu-launcher*
+
+  Fixes for: LP: #391105, #390405, #391039
+  * debian/control: add screen-profiles and screen-profiles-extras
+    transitional packages
+  * debian/postinst, debian/prerm, debian/rules: fix screen-profiles ->
+    byobu upgrades; drop byobu's attempt to remove the dpkg-divert on
+    /usr/bin/screen, as this fails; establish links in the postinst,
+    remove in the prerm
+  * debian/screen-profiles.postinst: remove the diversion on *installation*
+    of this transitional package
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 23 Jun 2009 14:47:10 -0500
+
 byobu (2.15-0ubuntu1) karmic; urgency=low
 
   * profiles/common: defutf8 on seems like a sane default, at this point,

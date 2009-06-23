@@ -1,12 +1,12 @@
 Name:           byobu
-Version:        2.15
+Version:        2.16
 Release:        1%{?dist}
 Summary:        a set of useful profiles and a profile-switcher for GNU screen
 
 Group:          Applications/System
 License:        GPL
 URL:            http://launchpad.net/byobu
-Source0:        http://code.launchpad.net/byobu/trunk/2.15/+download/byobu_2.15.orig.tar.gz
+Source0:        http://code.launchpad.net/byobu/trunk/2.16/+download/byobu_2.16.orig.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:	noarch
 
@@ -69,15 +69,15 @@ cp -ar profiles/light ${RPM_BUILD_ROOT}/usr/share/byobu/profiles
 cp -ar keybindings/common ${RPM_BUILD_ROOT}/usr/share/byobu/keybindings
 cp -ar keybindings/none ${RPM_BUILD_ROOT}/usr/share/byobu/keybindings
 cp -ar windows/common ${RPM_BUILD_ROOT}/usr/share/byobu/windows
-cp -ar select-screen-profile ${RPM_BUILD_ROOT}/usr/bin
+cp -ar byobu-select-profile ${RPM_BUILD_ROOT}/usr/bin
 cp -ar byobu ${RPM_BUILD_ROOT}/usr/bin
 cp -ar byobu-config ${RPM_BUILD_ROOT}/usr/bin
 cp -ar byobu-status ${RPM_BUILD_ROOT}/usr/bin
 cp -ar byobu-status-detail ${RPM_BUILD_ROOT}/usr/bin
-cp -ar screen-launcher-install ${RPM_BUILD_ROOT}/usr/share/byobu
-cp -ar screen-launcher-uninstall ${RPM_BUILD_ROOT}/usr/share/byobu
+cp -ar byobu-launcher-install ${RPM_BUILD_ROOT}/usr/share/byobu
+cp -ar byobu-launcher-uninstall ${RPM_BUILD_ROOT}/usr/share/byobu
 cp -ar motd+shell ${RPM_BUILD_ROOT}/usr/bin
-cp -ar screen-launcher ${RPM_BUILD_ROOT}/usr/bin
+cp -ar byobu-launcher ${RPM_BUILD_ROOT}/usr/bin
 cp -ar byobu-export ${RPM_BUILD_ROOT}/usr/bin
 cp -ar profiles/*_* ${RPM_BUILD_ROOT}/usr/share/byobu/profiles
 
@@ -89,13 +89,13 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root,-)
 /usr/bin/motd+shell
-/usr/bin/screen-launcher
+/usr/bin/byobu-launcher
 /usr/bin/byobu
 /usr/bin/byobu-config
 /usr/bin/byobu-export
 /usr/bin/byobu-status
 /usr/bin/byobu-status-detail
-/usr/bin/select-screen-profile
+/usr/bin/byobu-select-profile
 /usr/lib/byobu/arch
 /usr/lib/byobu/battery
 /usr/lib/byobu/cpu_count
@@ -133,8 +133,8 @@ rm -rf $RPM_BUILD_ROOT
 /usr/share/byobu/profiles/common
 /usr/share/byobu/profiles/dark
 /usr/share/byobu/profiles/light
-/usr/share/byobu/screen-launcher-install
-/usr/share/byobu/screen-launcher-uninstall
+/usr/share/byobu/byobu-launcher-install
+/usr/share/byobu/byobu-launcher-uninstall
 /usr/share/byobu/windows/common
 %doc README
 %doc doc/help.txt
