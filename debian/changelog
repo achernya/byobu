@@ -1,9 +1,31 @@
-byobu (2.15) unreleased; urgency=low
+byobu (2.16) unreleased; urgency=low
+
+  * byobu-config, doc/help.txt: update the verbage of some text
+  * byobu-config, byobu-janitor, byobu-select-profile, debian/install,
+    debian/rules, po/POTFILES.sh, rpm/byobu.spec: rename select-screen-profile
+    to byobu-select-profile; fits our namespace better
+  * byobu-config, byobu-launcher, byobu-launcher-install,
+    byobu-launcher-uninstall, debian/install, debian/rules,
+    rpm/byobu.spec: rename to byobu-launcher*
+  * debian/rules: establish symlink for screen-launcher for existing
+    launch-on-login configurations; this seems better than auto-editing
+    user's .profile
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 23 Jun 2009 02:41:46 -0500
+
+byobu (2.15-0ubuntu1) karmic; urgency=low
 
   * profiles/common: defutf8 on seems like a sane default, at this point,
     LP: #301447
+  * debian/control: trying to fix upgrade issues, add
+    provides/replaces/conflicts screen-profiles (<< 2.0), LP: #390808
+    NOTE: we can't provide a dummy screen-profiles package, as we
+    must have screen-profiles uninstalled first, to remove the
+    dpkg-diversion of /usr/bin/screen
+  * byobu: force the janitor to run on startup to create the environment
+  * byobu-status: fix --detail, detect script dir
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 22 Jun 2009 13:12:17 -0500
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 23 Jun 2009 01:00:09 -0500
 
 byobu (2.14-0ubuntu1) karmic; urgency=low
 
