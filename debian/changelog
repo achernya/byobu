@@ -1,8 +1,24 @@
-byobu (2.13-0ubuntu2) karmic; urgency=low
+byobu (2.15-0ubuntu1) karmic; urgency=low
+
+  * profiles/common: defutf8 on seems like a sane default, at this point,
+    LP: #301447
+  * debian/control: trying to fix upgrade issues, add
+    provides/replaces/conflicts screen-profiles (<< 2.0), LP: #390808
+    NOTE: we can't provide a dummy screen-profiles package, as we
+    must have screen-profiles uninstalled first, to remove the
+    dpkg-diversion of /usr/bin/screen
+  * byobu: force the janitor to run on startup to create the environment
+  * byobu-status: fix --detail, detect script dir
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 23 Jun 2009 01:00:09 -0500
+
+byobu (2.14-0ubuntu1) karmic; urgency=low
 
   * debian/postinst: remove set -x debugging
+  * debian/control: create dummy screen-profiles and screen-profiles-extras
+    packages, to handle seamless upgrades from screen-profiles -> byobu
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 21 Jun 2009 21:11:40 -0500
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 22 Jun 2009 11:28:14 -0500
 
 byobu (2.13-0ubuntu1) karmic; urgency=low
 
