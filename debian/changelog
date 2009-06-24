@@ -1,3 +1,9 @@
+byobu (2.16-0ubuntu2) karmic; urgency=low
+
+  * debian/postinst: can't assume a group named for the user, LP: #391722
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 24 Jun 2009 12:46:17 -0500
+
 byobu (2.16-0ubuntu1) karmic; urgency=low
 
   * byobu-config, doc/help.txt: update the verbage of some text
