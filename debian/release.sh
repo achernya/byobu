@@ -21,7 +21,6 @@ gpg --armor --sign --detach-sig ../"$PKG"_*.orig.tar.gz
 
 # Create the rpm export
 sudo alien --to-rpm ../$PKG"_"$MAJOR.$minor"_all.deb"
-sudo alien --to-rpm ../$PKG"-extras_"$MAJOR.$minor"_all.deb"
 mv -f *.rpm ..
 rsync -aP ../*.rpm kirkland@people.ubuntu.com:~kirkland/public_html/$PKG/rpm
 
@@ -31,6 +30,7 @@ rsync -aP /tmp/$PKG-export.tar.gz kirkland@people.ubuntu.com:~kirkland/public_ht
 
 # Open the next release for development
 nextminor=`expr $minor + 1`
+sed -i "s/^VERSION=.*$/VERSION=$MAJOR.$nextminor/" byobu
 dch -v "$MAJOR.$nextminor" "UNRELEASED"
 sed -i "s/$MAJOR.$nextminor) .*;/$MAJOR.$nextminor) unreleased;/" debian/changelog
 sed -i "s/^Version:.*$/Version:        $MAJOR.$nextminor/" rpm/$PKG.spec
