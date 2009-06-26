@@ -1,4 +1,31 @@
-byobu (2.16) unreleased; urgency=low
+byobu (2.17) unreleased; urgency=low
+
+  [ Dustin Kirkland ]
+  * debian/postinst: can't assume a group named for the user, LP: #391722
+  * bin/mem_available: read mem_available from /proc, should be more
+    efficient
+  * byobu-launcher-uninstall: uninstall old screen-launcher entries too,
+    LP: #391913
+  * byobu: detect and emit an error message if the user tries to run
+    byobu from within a screen session
+  * byobu.1, byobu-config.1: move the putty bug note to the byobu manpage
+    next to the keybinding documentation
+  * debian/postinst, debian/screen-profiles.postinst: ensure that
+    /usr/bin/screen doesn't disappear, which causes the dpkg-divert
+    removal to fail; LP: #390808
+  * debian/byobu-extras.install, debian/control, debian/install,
+    debian/release.sh, debian/rules, generate, rpm/byobu.spec: eliminate
+    the byobu-extras package; this was originally created because we
+    used to force select-screen-profile on first run, and the number of
+    profiles was overwhelming;  we're no longer doing this, and this
+    separate package is more trouble than its worth
+
+  [ Ciemon Dunville ]
+  * byobu.1: update description, add note about units of measure
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 26 Jun 2009 11:51:11 -0500
+
+byobu (2.16-0ubuntu1) karmic; urgency=low
 
   * byobu-config, doc/help.txt: update the verbage of some text
   * byobu-config, byobu-janitor, byobu-select-profile, debian/install,
@@ -7,11 +34,18 @@ byobu (2.16) unreleased; urgency=low
   * byobu-config, byobu-launcher, byobu-launcher-install,
     byobu-launcher-uninstall, debian/install, debian/rules,
     rpm/byobu.spec: rename to byobu-launcher*
-  * debian/rules: establish symlink for screen-launcher for existing
-    launch-on-login configurations; this seems better than auto-editing
-    user's .profile
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 23 Jun 2009 02:41:46 -0500
+  Fixes for: LP: #391105, #390405, #391039
+  * debian/control: add screen-profiles and screen-profiles-extras
+    transitional packages
+  * debian/postinst, debian/prerm, debian/rules: fix screen-profiles ->
+    byobu upgrades; drop byobu's attempt to remove the dpkg-divert on
+    /usr/bin/screen, as this fails; establish links in the postinst,
+    remove in the prerm
+  * debian/screen-profiles.postinst: remove the diversion on *installation*
+    of this transitional package
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 23 Jun 2009 14:47:10 -0500
 
 byobu (2.15-0ubuntu1) karmic; urgency=low
 

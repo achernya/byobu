@@ -2,21 +2,22 @@
 
 PKG="byobu"
 
-if [ -x "/usr/bin/screen.real" ]; then
-	# Byobu used to divert the real /usr/bin/screen, but we don't
-	# do this anymore; clean up old diversion if upgrading
-	if ls -alF /usr/bin/screen 2>/dev/null | grep -qs "^l.*/usr/bin/screen -> byobu"; then
-		rm -f /usr/bin/screen
-	fi
-        dpkg-divert --package "$PKG" --rename --remove /usr/bin/screen
-fi
+# The target of the diversion somehow disappeared which will cause
+# the divert removal to fail; we don't want that to happen
+[ -e "/usr/bin/screen.real" ] && [ ! -e "/usr/bin/screen" ] && cp -a /usr/bin/screen.real /usr/bin/screen
+
+# The following two links significantly improve the upgrade
+# experience from screen-profiles to byobu.
+ln -sf /usr/bin/byobu-status /usr/bin/screen-profiles-status
+ln -sf /usr/bin/byobu-launcher /usr/bin/screen-launcher
 
 # Notify users that they should reload their profile
 DIR="/var/run/screen"
 for d in $(ls "$DIR"); do
 	touch "$DIR/$d/$PKG.reload-required"
 	u=$(echo "$d" | sed "s:^S-::")
-	chown $u:$u "$DIR/$d/$PKG.reload-required"
+	chown $u "$DIR/$d/$PKG.reload-required"
+	chmod 700 "$DIR/$d/$PKG.reload-required"
 done
 
 #DEBHELPER#
