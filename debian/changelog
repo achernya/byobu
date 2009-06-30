@@ -1,18 +1,29 @@
-byobu (2.17) unreleased; urgency=low
+byobu (2.18) unreleased; urgency=low
+
+  * debian/screen-profiles.postinst: try to remove the dpkg-divert, but
+    if it fails, let the installation proceed, since we've copied
+    screen.real back into place now, LP: #393204
+  * byobu-launcher-uninstall: byobu-launcher is no longer fully qualified,
+    update the remove to account for this
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 30 Jun 2009 15:38:17 -0700
+
+byobu (2.17-0ubuntu1) karmic; urgency=low
 
   [ Dustin Kirkland ]
   * debian/postinst: can't assume a group named for the user, LP: #391722
+  * debian/postinst, debian/screen-profiles.postinst: ensure that
+    /usr/bin/screen doesn't disappear, which causes the dpkg-divert
+    removal to fail; LP: #390808
   * bin/mem_available: read mem_available from /proc, should be more
     efficient
   * byobu-launcher-uninstall: uninstall old screen-launcher entries too,
     LP: #391913
   * byobu: detect and emit an error message if the user tries to run
     byobu from within a screen session
+  * byobu: add a -v version argument
   * byobu.1, byobu-config.1: move the putty bug note to the byobu manpage
     next to the keybinding documentation
-  * debian/postinst, debian/screen-profiles.postinst: ensure that
-    /usr/bin/screen doesn't disappear, which causes the dpkg-divert
-    removal to fail; LP: #390808
   * debian/byobu-extras.install, debian/control, debian/install,
     debian/release.sh, debian/rules, generate, rpm/byobu.spec: eliminate
     the byobu-extras package; this was originally created because we
@@ -23,7 +34,7 @@ byobu (2.17) unreleased; urgency=low
   [ Ciemon Dunville ]
   * byobu.1: update description, add note about units of measure
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 26 Jun 2009 11:51:11 -0500
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 26 Jun 2009 17:34:30 -0500
 
 byobu (2.16-0ubuntu1) karmic; urgency=low
 
