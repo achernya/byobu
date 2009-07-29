@@ -1,4 +1,21 @@
-byobu (2.23) unreleased; urgency=low
+byobu (2.24) unreleased; urgency=low
+
+  [ Chow Loong Jin and Dustin Kirkland ]
+  * byobu, byobu-launcher, byobu-select-profile: check $STY rather than
+    $TERM, to determine if we're already inside of a screen session, per
+    screen's manpage; wrap $STY in double quotes; use -n rather than -z;
+    LP: #403988, LP: #403809
+
+  [ Dustin Kirkland ]
+  * debian/rules: fix update-pot section of rules file; previous code
+    was only actually gathering messages from the last file input
+    (byobu-config); this joins the code properly
+  * bin/wifi_quality: actually evaluate the wifi quality, fixes broken
+    quality percentage
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 29 Jul 2009 23:52:25 -0500
+
+byobu (2.23-0ubuntu1) karmic; urgency=low
 
   [ Kees Cook ]
   * byobu, byobu-launcher:

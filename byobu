@@ -18,7 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 PKG="byobu"
-VERSION=2.23
+VERSION=2.24
 
 # Add a version argument for debugging purposes
 if [ "$1" = "-v" ]; then
@@ -28,7 +28,7 @@ if [ "$1" = "-v" ]; then
 fi
 
 # Nesting byobu inside of screen doesn't work well
-if [ "$TERM" = "screen" ]; then
+if [ -n "$STY" ]; then
 	echo `gettext "Exit the current screen session to run $PKG"`
 	exit 1
 fi
@@ -37,7 +37,7 @@ fi
 byobu-janitor --force
 
 # Set window title until https://bugs.launchpad.net/bugs/338722 is fixed in screen
-echo -ne "\033]0;${USER}@$(hostname) - byobu\007"
+echo -ne "\033]0;${USER}@$(hostname) - ${PKG}\007"
 
 # Launch motd+shell, unless the user has default windows set to launch
 [ -n "$SHELL" ] || SHELL="/bin/sh"
