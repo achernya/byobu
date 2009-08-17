@@ -30,9 +30,10 @@ find_script () {
 	fi
 }
 
-# Source configuration
+# Source configurations
 [ -r "/etc/$PKG/statusrc" ] && . "/etc/$PKG/statusrc"
 [ -r "$HOME/.$PKG/status" ] && . "$HOME/.$PKG/status"
+[ -r "$HOME/.$PKG/statusrc" ] && . "$HOME/.$PKG/statusrc"
 
 export P="$1"
 if [ "$P" = "--detail" ]; then
@@ -57,5 +58,5 @@ if [ "$P" = "--detail" ]; then
 else
 		eval x="\$$P" || exit 1
 		[ "$x" = "1" ] || exit 0
-		exec $(find_script "$P")
+		. $(find_script "$P")
 fi
