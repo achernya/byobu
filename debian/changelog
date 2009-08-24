@@ -1,8 +1,21 @@
-byobu (2.27) unreleased; urgency=low
+byobu (2.28) unreleased; urgency=low
 
-  * UNRELEASED
+  * Fix bashism in byobu script (LP: #418273)
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 17 Aug 2009 14:32:57 -0500
+ -- Daniel Hahler <ubuntu@thequod.de>  Mon, 24 Aug 2009 21:10:46 +0200
+
+byobu (2.27-0ubuntu1) karmic; urgency=low
+
+  [ Derek Carter <goozbach@friocorte.com> ]
+  * byobu-config, rpm/byobu.spec: fixed to build on Fedora 11; merged
+    with minor modifications (install keybindings/common as a symlink to
+    f-keys)
+
+  [ Dustin Kirkland ]
+  * byobu-config: use Derek's *awesome* "screen -X" hack to reload profiles
+    automatically, and drop the "reload" prompt
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 17 Aug 2009 16:08:53 -0500
 
 byobu (2.26-0ubuntu1) karmic; urgency=low
 
@@ -21,6 +34,11 @@ byobu (2.26-0ubuntu1) karmic; urgency=low
     forked shells by multiple sed-calls on one line by using a single
     sed call with multiple -e arguments (thanks for the suggestion smoser)
   * debian/control: bumping standards version
+  * po/byobu-bg.po, po/byobu-de.po, po/byobu-en_GB.po, po/byobu-es.po,
+    po/byobu-fr.po, po/byobu-hu.po, po/byobu-id.po, po/byobu-it.po,
+    po/byobu-ja.po, po/byobu-la.po, po/byobu-nl.po, po/byobu-ru.po,
+    po/byobu-sv.po, po/es.po, po/fr.po, po/ru.po: translations import
+    from launchpad
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 17 Aug 2009 14:30:27 -0500
 
