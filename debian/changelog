@@ -1,3 +1,10 @@
+byobu (2.28-0ubuntu1) karmic; urgency=low
+
+  [ Daniel Hahler ]
+  * Fix bashism in byobu script (LP: #418273)
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 24 Aug 2009 15:18:03 -0500
+
 byobu (2.27-0ubuntu1) karmic; urgency=low
 
   [ Derek Carter <goozbach@friocorte.com> ]
