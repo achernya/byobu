@@ -1,3 +1,9 @@
+byobu (2.29-0ubuntu1) karmic; urgency=low
+
+  * bin/disk: fix disk units for <10GB disks
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 24 Aug 2009 22:58:20 -0500
+
 byobu (2.28-0ubuntu1) karmic; urgency=low
 
   [ Daniel Hahler ]
