@@ -1,4 +1,11 @@
-byobu (2.34) unreleased; urgency=low
+byobu (2.35) unreleased; urgency=low
+
+  * bin/updates_available: fix updates available, broken when updates
+    cache file does not exist, LP: #434736
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 22 Sep 2009 09:30:21 -0700
+
+byobu (2.34-0ubuntu1) karmic; urgency=low
 
   * bin/users: use wc -l, since pgrep -c doesn't work in some
     distros (busybox, Arch), LP: #434047
@@ -8,7 +15,7 @@ byobu (2.34) unreleased; urgency=low
     fixes, updating the names of the utilities to use "byobu" rather than
     "screen"
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 21 Sep 2009 11:04:11 -0700
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 21 Sep 2009 11:27:09 -0700
 
 byobu (2.33-0ubuntu1) karmic; urgency=low
 
