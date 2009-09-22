@@ -1,3 +1,10 @@
+byobu (2.35-0ubuntu1) karmic; urgency=low
+
+  * bin/updates_available: fix updates available, broken when updates
+    cache file does not exist, LP: #434736
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 22 Sep 2009 09:30:21 -0700
+
 byobu (2.34-0ubuntu1) karmic; urgency=low
 
   * bin/users: use wc -l, since pgrep -c doesn't work in some
