@@ -1,3 +1,11 @@
+byobu (2.37-0ubuntu1) karmic; urgency=low
+
+  * bin/updates_available: fix yum output when listing updates
+    available, LP: #440659
+  * byobu-config: fix crash, due to undefined variable, LP: #428418
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 02 Oct 2009 11:31:57 -0500
+
 byobu (2.36-0ubuntu1) karmic; urgency=low
 
   * bin/fan_speed: improve the logic for find the fan_speed system monitor
