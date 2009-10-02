@@ -1,4 +1,13 @@
-byobu (2.37) unreleased; urgency=low
+byobu (2.38) unreleased; urgency=low
+
+  * bin/menu: dynamically change the menu message between
+    Menu:<F9> and Menu:^a-@, based on the users chosen keybinding set,
+    LP: #446248
+  * po/*: import translations just before karmic release
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 02 Oct 2009 11:35:53 -0500
+
+byobu (2.37-0ubuntu1) karmic; urgency=low
 
   * bin/updates_available: fix yum output when listing updates
     available, LP: #440659
