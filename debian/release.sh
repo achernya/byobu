@@ -8,13 +8,12 @@ error() {
 	exit 1
 }
 
-head -n1 debian/changelog | grep "karmic" || error "This version must be ready for 'karmic'"
+head -n1 debian/changelog | grep "lucid" || error "This version must be ready for 'lucid'"
 
 # Tag the release in bzr
 minor=`head -n1 debian/changelog | sed "s/^.*($MAJOR.//" | sed "s/-.*$//"`
-bzr tag --delete "$MAJOR.$minor" || true
-bzr tag "$MAJOR.$minor"
-bzr commit -m "releasing $MAJOR.$minor" --unchanged
+dch --release
+debcommit --release --message="releasing $MAJOR.$minor"
 
 # Sign the tarball
 gpg --armor --sign --detach-sig ../"$PKG"_*.orig.tar.gz
@@ -36,7 +35,7 @@ rsync -aP /tmp/$PKG-export.tar.gz kirkland@people.canonical.com:~kirkland/public
 
 # Open the next release for development
 nextminor=`expr $minor + 1`
-sed -i "s/^VERSION=.*$/VERSION=$MAJOR.$nextminor/" byobu
+sed -i "s/^VERSION=.*$/VERSION=$MAJOR.$nextminor/" $PKG
 dch -v "$MAJOR.$nextminor" "UNRELEASED"
 sed -i "s/$MAJOR.$nextminor) .*;/$MAJOR.$nextminor) unreleased;/" debian/changelog
 sed -i "s/^Version:.*$/Version:        $MAJOR.$nextminor/" rpm/$PKG.spec

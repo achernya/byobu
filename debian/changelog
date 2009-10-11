@@ -1,4 +1,24 @@
-byobu (2.38) unreleased; urgency=low
+byobu (2.39) unreleased; urgency=low
+
+  [ Dustin Kirkland ]
+  * debian/install, desktop/byobu.desktop, desktop/byobu.svg: add a
+    desktop icon for Byobu, LP: #449200
+  * bin/menu: improve logic for the menu button, to explicitly look for
+    screen-escape-keys (^a-@), or none (byobu-config), else (F9), LP: #450421
+  * debian/prerm: the for loop might not actually do anything, so make
+    sure we do "something", like run "true", LP: #441788
+  * byobu-config: make byobu more python 2.5 friendly, by dropping the
+    'finally' clauses
+  * bin/menu: add some logic in support of byobu-export'd configurations
+  * byobu-export: add byobu-config to the export tarball
+  * debian/release-build.sh, debian/release.sh: update for karmic->lucid
+
+  [ Derek Carter ]
+  * rpm/byobu.spec: updated for Fedora 11
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 11 Oct 2009 14:58:18 -0500
+
+byobu (2.38-0ubuntu1) karmic; urgency=low
 
   * bin/menu: dynamically change the menu message between
     Menu:<F9> and Menu:^a-@, based on the users chosen keybinding set,

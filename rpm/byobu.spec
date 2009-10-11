@@ -1,12 +1,12 @@
 Name:           byobu
-Version:        2.38
+Version:        2.39
 Release:        1%{?dist}
 Summary:        a set of useful profiles and a profile-switcher for GNU screen
 
 Group:          Applications/System
 License:        GPL
 URL:            http://launchpad.net/byobu
-Source0:        http://code.launchpad.net/byobu/trunk/2.38/+download/byobu_2.38.orig.tar.gz
+Source0:        http://code.launchpad.net/byobu/trunk/2.39/+download/byobu_2.39.orig.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:	noarch
 
@@ -111,9 +111,7 @@ rm -rf $RPM_BUILD_ROOT
 /usr/lib/byobu/users
 /usr/lib/byobu/whoami
 /usr/lib/byobu/wifi_quality
-/usr/share/locale/es/LC_MESSAGES/byobu.mo
-/usr/share/locale/fr/LC_MESSAGES/byobu.mo
-/usr/share/locale/ru/LC_MESSAGES/byobu.mo
+/usr/share/locale/*
 /usr/share/byobu/keybindings/common
 /usr/share/byobu/keybindings/f-keys
 /usr/share/byobu/keybindings/none
