@@ -1,3 +1,11 @@
+byobu (2.38-0ubuntu2) karmic; urgency=low
+
+   * bin/menu: improve logic for the menu button, to explicitly look for
+     screen-escape-keys (^a-@), or none (byobu-config), else (F9), LP: #450421,
+     cherry-pick r778 from upstream
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 13 Oct 2009 10:02:42 -0500
+
 byobu (2.38-0ubuntu1) karmic; urgency=low
 
   * bin/menu: dynamically change the menu message between
