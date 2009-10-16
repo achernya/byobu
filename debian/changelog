@@ -1,3 +1,11 @@
+byobu (2.38-0ubuntu3) karmic; urgency=low
+
+  * Cherry-pick upstream r780
+  * debian/prerm: the for loop might not actually do anything, so make
+    sure we do "something", like run "true", LP: #441788
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 16 Oct 2009 12:37:03 -0500
+
 byobu (2.38-0ubuntu2) karmic; urgency=low
 
    * bin/menu: improve logic for the menu button, to explicitly look for
