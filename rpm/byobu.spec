@@ -1,12 +1,12 @@
 Name:           byobu
-Version:        2.39
+Version:        2.40
 Release:        1%{?dist}
 Summary:        a set of useful profiles and a profile-switcher for GNU screen
 
 Group:          Applications/System
 License:        GPL
 URL:            http://launchpad.net/byobu
-Source0:        http://code.launchpad.net/byobu/trunk/2.39/+download/byobu_2.39.orig.tar.gz
+Source0:        http://code.launchpad.net/byobu/trunk/2.40/+download/byobu_2.40.orig.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:	noarch
 
@@ -28,8 +28,6 @@ screen window manager, such as toggle-able system status notifications.
 
 
 %build
-profiles_generator/generate
-
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -58,8 +56,8 @@ cp -ar byobu ${RPM_BUILD_ROOT}/usr/bin
 cp -ar byobu-config ${RPM_BUILD_ROOT}/usr/bin
 cp -ar byobu-status ${RPM_BUILD_ROOT}/usr/bin
 cp -ar byobu-status-detail ${RPM_BUILD_ROOT}/usr/bin
-cp -ar byobu-launcher-install ${RPM_BUILD_ROOT}/usr/share/byobu
-cp -ar byobu-launcher-uninstall ${RPM_BUILD_ROOT}/usr/share/byobu
+cp -ar byobu-launcher-install ${RPM_BUILD_ROOT}/usr/bin
+cp -ar byobu-launcher-uninstall ${RPM_BUILD_ROOT}/usr/bin
 cp -ar motd+shell ${RPM_BUILD_ROOT}/usr/bin
 cp -ar byobu-launcher ${RPM_BUILD_ROOT}/usr/bin
 cp -ar byobu-janitor ${RPM_BUILD_ROOT}/usr/bin
@@ -84,9 +82,11 @@ rm -rf $RPM_BUILD_ROOT
 /usr/bin/byobu-status-detail
 /usr/bin/byobu-select-profile
 /usr/lib/byobu/arch
+/usr/lib/byobu/apport
 /usr/lib/byobu/battery
 /usr/lib/byobu/cpu_count
 /usr/lib/byobu/cpu_freq
+/usr/lib/byobu/custom
 /usr/lib/byobu/date
 /usr/lib/byobu/disk
 /usr/lib/byobu/ec2_cost
@@ -133,8 +133,8 @@ rm -rf $RPM_BUILD_ROOT
 /usr/share/byobu/profiles/light_purple
 /usr/share/byobu/profiles/light_red
 /usr/share/byobu/profiles/light_yellow
-/usr/share/byobu/byobu-launcher-install
-/usr/share/byobu/byobu-launcher-uninstall
+/usr/bin/byobu-launcher-install
+/usr/bin/byobu-launcher-uninstall
 /usr/share/byobu/windows/common
 /etc/byobu
 %doc README

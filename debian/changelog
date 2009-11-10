@@ -1,4 +1,84 @@
-byobu (2.39) unreleased; urgency=low
+byobu (2.40) unreleased; urgency=low
+
+  * bin/updates_available, statusrc: move the color coding out to the config
+    file
+  * byobu-config, byobu.1, po/*, profiles/common,
+    profiles_generator/profile.skel, rpm/byobu.spec, statusrc:
+    - add an apport hook, LP: #485380
+  * bin/apport: improve the formatting of the detailed output to
+    suggest installing apport if necessary
+  * debian/control: suggest apport
+  * bin/apport, bin/battery, bin/cpu_freq, bin/disk, bin/ec2_cost,
+    bin/fan_speed, bin/hostname, bin/ip_address, bin/load_average,
+    bin/logo, bin/mail, bin/mem_available, bin/mem_used, bin/menu,
+    bin/network, bin/processes, bin/reboot_required, bin/release,
+    bin/temp_c, bin/temp_f, bin/updates_available, bin/uptime, bin/users,
+    bin/whoami, bin/wifi_quality statusrc: define a set of color variables,
+    such that it's easier to make these theme-able
+  * windows/common: suggest w3m rather than elinks
+  * byobu-status, profiles/common, profiles_generator/profile.skel,
+    statusrc: obviate the need for separate profiles per color; read the
+    profile colors from a config file, and use a special "color" status
+    item to dynamically render it
+  * bin/menu: add a space to the -r test, LP: #490894
+  * profiles_generator/profile.skel: use the reverse color for the current
+    window highlighting; works better with odd color combinations, maximizes
+    contrast
+  * byobu-status: separate COLOR into FOREGROUND and BACKGROUND; more
+    flexibility
+  * byobu-config, byobu-select-profile: rework to independently select
+    background color and foreground color, rather than profile; improve text
+  * debian/install, debian/rules, profiles/common,
+    profiles_generator/generate, profiles_generator/profile.skel,
+    rpm/byobu.spec: get rid of the generated profiles; now, everything is
+    handled by FOREGROUND and BACKGROUND colors, dynamically
+  * byobu-janitor: clean up old ~/.byobu/profile symlinks; guess the user's
+    colors and set them in ~/.byobu/colors; ensure that profile gets linked
+    to the common one
+  * byobu-select-profile, byobu-select-profile.1: deprecate the --set
+    option, only support --background and --foreground now; update the
+    documentation
+  * debian/profile: establish symlinks for the color profiles to ensure
+    smooth upgrades; all point to the common profile now
+  * byobu-config, statusrc: enable whoami, hostname, ip_address by default;
+    it seems I almost *always* turn these on, seem useful; re-disable if
+    there are noisy complaints
+  * byobu-janitor, statusrc: seed the ~/.byobu/status file with the
+    default values, making it easier for users to customize themselves
+  * bin/custom, byobu-config, byobu.1, profiles/common, rpm/byobu.spec,
+    statusrc: add support for a custom status script indicator
+  * byobu-config, byobu-select-profile: make color selection more readable;
+    support ctrl-<space> escape sequence
+  * bin/custom, byobu-status: support --detail in custom scripts
+  * byobu-export, byobu-config:
+    - comprehensively rewritten, basically put all of byobu's installed
+      files in ~/.byobu, and use some clever sed scripts to fixup paths
+    - drop the color selection, no longer necessary
+  * byobu-reconnect-sockets, byobu-reconnect-sockets.1, debian/install,
+    debian/rules: create a sourcable shell script that updates the gpg-agent
+    and dbus socket environment variables, LP: #486511
+  * README: update link to exported tarball
+  * debian/install, rpm/byobu.spec, byobu-launcher-install,
+    byobu-launcher-uninstall, byobu-janitor: put the launcher install and
+    uninstall utilities in /usr/bin
+  * bin/*: drop sourcing of /etc/byobu/statusrc, as this is done in
+    byobu-status now
+  * bin/apport, bin/battery, bin/cpu_freq, bin/custom, bin/disk,
+    bin/ec2_cost, bin/fan_speed, bin/hostname, bin/ip_address,
+    bin/load_average, bin/logo, bin/mail, bin/mem_available, bin/mem_used,
+    bin/menu, bin/network, bin/processes, bin/reboot_required,
+    bin/release, bin/temp_c, bin/temp_f, bin/updates_available,
+    bin/uptime, bin/users, bin/whoami, bin/wifi_quality, byobu-status,
+    statusrc:
+    - define and use a color function for all status indicators, gives
+      infinite flexibility
+    - replace "undo" with "-"
+  * byobu-status: allow for no color decorations, helps with older versions
+    of screen, LP: #432165
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 10 Nov 2009 10:18:20 -0600
+
+byobu (2.39-0ubuntu1) lucid; urgency=low
 
   [ Dustin Kirkland ]
   * debian/install, desktop/byobu.desktop, desktop/byobu.svg: add a
@@ -16,7 +96,7 @@ byobu (2.39) unreleased; urgency=low
   [ Derek Carter ]
   * rpm/byobu.spec: updated for Fedora 11
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 11 Oct 2009 14:58:18 -0500
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 10 Nov 2009 10:18:00 -0600
 
 byobu (2.38-0ubuntu1) karmic; urgency=low
 

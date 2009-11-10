@@ -52,13 +52,6 @@ if [ -d "$HOME/.$OLDPKG" ] && [ ! -e "$HOME/.$PKG" ]; then
 	# Rename the config dir
 	mv -f "$HOME/.$OLDPKG" "$HOME/.$PKG"
 	ln -sf "$HOME/.$PKG" "$HOME/.$OLDPKG"
-	# Fix the chosen profile symlink
-	if [ -h "$PROFILE" ]; then
-		# Determine the chosen profile color
-		profile=`readlink "$PROFILE" | sed "s:^.*-::"`
-		# Try to set that color, if it exists, otherwise set to default
-		byobu-select-profile -s "$profile" >/dev/null 2>&1 || byobu-select-profile -s "$DEFAULT_PROFILE" >/dev/null 2>&1
-	fi
 	# Replace all instances of the old package name with the new
 	sed -i "s/$OLDPKG/$PKG/g" "$HOME/.$PKG"/* || true
 fi
@@ -66,9 +59,40 @@ fi
 # Affects: First runs with no configuration
 # Seed the configuration
 [ -d "$HOME/.$PKG" ] || mkdir -p "$HOME/.$PKG"
-[ -r "$PROFILE" ] || byobu-select-profile -s "$DEFAULT_PROFILE" >/dev/null 2>&1
+[ -r "$HOME/.$PKG/color" ] || byobu-select-profile -b W -f k >/dev/null 2>&1
+[ -r "$PROFILE" ] || ln -sf /usr/share/$PKG/profiles/common "$PROFILE"
+
+# Affects: Symlinks pointing to color profiles
+if [ -h "$PROFILE" ] && \
+   stat "$PROFILE" | grep -qs "File:.*->.*/usr/share/byobu/profiles/" && \
+ ! stat "$PROFILE" | grep -qs "File:.*->.*/usr/share/byobu/profiles/common" ; then
+	# Set default colors
+	BG=W
+	FG=k
+	color=$(ls -l "$PROFILE" | sed "s/^.*\///")
+	case $color in
+		black|dark)   BG=k; FG=W;;
+		dark_blue)    BG=b; FG=W;;
+		dark_cyan)    BG=c; FG=W;;
+		dark_green)   BG=g; FG=W;;
+		dark_purple)  BG=m; FG=W;;
+		dark_red)     BG=r; FG=W;;
+		dark_yellow)  BG=y; FG=W;;
+		light)        BG=W; FG=k;;
+		light_blue)   BG=B; FG=k;;
+		light_cyan)   BG=C; FG=k;;
+		light_green)  BG=G; FG=k;;
+		light_purple) BG=M; FG=k;;
+		light_red)    BG=R; FG=k;;
+		light_yellow) BG=Y; FG=k;;
+		*)            BG=W; FG=k;;
+	esac
+	rm -f "$PROFILE" 2>/dev/null
+	byobu-select-profile -b $BG -f $FG >/dev/null 2>&1
+fi
+
 [ -s "$HOME/.$PKG/keybindings" ] || echo "source /usr/share/$PKG/keybindings/common" > "$HOME/.$PKG/keybindings"
-[ -r "$HOME/.$PKG/status" ] || touch "$HOME/.$PKG/status"
+[ -r "$HOME/.$PKG/status" ] || $(grep -A 999999 BEGIN_CUT_HERE /etc/$PKG/statusrc | grep -B 999999 END_CUT_HERE | grep -v CUT > "$HOME/.$PKG/status")
 [ -r "$HOME/.$PKG/windows" ] || touch "$HOME/.$PKG/windows"
 [ -r "$HOME/.screenrc" ] || touch "$HOME/.screenrc"
 
@@ -76,7 +100,7 @@ fi
 # The status scripts used to have hyphens in their name, but now use
 # underscores such that we can source the file as a shell snippet;
 # fix existing status configuration.
-sed -i "s/-/_/g" "$HOME/.$PKG/status"
+sed -i "s/\(.*\)-\(.*\)=/\1_\2=/g" "$HOME/.$PKG/status"
 sed -i "s/^disk.*=/disk=/" "$HOME/.$PKG/status"
 sed -i "s/^network.*=/network=/" "$HOME/.$PKG/status"
 
@@ -84,7 +108,7 @@ sed -i "s/^network.*=/network=/" "$HOME/.$PKG/status"
 # screen-launcher was renamed byobu-launcher; if the user has byobu
 # set to auto-launch, update their configuration to use the byobu-launcher
 if grep -qs "screen-launcher$" "$HOME/.profile"; then
-	/usr/share/$PKG/byobu-launcher-install
+	byobu-launcher-install
 fi
 
 # Affects: Upgrades from <= byobu-2.25

@@ -9,6 +9,8 @@ byobu \- wrapper script for seeding a user's byobu configuration and launching s
 
 \fBbyobu\fP supports a number of unique and interesting status notifications across the lowest two lines in the screen.  Each status notification item is independently configurable, enabled and disabled by the configuration utility.  The guide below helps identify each status item (in alphabetical order):
 
+\fBapport\fP \- symbol displayed if there are pending crash reports; {!} symbol displayed on the lower bar toward the left, in black on an orange background
+
 \fBarch\fP \- system architecture; displayed on the lower bar toward the left, in the default text color on the default background color
 
 \fBbattery\fP \- battery information; display on the lower bar toward the right; |\-| indicates discharging, |+| indicates charging, |=| indicates fully charged;  when charging or discharging, the current battery capacity as a percentage is displayed;  the colours green, yellow, and red are used to give further indication of the battery's charge state
@@ -16,6 +18,8 @@ byobu \- wrapper script for seeding a user's byobu configuration and launching s
 \fBcpu_count\fP \- the number of cpu's or cores on the system; displayed in the lower bar toward the right in the default text color on the default background, followed by a trailing 'x'
 
 \fBcpu_freq\fP \- the current frequency of the cpu in GHz; displayed in the lower bar toward the right in white text on a light blue background
+
+\fBcustom\fP \- user defined custom scripts; must be executable programs of any kind in \fI$HOME/.byobu/bin\fP; must be named N_NAME, where N is the frequency in seconds to refresh the status indicator, and NAME is the name of the script; N should not be less than 5 seconds; script should echo a small amount of text to standard out, standard error is discared; the indicator will be displayed in the lower panel, in inverted colors to your current background/foreground scheme, unless you manually specify the colors in your script's output; BEWARE, cpu-intensive custom scripts may impact your overall system performance and could upset your system administrator!
 
 \fBdate\fP \- the system date in YYYY-MM-DD formate; displayed in the lower on the far right in the default text color on the default background
 

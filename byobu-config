@@ -30,7 +30,11 @@ HOME=os.getenv("HOME")
 USER=os.getenv("USER")
 PKG="byobu"
 SHARE='/usr/share/'+PKG
+if not os.path.exists(SHARE):
+    SHARE = "%s/.%s/%s" % (HOME, PKG, SHARE)
 DOC='/usr/share/doc/'+PKG
+if not os.path.exists(DOC):
+    DOC = "%s/.%s/%s" % (HOME, PKG, DOC)
 DEF_ESC="A"
 RELOAD = "If you are using the default set of keybindings, press\n<F5> or <ctrl-a-R> to activate these changes.\n\nOtherwise, exit this screen session and start a new one."
 RELOAD_FLAG="/var/run/screen/S-"+USER+"/"+PKG+".reload-required"
@@ -85,15 +89,16 @@ def menu(screen, size, isInstalled):
         installtext=_("Byobu currently does not launch at login (toggle on)")
 
 
-    li = Listbox(height = 8, width = 60, returnExit = 1)
+    li = Listbox(height = 9, width = 60, returnExit = 1)
     li.append(_("Help"), 1)
-    li.append(_("Change Byobu's colors"), 2)
-    li.append(_("Toggle status notifications"), 3)
-    li.append(_("Change keybinding set"), 4)
-    li.append(_("Change escape sequence"), 5)
-    li.append(_("Create new windows"), 6)
-    li.append(_("Manage default windows"), 7)
-    li.append(installtext, 8)
+    li.append(_("Change Byobu's background color"), 2)
+    li.append(_("Change Byobu's foreground color"), 3)
+    li.append(_("Toggle status notifications"), 4)
+    li.append(_("Change keybinding set"), 5)
+    li.append(_("Change escape sequence"), 6)
+    li.append(_("Create new windows"), 7)
+    li.append(_("Manage default windows"), 8)
+    li.append(installtext, 9)
     bb = ButtonBar(screen, (("Exit", "exit", ESC),), compact=1)
 
     g = GridForm(screen, _(" Byobu Configuration Menu"), 1, 2)
@@ -105,8 +110,7 @@ def menu(screen, size, isInstalled):
     else:
         return li.current()
 
-def messagebox(screen, width, height, title, text, \
-    scroll=0, \
+def messagebox(screen, width, height, title, text, scroll=0, \
     buttons=((_("Okay"), "okay"),(_("Cancel"), "cancel", ESC)) ):
 
     t = Textbox(width, height, text, scroll=scroll )
@@ -118,10 +122,9 @@ def messagebox(screen, width, height, title, text, \
     return bb.buttonPressed(g.runOnce())
 
 def help(screen, size, config):
-    for fn in glob.glob(DOC+'*/help.txt'):
-        f=file(fn)
-        text=f.read()
-        f.close()
+    f=file(DOC+'/help.txt')
+    text=f.read()
+    f.close()
 
     text=text.replace("<esckey>", getesckey(), 1)
 
@@ -135,20 +138,35 @@ def help(screen, size, config):
 
     return 100
 
-def profile(screen, size):
+def select_color(screen, size, layer):
     li = Listbox(height = 8, width = 60, scroll = 1, returnExit = 1)
 
     for choice in commands.getoutput('byobu-select-profile -l').splitlines():
-        li.append(choice, choice)
+        (intensity, color) = choice.split("_")
+        if choice == "light_grey":
+            choice_desc = "white"
+        elif intensity == "dark":
+            choice_desc = color
+        else:
+            choice_desc = "%s (light)" % color
+        li.append(choice_desc, choice)
 
     bb = ButtonBar(screen, ((_("Apply"), "apply"), (_("Cancel"), "cancel", ESC)), compact = 1)
 
-    g = GridForm(screen, _("Which profile would you like to use?"), 1, 2)
+    if layer == "foreground":
+        g = GridForm(screen, _("Choose a foreground color:"), 1, 2)
+    else:
+        g = GridForm(screen, _("Choose a background color:"), 1, 2)
+
     g.add(li, 0, 0, padding=(4,2,4,2))
     g.add(bb, 0, 1, padding=(1,1,0,0))
 
     if bb.buttonPressed(g.runOnce()) != "cancel":
-        commands.getoutput('byobu-select-profile --set %s' % li.current())
+        commands.getoutput("echo %s > /tmp/out" % layer)
+        if layer == "foreground":
+            commands.getoutput('byobu-select-profile --foreground %s' % li.current())
+        else:
+            commands.getoutput('byobu-select-profile --background %s' % li.current())
 	reload_required()
     return 100
 
@@ -262,16 +280,18 @@ def readwindows():
 
 def readstatus():
     status={}
+    status["apport"]=0
     status["arch"]=0
     status["battery"]=0
     status["cpu_count"]=1
     status["cpu_freq"]=1
+    status["custom"]=1
     status["date"]=1
     status["disk"]=0
     status["ec2_cost"]=0
     status["fan_speed"]=0
-    status["hostname"]=0
-    status["ip_address"]=0
+    status["hostname"]=1
+    status["ip_address"]=1
     status["load_average"]=1
     status["logo"]=1
     status["mail"]=0
@@ -288,7 +308,7 @@ def readstatus():
     status["users"]=0
     status["updates_available"]=1
     status["uptime"]=1
-    status["whoami"]=0
+    status["whoami"]=1
     status["wifi_quality"]=0
     if os.path.exists(HOME+'/.'+PKG+'/status'):
         f=open(HOME+'/.'+PKG+'/status', 'r')
@@ -392,7 +412,7 @@ def defaultwindows(screen, size):
 
 def install(screen, size, isInstalled):
     if not isInstalled:
-        out = commands.getoutput("bash /usr/share/"+PKG+"/byobu-launcher-install")
+        out = commands.getoutput("byobu-launcher-install")
         if out == "":
             out = _("Byobu will be launched automatically next time you login.")
 
@@ -400,7 +420,7 @@ def install(screen, size, isInstalled):
         buttons=((_("Menu"), )))
         return 100
     else:
-        out = commands.getoutput("bash /usr/share/"+PKG+"/byobu-launcher-uninstall")
+        out = commands.getoutput("byobu-launcher-uninstall")
         if out == "":
             out = _("Byobu will not be used next time you login.")
 
@@ -426,11 +446,16 @@ def getesckey():
     line = commands.getoutput("grep ^escape "+path)
     if line == "":
         return DEF_ESC
-    return line[line.find('^')+1]
+    esc = line[line.find('^')+1]
+    if esc == "`":
+        esc = " "
+    return esc
 
 def setesckey(key):
     path = HOME+'/.'+PKG+'/keybindings'
     if key != "":
+        if key == " ":
+            key = "`"
         u = key[0].upper()
         l = key[0].lower()
         if os.path.exists(path):
@@ -497,18 +522,20 @@ def main():
         if tag == 1:
             tag = help(screen, size, config)
         elif tag == 2:
-            tag = profile(screen, size)
+            tag = select_color(screen, size, "background")
         elif tag == 3:
-            tag = togglestatus(screen, size)
+            tag = select_color(screen, size, "foreground")
         elif tag == 4:
+            tag = togglestatus(screen, size)
+        elif tag == 5:
             tag = keybindings(screen, size)
-	elif tag == 5:
+	elif tag == 6:
             tag = chgesc(screen, size)
-        elif tag == 6:
-            tag = newwindow(screen, size)
         elif tag == 7:
-            tag = defaultwindows(screen, size)
+            tag = newwindow(screen, size)
         elif tag == 8:
+            tag = defaultwindows(screen, size)
+        elif tag == 9:
             tag = install(screen, size, isInstalled)
             isInstalled=(tag == 100)
 

@@ -19,7 +19,9 @@
 
 [ "$1" = "--detail" ] && exit 0
 PKG="byobu"
-[ -r "$HOME/.$PKG/keybindings"] && bindings="$HOME/.$PKG/keybindings" || bindings="$HOME/.screenrc"
+color 2>/dev/null || color() { true; }
+
+[ -r "$HOME/.$PKG/keybindings" ] && bindings="$HOME/.$PKG/keybindings" || bindings="$HOME/.screenrc"
 
 if grep -qs "^source.*screen-escape-keys$" $bindings 2>/dev/null; then
 	esc=`grep "^escape" $bindings | sed "s/^.*\(.\)$/\1/"`
@@ -30,4 +32,4 @@ else
 	key="F9"
 fi
 
-printf " \005{= kw}%s:<\005{-}\005{=b kw}$key\005{= kw}>" `gettext "Menu"`
+printf " $(color k w)%s:<$(color -)$(color b k w)$key$(color k w)>" `gettext "Menu"`

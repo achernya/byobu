@@ -1,7 +1,7 @@
 #!/bin/sh -e
 #
-#    reboot_required: determine if a reboot is required
-#    Copyright (C) 2008 Canonical Ltd.
+#    apport: note if there are crash dumps available for apporting
+#    Copyright (C) 2009 Canonical Ltd.
 #
 #    Authors: Dustin Kirkland <kirkland@canonical.com>
 #
@@ -20,18 +20,20 @@
 PKG="byobu"
 color 2>/dev/null || color() { true; }
 
-reboot="/var/run/reboot-required"
-[ -d "/var/run/screen/S-$USER" ] && DIR="/var/run/screen/S-$USER" || DIR="$HOME/.byobu"
-reload="$DIR/$PKG.reload-required"
-case "$1" in
-	--detail)
-		ls -alF "$reboot" "$reload" 2>&1
-	;;
-	--short)
-		[ -e "$reboot" ] && printf "Yes" || printf "No"
-	;;
-	*)
-		[ -e "$reboot" ] && printf "$(color b W)($(color -)$(color b b W)%s$(color -)$(color b W))$(color -) " "R"
-		[ -e "$reload" ] && printf "$(color b W)<$(color -)$(color b b W)%s$(color -)$(color b W)>$(color -) " "F5"
-	;;
-esac
+if [ "$1" = "--detail" ]; then
+	if ls /var/crash/*.crash >/dev/null 2>&1; then
+		printf "\nTo file bugs on the existing crash reports, run:\n"
+		which apport-cli >/dev/null || printf "  sudo apt-get install apport\n"
+		for i in /var/crash/*.crash; do
+			printf "  apport-cli $i\n"
+		done
+		printf "\nTo clear the pending reports:\n"
+		printf "  rm -f /var/crash/*.crash\n\n"
+	else
+		printf "No pending crash reports\n"
+	fi
+	exit 0
+fi
+
+# Print {!} if a /var/crash/*.crash file exists
+ls /var/crash/*.crash >/dev/null 2>&1 && printf "$(color y k){!}$(color -) "
