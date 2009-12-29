@@ -1,8 +1,23 @@
-byobu (2.43) unreleased; urgency=low
+byobu (2.44) unreleased; urgency=low
+
+  * UNRELEASED
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 29 Dec 2009 20:32:32 -0600
+
+byobu (2.43-0ubuntu1) lucid; urgency=low
 
   * byobu.1: improve putty bug documentation
+  * profiles/common: monitor windows, showing "@" next to the window name,
+    but don't print an "Activity" message
+  * byobu-select-profile, byobu-config: improve color selection with more
+    informative color names and support screen default background/foreground
+    colors, LP: #500669
+  * bin/logo, profiles/common: must undo each color change on logo printing
+    like all other status items, fix hardstatus line for "default color"
+  * profiles/common: fix active window highlight, make it reverse+underline
+    for all color combinations
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 23 Dec 2009 14:01:55 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 29 Dec 2009 20:31:42 -0600
 
 byobu (2.42-0ubuntu1) lucid; urgency=low
 
