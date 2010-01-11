@@ -7,15 +7,15 @@
 PKG=byobu
 VER=`head -n 1 debian/changelog | sed 's/^.*(//' | sed 's/).*//' | sed 's/-.*//'`
 
-release-upstream:
+get-orig-source:
 	dh_testdir
 	bzr export ../${PKG}_${VER}.orig.tar.gz
 
 install-po: update-pot
 	for po in po/*.po ; do \
 		lang=$${po#po/}; lang=$${lang%.po}; \
-		mkdir -p po/locale/$${lang}/LC_MESSAGES/; \
-		msgfmt $${po} -o po/locale/$${lang}/LC_MESSAGES/${PKG}.mo ; \
+		mkdir -p usr/share/locale/$${lang}/LC_MESSAGES/; \
+		msgfmt $${po} -o usr/share/locale/$${lang}/LC_MESSAGES/${PKG}.mo ; \
 	done
 
 update-pot:
@@ -56,7 +56,7 @@ binary-indep: build install
 	dh_testdir -i
 	dh_testroot -i
 	dh_installdocs -X.bzr -i
-	dh_installman -i byobu-launcher.1 byobu.1 byobu-config.1 byobu-select-profile.1 motd+shell.1 byobu-export.1 byobu-status.1 byobu-status-detail.1 byobu-reconnect-sockets.1
+	dh_installman -i
 	dh_installchangelogs -i
 	dh_installdebconf -i
 	dh_compress -i

@@ -1,10 +1,63 @@
-byobu (2.46) unreleased; urgency=low
+byobu (2.47) unreleased; urgency=low
+
+  [ Dustin Kirkland ]
+  * usr/lib/byobu/network: fix network script regresssion, LP: #506315
+  * usr/lib/byobu/wifi_quality: silence error
+  * byobu.desktop, byobu.svg: install these again, but hide the menu item
+    by default, per pitti's fallback suggestion to LP: #498322
+  * Make byobu more portable, much help from Derek Carter, LP: #503554
+    - debian/rules, debian/manpages, usr/share/man/man1/*: move the manpages
+      to make byobu more portable
+    - debian/install, bin/*, usr/lib/byobu/*: move the status scripts
+    - debian/install, usr/share/byobu/*: move the share files
+    - debian/install, usr/bin/*: move the binary scripts
+    - debian/install, usr/share/doc/byobu/*: move the docs
+    - debian/install, etc/*: move the config file
+    - debian/install, debian/rules, po/*: move the translations
+    - usr/share/applications/byobu.desktop, usr/share/byobu/pixmaps/byobu.svg:
+      moved
+    - usr/share/byobu/tests/byobu-time-notifications: relocate, rename, and
+      install the notification timing tests, add a copyright header
+    - AUTHORS, ChangeLog, NEWS: added
+  * bin/byobu-launcher, bin/byobu-select-session,
+    share/man/man1/byobu-select-session.1: add a dynamic prompt if
+    automatically launching byobu on a server where multiple sessions
+    exist, LP: #368963
+  * byobu-export, byobu-janitor, byobu-status: default to white text on
+    black backgrounds
+
+  [ Jason Cohen ]
+  * usr/bin/byobu: check if our terminfo supports 256 colors, LP: #409353
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 11 Jan 2010 22:54:36 -0600
+
+byobu (2.46-0ubuntu1) lucid; urgency=low
 
   * byobu-janitor: seed the default color choices more effciently, also
     fixes some strange crashes on first run; default the colors to white
     on black
+  * byobu-config, doc/help.txt: insert version number in byobu help menu,
+    LP: #502119
+  * bin/network: match interface a bit better for bridges, LP: #498722
+  * bin/logo, bin/release: when looking at /etc/issue, grab the first
+    line that starts with a real letter rather than control character,
+    LP: #432751
+  * byobu: deprecate code that prevented nested byobu sessions; this is
+    is actually quite useful, although you should choose different
+    escape sequences for each nested host, LP: #403988
+  * bin/battery, bin/custom, bin/fan_speed, bin/temp, bin/temp_f: don't
+    use ls programatically in for-loops, LP: #452405
+  * bin/cpu_temp, bin/temp_f, bin/temp_c, byobu-config, byobu.1,
+    profiles/common, rpm/byobu.spec, statusrc: merge temp_f and temp_c
+    into a single cpu_temp script
+  * profiles/common: adjust the formatting-only, and run-only-at-startup
+    status scripts to run every 9,999,999 seconds (~115 days), minor
+    performance improvement once a day, easier to identify such jobs;
+    adjust cpu_count and mem_available to run more frequently, as
+    cpu-hotplug and memory-ballooning are becoming more feasible,
+    particularly in VMs
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 07 Jan 2010 21:53:14 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 11 Jan 2010 22:54:07 -0600
 
 byobu (2.45-0ubuntu1) lucid; urgency=low
 

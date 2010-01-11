@@ -1,23 +1,4 @@
-bin/* usr/lib/byobu
-#desktop/byobu.svg usr/share/byobu/pixmaps/
-#desktop/byobu.desktop usr/share/applications/
-po/locale/* usr/share/locale
-profiles/byoburc usr/share/byobu/profiles
-profiles/common usr/share/byobu/profiles
-keybindings/* usr/share/byobu/keybindings
-statusrc etc/byobu
-windows/common usr/share/byobu/windows
-byobu-select-profile usr/bin
-byobu usr/bin
-byobu-config usr/bin
-byobu-reconnect-sockets usr/bin
-byobu-status usr/bin
-byobu-status-detail usr/bin
-byobu-janitor usr/bin
-byobu-launcher-install usr/bin
-byobu-launcher-uninstall usr/bin
-motd+shell usr/bin
-byobu-launcher usr/bin
-byobu-export usr/bin
+etc/*
+usr/*
 debian/source_byobu.py usr/share/apport/package-hooks
 debian/lintian/byobu usr/share/lintian/overrides

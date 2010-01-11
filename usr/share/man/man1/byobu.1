@@ -1,0 +1,122 @@
+.TH byobu 1 "19 June 2009" byobu "byobu"
+.SH NAME
+byobu \- wrapper script for seeding a user's byobu configuration and launching screen
+
+.SH DESCRIPTION
+\fBbyobu\fP is a script that launches GNU screen in the byobu configuration.  This enables the display of system information and status notifications within two lines at the bottom of the screen session. It also enables multiple tabbed terminal sessions, accessible through simple keystrokes.
+
+.SH STATUS NOTIFICATIONS
+
+\fBbyobu\fP supports a number of unique and interesting status notifications across the lowest two lines in the screen.  Each status notification item is independently configurable, enabled and disabled by the configuration utility.  The guide below helps identify each status item (in alphabetical order):
+
+\fBapport\fP \- symbol displayed if there are pending crash reports; {!} symbol displayed on the lower bar toward the left, in black on an orange background
+
+\fBarch\fP \- system architecture; displayed on the lower bar toward the left, in the default text color on the default background color
+
+\fBbattery\fP \- battery information; display on the lower bar toward the right; |\-| indicates discharging, |+| indicates charging, |=| indicates fully charged;  when charging or discharging, the current battery capacity as a percentage is displayed;  the colours green, yellow, and red are used to give further indication of the battery's charge state
+
+\fBservices\fP \- users can configure a list of services to monitor, define the SERVICES variable in $HOME/.byobu/status, a whitespace separated of services, each service should include the init name of the service, then a pipe, and then an abbreviated name or symbol to display when running; displayed in the lower bar toward the center in cyan on a white background
+
+\fBcpu_count\fP \- the number of cpu's or cores on the system; displayed in the lower bar toward the right in the default text color on the default background, followed by a trailing 'x'
+
+\fBcpu_freq\fP \- the current frequency of the cpu in GHz; displayed in the lower bar toward the right in white text on a light blue background
+
+\fBcpu_temp\fP \- the cpu temperature in Celsius (default) or Fahrenheit, configure TEMP=F or TEMP=C in \fI$HOME/.byobu/statusrc\fP; displayed in the lower bar toward the right in yellow text on a black background; you may override the detected cpu temperature device by setting MONITORED_TEMP=/proc/acpi/whatever in \fI$HOME/.byobu/statusrc\fP
+
+\fBcustom\fP \- user defined custom scripts; must be executable programs of any kind in \fI$HOME/.byobu/bin\fP; must be named N_NAME, where N is the frequency in seconds to refresh the status indicator, and NAME is the name of the script; N should not be less than 5 seconds; script should echo a small amount of text to standard out, standard error is discared; the indicator will be displayed in the lower panel, in inverted colors to your current background/foreground scheme, unless you manually specify the colors in your script's output; BEWARE, cpu-intensive custom scripts may impact your overall system performance and could upset your system administrator!
+
+\fBdate\fP \- the system date in YYYY-MM-DD formate; displayed in the lower on the far right in the default text color on the default background
+
+\fBdisk\fP \- total disk space available and total used on / directory; displayed in the lower bar on the far right in white text on a light purple background; override the default directory by specifying an alternate mount point with MONITORED_DISK=/wherever in \fI$HOME/.byobu/statusrc\fP
+
+\fBec2_cost\fP \- an estimation of the cost of the current boot of the system in terms of the Amazon EC2 billing model; displayed in the lower bar toward the right in green text on a black background; there is a leading '~' to indicate that this is an estimation, and the monetary units are US Dollars '$'
+
+\fBfan_speed\fP \- cpu or system fan speed as reported by lm-sensors; displayed in the lower bar toward the right in black text on a grey background; there is a trailing 'rpm' for units
+
+\fBhostname\fP \- the hostname of the system; displayed in the upper bar on the far right in bold black text on a grey background; there is a leading '@' symbol if the username status is also enabled
+
+\fBip_address\fP \- the ip address of the system in dotted decimal form; displayed in the upper bar on the far right in bold black text on a grey background
+
+\fBload_average\fP \- the system load average over the last 1 minute; displayed in the lower bar toward the right in black text on a yellow background
+
+\fBlogo\fP \- an approximation of the current operating system's logo; displayed in the lower bar on the far left; you may customize this logo by setting a chosen logo in \fI$HOME/.byobu/logo\fP, or you may override this with LOGO=:-D in \fI$HOME/.byobu/statusrc\fP
+
+\fBmail\fP \- system mail for the current user; the letter '[M]' is displayed in the lower bar toward the left in black text on a grey background
+
+\fBmem_available\fP \- total memory available in the system; displayed in the lower bar toward the right in white text on a green background
+
+\fBmem_used\fP \- total memory used in the system as a percentage of the total memory available; displayed in the lower bar toward the right in white text on a green background with a trailing '%' sign
+
+\fBmenu\fP \- a simple indicator directing new users to use the F9 keybinding to access the byobu menu
+
+\fBnetwork\fP \- instantaneous upload/download bandwidth in kB/s over the last 2 seconds; displayed in the lower bar toward the right in white text on a purple background with a leading '^' sign indicating 'up' and 'v' sign indicating 'down'; override the default interface by specifying an alternate interface with MONITORED_NETWORK=eth1 in \fI$HOME/.byobu/statusrc\fP
+
+\fBprocesses\fP \- total number of processes running on the system; displayed in the lower bar in white text on a dark yellow background with a trailing '&' indicating 'background processes'
+
+\fBreboot_required\fP \- symbol present if a reboot is required following a system update; displayed in the lower bar white text on a blue background by the symbol '(R)'; additionally, reboot_required will print '<F5>' in white text on a blue background, if Byobu requires you to reload your profile to affect some changes.
+
+\fBrelease\fP \- distribution and version information about the release running on the current system as reported by \fBlsb_release(1)\fP or \fI/etc/issue\fP; displayed in the lower bar in bold black text toward the left on a grey background; you may override the detected release with DISTRO=Whatever in \fI$HOME/.byobu/statusrc\fP
+
+\fBtime\fP \- the system time in HH:MM:SS format; displayed in the lower bar on the far right in the default text and default background colors
+
+\fBupdates_available\fP \- the number of updates available on the system; displayed in the lower bar toward the right in white text on a red background with a trailing '!' sign; if any updates are marked 'security updates', then there will be a total of two trailing exclamation points, '!!'
+
+\fBuptime\fP \- the total system uptime since last boot; displayed in the lower bar toward the right in blue text on a grey background
+
+\fBusers\fP \- the number of remote users logged into the system via sshd, empty if 0 users; displayed in the lower bar toward the right in red text on a grey background with a trailing '#' sign
+
+\fBwhoami\fP \- the name of the user who owns the screen session; displayed in the upper bar toward the far right in bold black text on a grey background
+
+\fBwifi_quality\fP \- the connection rate and signal quality of the wifi connection; displayed in the lower bar toward the right in black text on a cyan background; the connection rate is in 'Mb/s' and the signal quality is as a percentage with a trailing '%'
+
+\fBwindows\fP \- each open window in the screen session appears is displayed in the upper bar toward the far right in blue text on a grey background
+
+.SH UNITS OF MEASURE
+byobu uses binary for measurements rather than decimal for KB, MB, and GB.  This means multiples of 1024 rather than multiples of 1000, in accordance with JEDEC Standard 100B.01.
+
+.SH KEYBINDINGS
+
+byobu keybindings can be user defined in /usr/share/byobu/keybindings/ (or within .screenrc if byobu-export was used). The common key bindings are:
+
+\fBF2\fP \- Create a new window
+
+\fBF3\fP \- Move to previous window
+
+\fBF4\fP \- Move to next window
+
+\fBF5\fP \- Reload profile
+
+\fBF6\fP \- Detach from this session
+
+\fBF7\fP \- Enter copy/scrollback mode
+
+\fBF8\fP \- Re-title a window
+
+\fBF9\fP \- Configuration Menu
+
+\fBF12\fP \-  Lock this terminal
+
+\fBCtrl-a $\fP \- show detailed status
+
+\fBCtrl-a R\fP \- Reload profile
+
+\fBCtrl-a !\fP \- Toggle key bindings on and off
+
+\fBCtrl-a k\fP \- Kill the current window
+
+.SH "BUGS"
+
+PuTTY users have reported that the F2, F3, and F4 shortcut keys are not working properly.  PuTTY sends the same escape sequences as the linux console for F1-F4 by default.  You can fix this problem in the PuTTY config, Terminal -> Keyboard -> Function keys: Xterm R6.  See: \fIhttp://www.mail-archive.com/screen-users@gnu.org/msg01525.html\fP
+
+.SH SEE ALSO
+.PD 0
+.TP
+\fBscreen\fP(1), \fBbyobu-config\fP, \fBbyobu-export\fP, \fBbyobu-status\fP, \fBbyobu-status-detail\fB
+.TP
+\fIhttp://launchpad.net/byobu\fP
+.PD
+
+.SH AUTHOR
+This manpage and the utility was written by Dustin Kirkland <kirkland@canonical.com> for Ubuntu systems (but may be used by others).  Permission is granted to copy, distribute and/or modify this document under the terms of the GNU General Public License, Version 3 published by the Free Software Foundation.
+
+On Debian systems, the complete text of the GNU General Public License can be found in /usr/share/common-licenses/GPL.
