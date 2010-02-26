@@ -1,0 +1,207 @@
+# translation of ru.po to
+# translation of byobu.po to
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# byobu <dubrsl@altlinux.ru>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: ru\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-03-03 11:47-0600\n"
+"PO-Revision-Date: 2009-07-24 14:46+0000\n"
+"Last-Translator: byobu <Unknown>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2009-09-23 11:08+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+
+#: usr/lib/byobu/menu:35 usr/bin/byobu-config:133 usr/bin/byobu-config:412
+#: usr/bin/byobu-config:418
+msgid "Menu"
+msgstr "Меню"
+
+#: usr/bin/byobu-export:66
+msgid "File exists"
+msgstr ""
+
+#: usr/bin/byobu-export:67
+msgid "Remove file? [y/N] "
+msgstr ""
+
+#: usr/bin/byobu-export:116
+msgid "Archive"
+msgstr ""
+
+#: usr/bin/byobu-export:118
+msgid "Extract the archive in your home directory on the target system."
+msgstr ""
+
+#: usr/bin/byobu-select-profile:71
+msgid "Error:"
+msgstr ""
+
+#: usr/bin/byobu-select-profile:71
+msgid " file exists, but is not a symlink"
+msgstr ""
+
+#: usr/bin/byobu-select-profile:94
+msgid "ERROR: Invalid selection"
+msgstr ""
+
+#: usr/bin/byobu-select-profile:100
+msgid "Select the foreground color: "
+msgstr ""
+
+#: usr/bin/byobu-select-profile:103
+msgid "Select the background color: "
+msgstr ""
+
+#: usr/bin/byobu-select-profile:117 usr/bin/byobu-select-profile:120
+msgid "Choose"
+msgstr ""
+
+#: usr/bin/byobu-select-profile:128
+msgid "Selected"
+msgstr ""
+
+#: usr/bin/byobu-config:87
+msgid "Byobu currently launches at login (toggle off)"
+msgstr ""
+
+#: usr/bin/byobu-config:89
+msgid "Byobu currently does not launch at login (toggle on)"
+msgstr ""
+
+#: usr/bin/byobu-config:93
+msgid "Help"
+msgstr "Помощь"
+
+#: usr/bin/byobu-config:94
+msgid "Change Byobu's background color"
+msgstr ""
+
+#: usr/bin/byobu-config:95
+msgid "Change Byobu's foreground color"
+msgstr ""
+
+#: usr/bin/byobu-config:96
+msgid "Toggle status notifications"
+msgstr "Переключатель состояния уведомлений"
+
+#: usr/bin/byobu-config:97
+msgid "Change keybinding set"
+msgstr "Изменить привязки клавиш"
+
+#: usr/bin/byobu-config:98
+msgid "Change escape sequence"
+msgstr "Изменение Escape-последовательности"
+
+#: usr/bin/byobu-config:99
+msgid "Create new windows"
+msgstr ""
+
+#: usr/bin/byobu-config:100
+msgid "Manage default windows"
+msgstr "Управление окном по умолчанию"
+
+#: usr/bin/byobu-config:104 usr/bin/byobu-config:511
+msgid " Byobu Configuration Menu"
+msgstr " Конфигурационное меню Byobu"
+
+#: usr/bin/byobu-config:114
+msgid "Okay"
+msgstr "Ok"
+
+#: usr/bin/byobu-config:114 usr/bin/byobu-config:148 usr/bin/byobu-config:173
+#: usr/bin/byobu-config:207 usr/bin/byobu-config:348 usr/bin/byobu-config:389
+#: usr/bin/byobu-config:463
+msgid "Cancel"
+msgstr "Отмена"
+
+#: usr/bin/byobu-config:134
+msgid "Byobu Help"
+msgstr "Помощь Byobu"
+
+#: usr/bin/byobu-config:148 usr/bin/byobu-config:173 usr/bin/byobu-config:207
+#: usr/bin/byobu-config:348 usr/bin/byobu-config:389 usr/bin/byobu-config:463
+msgid "Apply"
+msgstr "Применить"
+
+#: usr/bin/byobu-config:151
+msgid "Choose a foreground color:"
+msgstr ""
+
+#: usr/bin/byobu-config:153
+msgid "Choose a background color:"
+msgstr ""
+
+#: usr/bin/byobu-config:174
+msgid "Which set of keybindings would you like to use?"
+msgstr "Какой набор привязок к клавишам хотели бы Вы использовать?"
+
+#: usr/bin/byobu-config:187
+msgid "Title: "
+msgstr "Заголовок: "
+
+#: usr/bin/byobu-config:189
+msgid "Command: "
+msgstr "Команда: "
+
+#: usr/bin/byobu-config:191
+msgid "Presets: "
+msgstr "Задает: "
+
+#: usr/bin/byobu-config:205
+msgid "Add to default windows"
+msgstr "Добавьте к окнам значения по умолчанию"
+
+#: usr/bin/byobu-config:209
+msgid "Create new window(s):"
+msgstr "создать новое окно(а)"
+
+#: usr/bin/byobu-config:349
+msgid "Toggle status notifications:"
+msgstr "Переключатель состояния уведомлений:"
+
+#: usr/bin/byobu-config:381
+msgid "Windows:"
+msgstr "Окно:"
+
+#: usr/bin/byobu-config:391
+msgid "Select window(s) to create by default:"
+msgstr "Выберите окно(на), чтобы создать по умолчанию:"
+
+#: usr/bin/byobu-config:411
+msgid "Byobu will not be used next time you login."
+msgstr ""
+
+#: usr/bin/byobu-config:412
+msgid "Message"
+msgstr "Сообщение"
+
+#: usr/bin/byobu-config:417
+msgid "Byobu will be launched automatically next time you login."
+msgstr ""
+
+#: usr/bin/byobu-config:462
+msgid "Escape key: ctrl-"
+msgstr ""
+
+#: usr/bin/byobu-config:465
+msgid "Change escape sequence:"
+msgstr "Изменить Escape-последовательность"
+
+#: usr/bin/byobu-config:512
+msgid "<Tab>/<Alt-Tab> between elements | <Enter> selects | <Esc> exits"
+msgstr ""
+
+#~ msgid "Which profile would you like to use?"
+#~ msgstr "Какой профайл вы желаете использовать?"
+
+#~ msgid "Remove screen by default at login"
+#~ msgstr "Убрать screen из загрузки по умолчанию"
+
+#~ msgid "Exit"
+#~ msgstr "Выход"

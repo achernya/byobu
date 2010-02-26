@@ -1,0 +1,224 @@
+# Bulgarian translation for screen-profiles
+# Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
+# This file is distributed under the same license as the screen-profiles package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: screen-profiles\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-03-03 11:47-0600\n"
+"PO-Revision-Date: 2009-10-08 15:00+0000\n"
+"Last-Translator: Dragomir Minkovski <Unknown>\n"
+"Language-Team: Bulgarian <bg@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2009-10-09 06:48+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+
+#: usr/lib/byobu/menu:35 usr/bin/byobu-config:133 usr/bin/byobu-config:412
+#: usr/bin/byobu-config:418
+msgid "Menu"
+msgstr "Меню"
+
+#: usr/bin/byobu-export:66
+msgid "File exists"
+msgstr "Файлът съществува"
+
+#: usr/bin/byobu-export:67
+msgid "Remove file? [y/N] "
+msgstr "Премахване на файл? [y/n] "
+
+#: usr/bin/byobu-export:116
+msgid "Archive"
+msgstr "Архив"
+
+#: usr/bin/byobu-export:118
+msgid "Extract the archive in your home directory on the target system."
+msgstr ""
+"Разархивирайте архива във вашата домашна директория на желаната система"
+
+#: usr/bin/byobu-select-profile:71
+msgid "Error:"
+msgstr "Грешка:"
+
+#: usr/bin/byobu-select-profile:71
+msgid " file exists, but is not a symlink"
+msgstr " файлът съществува, но не е symlink"
+
+#: usr/bin/byobu-select-profile:94
+msgid "ERROR: Invalid selection"
+msgstr "ГРЕШКА: Невалидна селекция"
+
+#: usr/bin/byobu-select-profile:100
+#, fuzzy
+msgid "Select the foreground color: "
+msgstr "Изберете цвят: "
+
+#: usr/bin/byobu-select-profile:103
+#, fuzzy
+msgid "Select the background color: "
+msgstr "Изберете цвят: "
+
+#: usr/bin/byobu-select-profile:117 usr/bin/byobu-select-profile:120
+msgid "Choose"
+msgstr "Избор"
+
+#: usr/bin/byobu-select-profile:128
+msgid "Selected"
+msgstr ""
+
+#: usr/bin/byobu-config:87
+msgid "Byobu currently launches at login (toggle off)"
+msgstr "Byobu ще стартира при логин (изключи)"
+
+#: usr/bin/byobu-config:89
+msgid "Byobu currently does not launch at login (toggle on)"
+msgstr ""
+
+#: usr/bin/byobu-config:93
+msgid "Help"
+msgstr "Помощ"
+
+#: usr/bin/byobu-config:94
+#, fuzzy
+msgid "Change Byobu's background color"
+msgstr "Променете цвета на Byobu"
+
+#: usr/bin/byobu-config:95
+#, fuzzy
+msgid "Change Byobu's foreground color"
+msgstr "Променете цвета на Byobu"
+
+#: usr/bin/byobu-config:96
+msgid "Toggle status notifications"
+msgstr ""
+
+#: usr/bin/byobu-config:97
+msgid "Change keybinding set"
+msgstr "Промяна на клавишните комбинации"
+
+#: usr/bin/byobu-config:98
+msgid "Change escape sequence"
+msgstr ""
+
+#: usr/bin/byobu-config:99
+msgid "Create new windows"
+msgstr ""
+
+#: usr/bin/byobu-config:100
+msgid "Manage default windows"
+msgstr ""
+
+#: usr/bin/byobu-config:104 usr/bin/byobu-config:511
+msgid " Byobu Configuration Menu"
+msgstr ""
+
+#: usr/bin/byobu-config:114
+msgid "Okay"
+msgstr "ОК"
+
+#: usr/bin/byobu-config:114 usr/bin/byobu-config:148 usr/bin/byobu-config:173
+#: usr/bin/byobu-config:207 usr/bin/byobu-config:348 usr/bin/byobu-config:389
+#: usr/bin/byobu-config:463
+msgid "Cancel"
+msgstr "Отказ"
+
+#: usr/bin/byobu-config:134
+msgid "Byobu Help"
+msgstr ""
+
+#: usr/bin/byobu-config:148 usr/bin/byobu-config:173 usr/bin/byobu-config:207
+#: usr/bin/byobu-config:348 usr/bin/byobu-config:389 usr/bin/byobu-config:463
+msgid "Apply"
+msgstr "Приложи"
+
+#: usr/bin/byobu-config:151
+msgid "Choose a foreground color:"
+msgstr ""
+
+#: usr/bin/byobu-config:153
+msgid "Choose a background color:"
+msgstr ""
+
+#: usr/bin/byobu-config:174
+msgid "Which set of keybindings would you like to use?"
+msgstr "Коя клавишна комбинация ще ползвате?"
+
+#: usr/bin/byobu-config:187
+msgid "Title: "
+msgstr "Заглавие: "
+
+#: usr/bin/byobu-config:189
+msgid "Command: "
+msgstr "Команда: "
+
+#: usr/bin/byobu-config:191
+msgid "Presets: "
+msgstr "Предварителни настройки: "
+
+#: usr/bin/byobu-config:205
+msgid "Add to default windows"
+msgstr "Добавяне към прозорците по подразбиране"
+
+#: usr/bin/byobu-config:209
+msgid "Create new window(s):"
+msgstr ""
+
+#: usr/bin/byobu-config:349
+msgid "Toggle status notifications:"
+msgstr ""
+
+#: usr/bin/byobu-config:381
+msgid "Windows:"
+msgstr "Прозорци:"
+
+#: usr/bin/byobu-config:391
+msgid "Select window(s) to create by default:"
+msgstr "Избор на прозорец за създаване по подразбиране"
+
+#: usr/bin/byobu-config:411
+msgid "Byobu will not be used next time you login."
+msgstr ""
+
+#: usr/bin/byobu-config:412
+msgid "Message"
+msgstr "Съобщение"
+
+#: usr/bin/byobu-config:417
+msgid "Byobu will be launched automatically next time you login."
+msgstr ""
+
+#: usr/bin/byobu-config:462
+msgid "Escape key: ctrl-"
+msgstr ""
+
+#: usr/bin/byobu-config:465
+msgid "Change escape sequence:"
+msgstr ""
+
+#: usr/bin/byobu-config:512
+msgid "<Tab>/<Alt-Tab> between elements | <Enter> selects | <Esc> exits"
+msgstr ""
+
+#~ msgid "Profile"
+#~ msgstr "Профил"
+
+#~ msgid "Select a screen profile: "
+#~ msgstr "Избиране на screen профил "
+
+#~ msgid ""
+#~ "If you are using the default set of keybindings, press\\n<F5> to activate "
+#~ "these changes.\\n\\nOtherwise, exit this screen session and start a new "
+#~ "one."
+#~ msgstr ""
+#~ "Ако използвате настройката по подразбиране за бързите клавиши натиснете"
+#~ "\\n<F5> за да активирате тези промени.\\n\\n В противен случай затворете "
+#~ "тази сесия и започнете нова."
+
+#~ msgid "Run \"byobu\" to activate"
+#~ msgstr "Стартирайте \"byobu\" за да активирате"
+
+#~ msgid "Which profile would you like to use?"
+#~ msgstr "Кой профил бихте желали да ползвате?"

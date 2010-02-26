@@ -1,0 +1,223 @@
+# Indonesian translation for byobu
+# Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
+# This file is distributed under the same license as the byobu package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: byobu\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-03-03 11:47-0600\n"
+"PO-Revision-Date: 2009-08-17 21:09+0000\n"
+"Last-Translator: Andika Triwidada <andika@gmail.com>\n"
+"Language-Team: Indonesian <id@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2009-09-23 11:08+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+
+#: usr/lib/byobu/menu:35 usr/bin/byobu-config:133 usr/bin/byobu-config:412
+#: usr/bin/byobu-config:418
+msgid "Menu"
+msgstr "Menu"
+
+#: usr/bin/byobu-export:66
+msgid "File exists"
+msgstr "Berkas telah ada"
+
+#: usr/bin/byobu-export:67
+msgid "Remove file? [y/N] "
+msgstr "Hapus berkas? [y/T] "
+
+#: usr/bin/byobu-export:116
+msgid "Archive"
+msgstr "Arsip"
+
+#: usr/bin/byobu-export:118
+msgid "Extract the archive in your home directory on the target system."
+msgstr "Ekstrak arsip di direktori rumah anda pada sistem target."
+
+#: usr/bin/byobu-select-profile:71
+msgid "Error:"
+msgstr "Kesalahan:"
+
+#: usr/bin/byobu-select-profile:71
+msgid " file exists, but is not a symlink"
+msgstr " berkas ada, tapi bukan symlink"
+
+#: usr/bin/byobu-select-profile:94
+msgid "ERROR: Invalid selection"
+msgstr "KESALAHAN: Pilihan tak valid"
+
+#: usr/bin/byobu-select-profile:100
+#, fuzzy
+msgid "Select the foreground color: "
+msgstr "Pilih warna: "
+
+#: usr/bin/byobu-select-profile:103
+#, fuzzy
+msgid "Select the background color: "
+msgstr "Pilih warna: "
+
+#: usr/bin/byobu-select-profile:117 usr/bin/byobu-select-profile:120
+msgid "Choose"
+msgstr "Pilih"
+
+#: usr/bin/byobu-select-profile:128
+msgid "Selected"
+msgstr ""
+
+#: usr/bin/byobu-config:87
+msgid "Byobu currently launches at login (toggle off)"
+msgstr "Byobu kini diluncurkan saat login (toggle mati)"
+
+#: usr/bin/byobu-config:89
+msgid "Byobu currently does not launch at login (toggle on)"
+msgstr "Byobu kini tidak diluncurkan saat login (toggle nyala)"
+
+#: usr/bin/byobu-config:93
+msgid "Help"
+msgstr "Bantuan"
+
+#: usr/bin/byobu-config:94
+#, fuzzy
+msgid "Change Byobu's background color"
+msgstr "Ubah warna Byobu"
+
+#: usr/bin/byobu-config:95
+#, fuzzy
+msgid "Change Byobu's foreground color"
+msgstr "Ubah warna Byobu"
+
+#: usr/bin/byobu-config:96
+msgid "Toggle status notifications"
+msgstr "Toggle pemberitahuan status"
+
+#: usr/bin/byobu-config:97
+msgid "Change keybinding set"
+msgstr "Ubah tatanan keybinding"
+
+#: usr/bin/byobu-config:98
+msgid "Change escape sequence"
+msgstr "Ubah urutan escape"
+
+#: usr/bin/byobu-config:99
+msgid "Create new windows"
+msgstr "Buat jendela baru"
+
+#: usr/bin/byobu-config:100
+msgid "Manage default windows"
+msgstr "Kelola jendela bawaan"
+
+#: usr/bin/byobu-config:104 usr/bin/byobu-config:511
+msgid " Byobu Configuration Menu"
+msgstr " Menu Konfigurasi Byobu"
+
+#: usr/bin/byobu-config:114
+msgid "Okay"
+msgstr "Ok"
+
+#: usr/bin/byobu-config:114 usr/bin/byobu-config:148 usr/bin/byobu-config:173
+#: usr/bin/byobu-config:207 usr/bin/byobu-config:348 usr/bin/byobu-config:389
+#: usr/bin/byobu-config:463
+msgid "Cancel"
+msgstr "Batal"
+
+#: usr/bin/byobu-config:134
+msgid "Byobu Help"
+msgstr "Bantuan Byobu"
+
+#: usr/bin/byobu-config:148 usr/bin/byobu-config:173 usr/bin/byobu-config:207
+#: usr/bin/byobu-config:348 usr/bin/byobu-config:389 usr/bin/byobu-config:463
+msgid "Apply"
+msgstr "Terapkan"
+
+#: usr/bin/byobu-config:151
+msgid "Choose a foreground color:"
+msgstr ""
+
+#: usr/bin/byobu-config:153
+msgid "Choose a background color:"
+msgstr ""
+
+#: usr/bin/byobu-config:174
+msgid "Which set of keybindings would you like to use?"
+msgstr "Tatanan keybinding mana yang ingin anda pakai?"
+
+#: usr/bin/byobu-config:187
+msgid "Title: "
+msgstr "Judul: "
+
+#: usr/bin/byobu-config:189
+msgid "Command: "
+msgstr "Perintah: "
+
+#: usr/bin/byobu-config:191
+msgid "Presets: "
+msgstr "Pratata: "
+
+#: usr/bin/byobu-config:205
+msgid "Add to default windows"
+msgstr "Tambahkan ke jendela bawaan"
+
+#: usr/bin/byobu-config:209
+msgid "Create new window(s):"
+msgstr "Buat jendela baru:"
+
+#: usr/bin/byobu-config:349
+msgid "Toggle status notifications:"
+msgstr "Toggle pemberitahuan status:"
+
+#: usr/bin/byobu-config:381
+msgid "Windows:"
+msgstr "Jendela:"
+
+#: usr/bin/byobu-config:391
+msgid "Select window(s) to create by default:"
+msgstr "Pilih jendela yang akan dibuat secara default"
+
+#: usr/bin/byobu-config:411
+msgid "Byobu will not be used next time you login."
+msgstr "Byobu tidak akan dipakai ketika anda login berikutnya."
+
+#: usr/bin/byobu-config:412
+msgid "Message"
+msgstr "Pesan"
+
+#: usr/bin/byobu-config:417
+msgid "Byobu will be launched automatically next time you login."
+msgstr "Byobu akan diluncurkan secara otomatis saat anda login berikutnya."
+
+#: usr/bin/byobu-config:462
+msgid "Escape key: ctrl-"
+msgstr "Kunci escape: ctrl-"
+
+#: usr/bin/byobu-config:465
+msgid "Change escape sequence:"
+msgstr "Ubah urutan escape:"
+
+#: usr/bin/byobu-config:512
+msgid "<Tab>/<Alt-Tab> between elements | <Enter> selects | <Esc> exits"
+msgstr "<Tab>/<Alt-Tab> antar elemen | <Enter> pilih | <Esc> keluar"
+
+#~ msgid "Profile"
+#~ msgstr "Profil"
+
+#~ msgid "Select a screen profile: "
+#~ msgstr "Pilih profil screen: "
+
+#~ msgid ""
+#~ "If you are using the default set of keybindings, press\\n<F5> to activate "
+#~ "these changes.\\n\\nOtherwise, exit this screen session and start a new "
+#~ "one."
+#~ msgstr ""
+#~ "Bila anda memakai tatanan bawaan keybinding, tekan\\n<F5> untuk "
+#~ "mengaktifkan perubahan ini.\\n\\nJika tidak, keluar dari sesi screen ini "
+#~ "dan mulailah yang baru."
+
+#~ msgid "Run \"byobu\" to activate"
+#~ msgstr "Jalankan \"byobu\" untuk mengaktifkan"
+
+#~ msgid "Which profile would you like to use?"
+#~ msgstr "Profil mana yang akan anda pakai?"
