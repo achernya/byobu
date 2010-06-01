@@ -18,7 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 PKG="byobu"
-VERSION=2.77
+VERSION=2.78
 
 # Add a version argument for debugging purposes
 if [ "$#" = "1" ] && [ "$1" = "-v" ]; then
@@ -52,8 +52,8 @@ else
 fi
 export BYOBU_WINDOWS
 
-# Launch motd+shell, unless the user has default windows set to launch
-grep -qs "^[^#]" "$BYOBU_WINDOWS" && DEFAULT_WINDOW= || DEFAULT_WINDOW="-t shell motd+shell"
+# Launch shell, unless the user has default windows set to launch
+grep -qs "^[^#]" "$BYOBU_WINDOWS" && DEFAULT_WINDOW= || DEFAULT_WINDOW="shell"
 
 # Check if our terminfo supports 256 colors
 [ -x /usr/bin/tput ] && [ $(/usr/bin/tput colors 2>/dev/null || echo 0) -eq 256 ] && SCREEN_TERM="-T screen-256color"
