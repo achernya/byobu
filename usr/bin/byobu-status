@@ -33,10 +33,8 @@ find_script () {
 # Define colors
 ESC="\005"
 color() {
-	if [ -z "$1" ] || [ "$COLOR" = "none" ]; then
-		return 0
-	fi
-	case $1 in
+	case "$1" in
+		"") return 0 ;;
 		-)   printf "$ESC{-}" ;;
 		esc)    printf "$ESC" ;;
 		bold1)  printf "$ESC{=b }" ;;
@@ -45,7 +43,7 @@ color() {
 		invert) printf "$ESC{=r }" ;;
 		*)
 			if [ "$#" = "2" ]; then
-				[ "$MONOCHROME" = "1" ] && printf "$ESC{= }" || printf "$ESC{= $1$2}"
+				[ "$MONOCHROME" = "1" ] && printf "$ESC{= }"   || printf "$ESC{= $1$2}"
 			else
 				[ "$MONOCHROME" = "1" ] && printf "$ESC{=$1 }" || printf "$ESC{=$1 $2$3}"
 			fi
@@ -64,15 +62,15 @@ case "$P" in
 	--detail)
 		VER=
 		if which dpkg-query >/dev/null; then
-			VER=`dpkg-query --show $PKG | awk '{print "-" $2 }'`
+			VER=$(set -- $(dpkg-query --show $PKG); echo "$2")
 		fi
-		printf "$PKG$VER Detailed Status Navigation\n  Expand all - zr\t\tCollapse all - zm\n  Expand one - zo\t\tCollapse one - zc\n\n"
+		printf "$PKG-$VER Detailed Status Navigation\n  Expand all - zr\t\tCollapse all - zm\n  Expand one - zo\t\tCollapse one - zc\n\n"
 		for i in "/usr/lib/$PKG"/* "$HOME/.$PKG/bin"/*; do
-			i=$(echo "$i" | sed "s:^.*/::")
+			i=${i##*/}
 			[ "$i" = "menu" ] && continue
 			script=`find_script $i`
-			short=`$script --short | sed 's/^\s*//' | sed 's/\s*$//' | sed 's/.{[^}]*}//g'` || true
-			detail=`$script --detail | sed '/^$/d' | sed 's/^/\t/g'` || true
+			short=`$script --short | sed -e 's/^\s*//' -e 's/\s*$//' -e 's/.{[^}]*}//g'` || true
+			detail=`$script --detail | sed -e '/^$/d' -e 's/^/\t/g'` || true
 			printf "%s\n\t(%s)\n" "$short" "$i"
 			[ -n "$detail" ] && printf "%s\n" "$detail"
 		done

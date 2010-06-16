@@ -18,7 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 PKG="byobu"
-VERSION=2.80
+VERSION=2.81
 
 # Add a version argument for debugging purposes
 if [ "$#" = "1" ] && [ "$1" = "-v" ]; then
@@ -70,14 +70,20 @@ if [ "$#" = "0" ]; then
 	out=$(screen -wipe 2>/dev/null) || true
 	if [ "$CUSTOM_WINDOW_SET" = "1" ]; then
 		# Start new custom window set session
-		exec screen $SCREEN_TERM $PROFILE
-	elif echo "$out" | LANG=C egrep -qsi "(No Sockets found in|This room is empty)"; then
-		# Start new default session
-		exec screen $SCREEN_TERM $PROFILE $DEFAULT_WINDOW
+		exec screen $SCREEN_TERM -S $PKG $PROFILE
 	else
-		# Select and attach to an existing session
-		exec byobu-select-session
+		case "$out" in
+			*\(*\)*)
+				# Select and attach to an existing session
+				exec byobu-select-session
+			;;
+			*)
+				# Start new default session
+				exec screen $SCREEN_TERM -S $PKG $PROFILE $DEFAULT_WINDOW
+			;;
+		esac
 	fi
 else
-	exec screen $SCREEN_TERM $PROFILE "$@"
+	# Launch with command line args
+	exec screen $SCREEN_TERM -S $PKG $PROFILE "$@"
 fi
