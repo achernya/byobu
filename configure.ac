@@ -1,7 +1,7 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_PREREQ([2.65])
+AC_PREREQ([2.61])
 AC_INIT(byobu, 3.0, http://bugs.launchpad.net/byobu)
 AM_INIT_AUTOMAKE(byobu, 3.0)
 
@@ -29,5 +29,10 @@ AC_OUTPUT(Makefile \
 	usr/share/man/man1/Makefile usr/bin/Makefile)
 
 if test -n "${prefix}" && test "${prefix}" != "/usr"; then
-	sed -i "s: \&\& export BYOBU_PREFIX=.*$: \&\& export BYOBU_PREFIX=\"${prefix}\":" usr/bin/byobu-janitor usr/bin/byobu-launcher usr/bin/byobu-select-profile usr/bin/byobu-status usr/bin/byobu
+	for i in usr/bin/byobu*; do
+		# This hackery seems necessary for Mac OSX and Solaris installs
+		sed -e "s:BYOBU_PREFIX=.*:BYOBU_PREFIX=\"${prefix}\":" "$i" > "$i.new"
+		mv -f "$i.new" "$i"
+		chmod 755 "$i"
+	done
 fi

@@ -1,4 +1,26 @@
-byobu (3.0) unreleased; urgency=low
+byobu (3.2) UNRELEASED; urgency=low
+
+  * usr/share/byobu/keybindings/f-keys: resize the screen as part of the
+    F5/refresh, LP: #619899
+  * usr/bin/byobu-launcher: don't launch if in a dumb terminal, LP: #612886
+  * usr/lib/byobu/network, usr/share/man/man1/byobu.1: allow for
+    configuration of network traffic in [kM]ps, LP: #578377
+  * configure.ac: POSIX sed doesn't include -i option, LP: #619328, #622640
+  * usr/bin/byobu-janitor: improve dash replacement in status config,
+    LP: #598488
+  * usr/bin/byobu-janitor: fix upgrades where one's window list might have
+    motd+shell, LP: #589715
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 23 Aug 2010 17:34:33 -0400
+
+byobu (3.1-0ubuntu1) maverick; urgency=low
+
+  * configure.ac: drop autoconf version dependency to 2.61, so that we
+    can build on Hardy
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 03 Aug 2010 15:19:16 -0400
+
+byobu (3.0-0ubuntu1) maverick; urgency=low
 
   [ Dustin Kirkland ]
   * usr/bin/byobu: allow users to specify their own -S, LP: #610134
@@ -41,7 +63,7 @@ byobu (3.0) unreleased; urgency=low
     that package if you require RPMs
   * configure.ac, usr/bin/byobu: bump to version 3.0
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 02 Aug 2010 20:14:08 -0400
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 02 Aug 2010 22:30:46 -0400
 
 byobu (2.82-0ubuntu1) maverick; urgency=low
 
