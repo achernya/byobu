@@ -1,4 +1,14 @@
-byobu (3.2) UNRELEASED; urgency=low
+byobu (3.3) unreleased; urgency=low
+
+  * lib/byobu/network, share/man/man1/byobu.1: clean up binary/decimal
+    multipliers for network transfer vs. memory/disk capacities, in
+    accordance with industry standards
+  * usr/share/man/man1/byobu.1: add a note about non-utf8 locales,
+    LP: #613769
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 23 Aug 2010 17:52:26 -0400
+
+byobu (3.2-0ubuntu1) maverick; urgency=low
 
   * usr/share/byobu/keybindings/f-keys: resize the screen as part of the
     F5/refresh, LP: #619899
@@ -11,7 +21,7 @@ byobu (3.2) UNRELEASED; urgency=low
   * usr/bin/byobu-janitor: fix upgrades where one's window list might have
     motd+shell, LP: #589715
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 23 Aug 2010 17:34:33 -0400
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 23 Aug 2010 17:52:21 -0400
 
 byobu (3.1-0ubuntu1) maverick; urgency=low
 

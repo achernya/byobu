@@ -95,7 +95,11 @@ For example:
   $ BYOBU_WINDOWS=ssh_sessions byobu
 
 .SH UNITS OF MEASURE
-byobu uses binary for measurements rather than decimal for KB, MB, and GB.  This means multiples of 1024 rather than multiples of 1000, in accordance with JEDEC Standard 100B.01.
+byobu uses binary for capacity measurements of KB, MB, GB, and TB.  This means multiples of 1024 rather than multiples of 1000, in accordance with JEDEC Standard 100B.01 for disk and memory capacity measurements.  See:
+ * http://en.wikipedia.org/wiki/JEDEC_memory_standards
+
+byobu uses decimal for measurements of network data transfer, meaning multiple of 1000, rather than 1024.  See:
+ * http://en.wikipedia.org/wiki/Data_rate_units
 
 .SH KEYBINDINGS
 
@@ -134,6 +138,8 @@ byobu keybindings can be user defined in /usr/share/byobu/keybindings/ (or withi
 PuTTY users have reported that the F2, F3, and F4 shortcut keys are not working properly.  PuTTY sends the same escape sequences as the linux console for F1-F4 by default.  You can fix this problem in the PuTTY config, Terminal -> Keyboard -> Function keys: Xterm R6.  See: \fIhttp://www.mail-archive.com/screen-users@gnu.org/msg01525.html\fP
 
 Mac OSX terminal users have reported 'flashing text'.  You can fix this in the advanced settings of the terminal application, with 'Declare Terminal As: xterm-color'.
+
+Users of a non-UTF8 locale (such as cs_CZ charset ISO-8859-2), may need to add "defutf8 off" to \fI~/.screenrc\fP, if some characters are rendering as "?".
 
 .SH SEE ALSO
 .PD 0
