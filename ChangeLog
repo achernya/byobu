@@ -1,4 +1,41 @@
-byobu (3.3) unreleased; urgency=low
+byobu (3.5) unreleased; urgency=low
+
+  [ Jan Klepek ]
+  * usr/bin/byobu-status: fix libexec path for Fedora, LP: #630054
+
+  [ Dustin Kirkland ]
+  * usr/lib/byobu/rcs_cost, usr/lib/byobu/ec2_cost: testing crontab
+    creation time is not accurate, seems this happens at image creation
+    rather than instance instantiation; use /etc/hostname instead; ensure
+    that minimum hours is 1, not 0; LP: #639855
+  * usr/lib/byobu/network: use bps rather than B/s by default for network
+    traffic, LP: #578377
+  * This Maverick release also includes the fix:
+    - usr/share/applications/byobu.desktop: add gettext domain, LP: #623935
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 01 Sep 2010 13:11:34 -0600
+
+byobu (3.4-0ubuntu1) maverick; urgency=low
+
+  * usr/share/byobu/keybindings/f-keys: make F1 also point to the menu,
+    along with F9; this might help in some tty environments outside of
+    gnome-terminal
+  * bin/byobu-janitor, share/byobu/keybindings/f-keys: use sed -e, for
+    Mac OS X compatibility, LP: #625387, #623595
+  * lib/byobu/ip_address, share/man/man1/byobu.1:
+    - display both ifconfig and ip output in ip_address detail display
+    - use ip rather than ifconfig to get the ip address, slight performance
+      improvement
+    - support a flag, IPV6=1, in .byobu/status, to allow for showing
+      IPv6 addresses instead of IPv4
+    - thanks to Mark Schouten <mark@prevented.net> for the IPv6 idea and
+      sample code
+  * usr/share/man/man1/byobu.1: fix typos
+  * usr/share/applications/byobu.desktop: add gettext domain, LP: #623935
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 01 Sep 2010 13:11:23 -0600
+
+byobu (3.3-0ubuntu1) maverick; urgency=low
 
   * lib/byobu/network, share/man/man1/byobu.1: clean up binary/decimal
     multipliers for network transfer vs. memory/disk capacities, in
@@ -6,7 +43,7 @@ byobu (3.3) unreleased; urgency=low
   * usr/share/man/man1/byobu.1: add a note about non-utf8 locales,
     LP: #613769
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 23 Aug 2010 17:52:26 -0400
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 24 Aug 2010 18:21:09 -0400
 
 byobu (3.2-0ubuntu1) maverick; urgency=low
 
