@@ -1,4 +1,68 @@
-byobu (3.6) unreleased; urgency=low
+byobu (3.7) unreleased; urgency=low
+
+  [ Dustin Kirkland ]
+  * usr/lib/byobu/ec2_cost, usr/share/byobu/ec2/rates.eu_ie,
+    usr/share/byobu/ec2/rates.us_ca, usr/share/byobu/ec2/rates.us_va:
+    - add ec2_cost support for t1.micro instances, LP: #669190
+  * etc/byobu/statusrc, usr/bin/byobu-config, usr/lib/byobu/Makefile.am,
+    usr/lib/byobu/notify_osd, usr/share/byobu/profiles/common,
+    usr/share/man/man1/byobu.1:
+    - add notify_osd support to byobu, LP: #669189
+    - separate the perl into a script of its own
+    - add per-pid notifier monitors, terminate when screen terminates
+    - allow for disabling the notify_osd status; must handle in the perl
+      script
+    - use BYOBU_PREFIX for local installs
+  * usr/bin/byobu-config, usr/bin/byobu-janitor, usr/bin/byobu-launcher-
+    uninstall, usr/share/byobu/keybindings/f-keys:
+    - use gsed, where available; should help with BSD issues running byobu,
+      LP: #651993
+  * README: add a note about gsed
+  * usr/share/man/man1/byobu.1: add a synopsis section that mentions options
+    simply passed through to screen, LP: #669566
+  * usr/bin/byobu, usr/bin/byobu-janitor,
+    usr/share/byobu/profiles/common: change location of $SSH_AUTH_SOCK symlink
+    from /var/run to $HOME, as we can't be sure that the user's var/run
+    dir will exist before screen starts, LP: #664059
+  * etc/update-motd.d, etc/update-motd.d/55-window-manager,
+    etc/update-motd.d/Makefile.am, Makefile.am, usr/bin/byobu-disable,
+    usr/bin/byobu-enable:
+    - add a helpful update-motd message and a convenient command to enable-and-
+      launch byobu
+  * usr/bin/byobu-select-session: enable byobu-select-session to list
+    custom session names, LP: #630673
+  * debian/templates, etc/byobu/statusrc, usr/bin/byobu, usr/bin/byobu-
+    janitor, usr/bin/byobu-launcher, usr/bin/byobu-launcher-install,
+    usr/bin/byobu-launcher-uninstall, usr/bin/byobu-select-profile,
+    usr/bin/byobu-status, usr/lib/byobu/custom, usr/lib/byobu/disk_io,
+    usr/lib/byobu/ec2_cost, usr/lib/byobu/hostname,
+    usr/lib/byobu/ip_address, usr/lib/byobu/logo,
+    usr/lib/byobu/mem_available, usr/lib/byobu/menu,
+    usr/lib/byobu/network, usr/lib/byobu/.notify_osd,
+    usr/lib/byobu/reboot_required, usr/lib/byobu/services,
+    usr/lib/byobu/updates_available, usr/share/byobu/keybindings/f-keys,
+    usr/share/byobu/keybindings/screen-escape-keys,
+    usr/share/byobu/profiles/byoburc, usr/share/byobu/profiles/common,
+    usr/share/man/man1/byobu.1:
+    - xdg user dirs overhaul, LP: #553105
+  * etc/byobu/statusrc, usr/bin/byobu-config, usr/lib/byobu/mail,
+    usr/lib/byobu/Makefile.am, usr/lib/byobu/raid,
+    usr/share/byobu/profiles/common, usr/share/man/man1/byobu.1:
+    - add a raid notification, LP: #669191
+  * usr/bin/byobu-status, usr/lib/byobu/notify_osd:
+    - fix all detail printing
+  * usr/bin/byobu:
+    - fix listing of sessions, LP: #672023
+  * usr/lib/byobu/services:
+    - drop max instance count from NC service reporting;  was inaccurate
+
+  [ Marcus Asshauer ]
+  * usr/bin/byobu-config: add directory option when creating new window,
+    LP: #623033
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 21 Oct 2010 12:09:14 -0500
+
+byobu (3.6-0ubuntu1) natty; urgency=low
 
   [ Ryan Thompson ]
   * usr/bin/byobu-launcher: return false, if byobu doesn't launch because
@@ -8,7 +72,7 @@ byobu (3.6) unreleased; urgency=low
   * usr/bin/byobu: fix SSH_AUTH_SOCK breakage, define $RUN dir, LP: #664059
   * experimental/byobu.php, experimental/README: delete
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 15 Sep 2010 13:31:03 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 21 Oct 2010 12:09:08 -0500
 
 byobu (3.5-0ubuntu1) maverick; urgency=low
 

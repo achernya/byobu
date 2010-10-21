@@ -1,6 +1,6 @@
 #    statusrc
 #      Byobu's default status notifications
-#      Override these in $HOME/.byobu/status
+#      Override these in $HOME/.local/share/byobu/status
 #
 #    Copyright (C) 2009 Canonical Ltd.
 #
@@ -41,7 +41,9 @@ mem_available=1
 mem_used=1
 menu=1
 network=0
+notify_osd=0
 processes=0
+raid=1
 rcs_cost=0
 reboot_required=1
 release=1

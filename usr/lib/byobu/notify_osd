@@ -1,9 +1,10 @@
 #!/bin/sh -e
 #
-#    hostname - report a host's name
-#    Copyright (C) 2008 Canonical Ltd.
+#    notify_osd: print notify-osd messages in screen's notification buffer
+#    Copyright (C) 2010 Canonical Ltd.
 #
 #    Authors: Dustin Kirkland <kirkland@canonical.com>
+#             with help from Mathias Gug <mathias.gug@canonical.com>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -17,16 +18,21 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-PKG="byobu"
-[ -d "$XDG_DATA_HOME" ] && DATA="$XDG_DATA_HOME/$PKG" || DATA="$HOME/.local/share/$PKG"
-color 2>/dev/null || color() { true; }
+LOG="$HOME"/.cache/notify-osd.log
+[ -z "$BYOBU_PREFIX" ] && BYOBU_PREFIX="/usr"
 
-if [ "$1" = "--detail" ]; then
-	hostname -f
-	exit 0
-fi
+case "$1" in
+	--short)
+		exit 0
+	;;
+	--detail)
+		cat "$LOG" || true
+		exit 0
+	;;
+esac
 
-. "$DATA/status"
-[ "$whoami" = "1" ] && at="@"
-
-printf "$(color bold2)%s%s$(color -)" "$at" $(hostname -s 2>/dev/null || hostname)
+# This line operates basically as a daemon, watching the notify-osd log file,
+# processing new messages and sending them to screen
+CMD="tail --pid $PPID -n 0 -F $LOG"
+pkill -f "$CMD" || true
+$CMD | $BYOBU_PREFIX/lib/byobu/.notify_osd "$PPID"

@@ -1,7 +1,7 @@
 #!/bin/sh -e
 #
-#    hostname - report a host's name
-#    Copyright (C) 2008 Canonical Ltd.
+#    raid: notify raid events, failures and syncing
+#    Copyright (C) 2010 Canonical Ltd.
 #
 #    Authors: Dustin Kirkland <kirkland@canonical.com>
 #
@@ -17,16 +17,29 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+[ -r /proc/mdstat ] || exit 0
+
 PKG="byobu"
-[ -d "$XDG_DATA_HOME" ] && DATA="$XDG_DATA_HOME/$PKG" || DATA="$HOME/.local/share/$PKG"
 color 2>/dev/null || color() { true; }
 
-if [ "$1" = "--detail" ]; then
-	hostname -f
-	exit 0
+case $1 in
+	--detail)
+		cat /proc/mdstat
+		exit 0
+	;;
+esac
+
+if grep -qs " blocks \[.*_.*\]$" /proc/mdstat; then
+	# Errors in your raid
+	msg="RAID"
 fi
 
-. "$DATA/status"
-[ "$whoami" = "1" ] && at="@"
+if grep -qs \% /proc/mdstat; then
+	p=$(grep \% /proc/mdstat | sed -e "s/\%.*/%/" -e "s/.* //")
+	[ -z "$msg" ] && msg="RAID"
+	msg="$msg,$p"
+fi
 
-printf "$(color bold2)%s%s$(color -)" "$at" $(hostname -s 2>/dev/null || hostname)
+if [ -n "$msg" ]; then
+	printf "$(color B w r)%s$(color -) " "$msg"
+fi

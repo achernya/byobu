@@ -23,7 +23,7 @@
 # Now, let's override with our customizations
 startup_message off
 vbell off
-msgwait 1
+msgwait 5
 defutf8 on
 
 # Define status commands
@@ -36,6 +36,7 @@ defutf8 on
 backtick 10 	9999999	9999999		byobu-janitor
 backtick 11	9999999	9999999		printf "\005-1="
 backtick 12	9999999	9999999		byobu-status color
+backtick 13	0	0		byobu-status notify_osd
 backtick 99  	9999999	9999999		byobu-status logo
 backtick 100	599	599		byobu-status release
 backtick 101 	7	7		byobu-status updates_available
@@ -72,6 +73,7 @@ backtick 131 	53	53		byobu-status services
 backtick 132 	11	11		byobu-status time_utc
 backtick 133 	3	3		byobu-status disk_io
 backtick 134 	613	613		byobu-status rcs_cost
+backtick 135 	7	7		byobu-status raid
 
 hardstatus alwayslastline
 
@@ -97,15 +99,15 @@ defmonitor on
 activity ""
 
 # Maintain SSH_AUTH_SOCK link
-setenv SSH_AUTH_SOCK /var/run/screen/S-$USER/byobu.ssh-agent
+setenv SSH_AUTH_SOCK $HOME/.local/share/byobu/.ssh-agent
 
-source $HOME/.byobu/keybindings
+source $HOME/.local/share/byobu/keybindings
 
 # Window tabs, second to last line
 caption always "%12`%?%-Lw%50L>%?%{=r}%n*%f %t%?(%u)%?%{-}%12`%?%+Lw%?%11` %=%12`%110`%109`%122`%111`%10`%<"
 
 # Status string, last line
-hardstatus string '%99`%{-}%{=r}%12` %100`%112`%= %130`%102`%101`%129`%131`%127`%114`%115`%108`%134`%128`%125`%126`%113`%119`%133`%117`%116`%106`%104`%103`%105`%107`%123`%132`%120`%121`'
+hardstatus string '%99`%{-}%{=r}%12` %100`%112`%= %130`%135`%102`%101`%129`%131`%127`%114`%115`%108`%134`%128`%125`%126`%113`%119`%133`%117`%116`%106`%104`%103`%105`%107`%123`%132`%120`%121`'
 
 # NOTE: Older version of screen have an arbitrary limit of only being able
 # to change colors 16 times in this 'hardstatus string'.

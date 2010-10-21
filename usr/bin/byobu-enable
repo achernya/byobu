@@ -1,7 +1,7 @@
 #!/bin/sh -e
 #
-#    hostname - report a host's name
-#    Copyright (C) 2008 Canonical Ltd.
+#    byobu-enable: enable and launch byobu
+#    Copyright (C) 2010 Canonical Ltd.
 #
 #    Authors: Dustin Kirkland <kirkland@canonical.com>
 #
@@ -17,16 +17,15 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-PKG="byobu"
-[ -d "$XDG_DATA_HOME" ] && DATA="$XDG_DATA_HOME/$PKG" || DATA="$HOME/.local/share/$PKG"
-color 2>/dev/null || color() { true; }
+byobu-launcher-install
 
-if [ "$1" = "--detail" ]; then
-	hostname -f
-	exit 0
-fi
+echo
+echo "The Byobu window manager will be launched automatically at each text login."
+echo
+echo "To disable this behavior later, just run:"
+echo "  byobu-disable"
+echo
+echo -n "Press <enter> to continue..."
+$(head -n1)
 
-. "$DATA/status"
-[ "$whoami" = "1" ] && at="@"
-
-printf "$(color bold2)%s%s$(color -)" "$at" $(hostname -s 2>/dev/null || hostname)
+exec byobu
