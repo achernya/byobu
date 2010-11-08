@@ -1,0 +1,38 @@
+{{Infobox software
+| name                 = Byobu
+| former name          = Screen Profiles
+| logo                 = [[File:Byobu.svg|80px|Byobu logo]]
+| screenshot           = 
+| caption              = Text based window manager
+| developer            = Dustin Kirkland
+| released             = December 2008
+| frequently updated   = yes<!-- Release version update? Don't edit this page, just click on the version number! -->
+| programming language = Shell, Python
+| operating system     = [[Unix-like]]
+| genre                = [[Command line interface]]
+| license              = [[GNU General Public License|GPL]] version 3
+| website              = https://launchpad.net/byobu
+}}
+
+'''Byobu''' is a [[Free software|free]] text based [[Window_manager|window manager]] and [[virtual console|virtual terminal]] [[multiplexer]] that wraps and extends [[GNU_Screen|GNU Screen]].
+
+== Features ==
+
+== History ==
+
+In the days preceding the [[Ubuntu_Developer_Summit#Development|Ubuntu Developer Summit]] held on Google's Mountain View campus in December 2008, several Ubuntu developers, including Dustin Kirkland, Nicolas Barcet, and Dave Walker discussed alternative approaches to solving some long standing requests to add a graphical desktop to the Ubuntu Server.  They decided to collect the best hacks to GNU Screen they could find, and publish a better profile (or set of profiles) for [[GNU_Screen|GNU Screen]] on [[Ubuntu_(operating_system)|Ubuntu]]<ref>{{cite web |url=http://arstechnica.com/open-source/news/2009/04/ubuntu-brings-advanced-screen-features-to-the-masses.ars |title=Ubuntu brings advanced Screen features to the masses |publisher=Ars Technica |accessdate=2010-11-09 }}</ref>.  
+
+Another 54 releases of screen-profiles were published before the project was renamed 'Byobu' on May 5, 2009<ref>{{cite web |url=https://launchpad.net/byobu/trunk/2.0 |title=byobu 2.0 released -- the project formerly known as screen-profiles |publisher=Launchpad |accessdate=2010-11-09 }}</ref>.  The new name reflected the dynamic, extensible nature beyond the original static, flat configuration profiles.
+
+== References ==
+{{Reflist}}
+{{Refbegin}}
+
+== External links ==
+*[https://launchpad.net/byobu Byobu's official site]
+*[http://manpages.ubuntu.com/byobu Manual]
+
+[[Category:Unix software]]
+[[Category:Termcap]]
+[[Category:Terminal multiplexers]]
+
