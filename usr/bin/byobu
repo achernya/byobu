@@ -18,12 +18,12 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 PKG="byobu"
-VERSION=3.8
+VERSION=3.9
 [ -z "$BYOBU_PREFIX" ] && export BYOBU_PREFIX="/usr"
 export BYOBU_PREFIX
 [ -r "/etc/$PKG/socketdir" ] && . "/etc/$PKG/socketdir" || SOCKETDIR="/var/run/screen"
 RUN="$SOCKETDIR/S-$USER"
-[ -d "$XDG_DATA_HOME" ] && DATA="$XDG_DATA_HOME/$PKG" || DATA="$HOME/.local/share/$PKG"
+DATA="$HOME/.$PKG"
 
 if [ ! -x "$BYOBU_PREFIX/bin/$PKG" ]; then
 	echo "ERROR: Cannot find $BYOBU_PREFIX/bin/$PKG" 2>&1
