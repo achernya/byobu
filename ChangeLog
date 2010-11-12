@@ -1,4 +1,19 @@
-byobu (3.9) unreleased; urgency=low
+byobu (3.10) unreleased; urgency=low
+
+  * usr/lib/byobu/custom: fix typo in for loop, LP: #673728, thanks for
+    the triage Jorge E. Gómez
+  * usr/bin/byobu-janitor: make sure this runs to completion, LP: #676605
+  * usr/lib/byobu/cpu_freq: scale bogomips by number of processors, if
+    using bogomips to estimate frequency, LP: #675442
+  * etc/byobu/statusrc, usr/bin/byobu-config, usr/lib/byobu/Makefile.am,
+    usr/lib/byobu/swap, usr/share/byobu/profiles/common,
+    usr/share/man/man1/byobu.1: add a swap memory usage notification,
+    LP: #677259
+  * usr/lib/byobu/release: fix the ubuntu devel release printing
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 12 Nov 2010 22:45:25 -0600
+
+byobu (3.9-0ubuntu1) natty; urgency=low
 
   * debian/templates, etc/byobu/statusrc, usr/bin/byobu, usr/bin/byobu-
     config, usr/bin/byobu-janitor, usr/bin/byobu-launcher,
@@ -17,7 +32,7 @@ byobu (3.9) unreleased; urgency=low
   * usr/lib/byobu/release: use /etc/issue first, much, much faster,
     thanks to the suggestion from Daniel Hahler, LP: #674275
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 10 Nov 2010 18:29:06 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 12 Nov 2010 22:45:16 -0600
 
 byobu (3.8-0ubuntu1) natty; urgency=low
 
