@@ -1,4 +1,13 @@
-byobu (3.13) unreleased; urgency=low
+byobu (3.14) UNRELEASED; urgency=low
+
+  * debian/install, etc/update-motd.d/55-window-manager, === removed
+    directory etc/update-motd.d: dropped motd message; unfortunately
+    annoyed some people;  we still need a way to expose byobu to people
+    who want it, but don't know what it's called, LP: #680657
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 29 Nov 2010 14:53:06 -0600
+
+byobu (3.13-0ubuntu1) natty; urgency=low
 
   [ Dustin Kirkland ]
   * etc/update-motd.d/55-window-manager: print the MOTD appendage up to 3
@@ -8,7 +17,7 @@ byobu (3.13) unreleased; urgency=low
   * usr/bin/byobu-launcher-install, usr/lib/byobu/whoami: Use getent instead
     of reading /etc/passwd directly , LP: #682296
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 28 Nov 2010 10:36:55 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 28 Nov 2010 10:41:09 -0600
 
 byobu (3.12-0ubuntu1) natty; urgency=low
 
