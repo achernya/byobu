@@ -1,11 +1,26 @@
-byobu (3.14) UNRELEASED; urgency=low
+byobu (3.15) unreleased; urgency=low
+
+  * usr/lib/byobu/raid: only match one raid rebuild (the first one)
+  * debian/rules, usr/share/applications/byobu.desktop: try to get
+    the icon working in Unity, LP: #683444
+  * usr/share/byobu/keybindings/f-keys,
+    usr/share/byobu/keybindings/screen-escape-keys,
+    usr/share/man/man1/byobu.1: add some keybindings for better handling
+    of screen splits, LP: #686847
+  * usr/lib/byobu/ip_address: look for the ip address on global scope,
+    helps with labeled and tagged interfaces, LP: #685748
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 07 Dec 2010 21:55:52 -0600
+
+byobu (3.14-0ubuntu1) natty; urgency=low
 
   * debian/install, etc/update-motd.d/55-window-manager, === removed
-    directory etc/update-motd.d: dropped motd message; unfortunately
-    annoyed some people;  we still need a way to expose byobu to people
-    who want it, but don't know what it's called, LP: #680657
+    directory etc/update-motd.d, debian/postinst:
+    - dropped motd message; unfortunately annoyed some people, LP: #680657
+    - we still need a way to enable people who don't know about byobu
+      to actually find it
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 29 Nov 2010 14:53:06 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 29 Nov 2010 14:57:08 -0600
 
 byobu (3.13-0ubuntu1) natty; urgency=low
 
