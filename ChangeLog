@@ -1,10 +1,21 @@
-byobu (3.16) unreleased; urgency=low
+byobu (3.17) unreleased; urgency=low
+
+  * usr/lib/byobu/cpu_temp: add cpu temp path for modern (x201) thinkpads,
+    LP: #693568
+  * usr/share/byobu/windows/common: must set a target site for the sample
+    w3m window to work, LP: #689340
+  * usr/bin/byobu: list all sessions, LP: #684926
+  * usr/share/applications/byobu.desktop: enable the desktop icon by default
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 08 Dec 2010 08:57:51 -0600
+
+byobu (3.16-0ubuntu1) natty; urgency=low
 
   * usr/share/byobu/keybindings/f-keys,
     usr/share/byobu/keybindings/screen-escape-keys: drop the -k arg to
     bindkey, doesn't seem to be working
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 08 Dec 2010 08:55:57 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 08 Dec 2010 08:57:45 -0600
 
 byobu (3.15-0ubuntu1) natty; urgency=low
 
