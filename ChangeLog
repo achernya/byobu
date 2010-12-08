@@ -1,4 +1,12 @@
-byobu (3.15) unreleased; urgency=low
+byobu (3.16) unreleased; urgency=low
+
+  * usr/share/byobu/keybindings/f-keys,
+    usr/share/byobu/keybindings/screen-escape-keys: drop the -k arg to
+    bindkey, doesn't seem to be working
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 08 Dec 2010 08:55:57 -0600
+
+byobu (3.15-0ubuntu1) natty; urgency=low
 
   * usr/lib/byobu/raid: only match one raid rebuild (the first one)
   * debian/rules, usr/share/applications/byobu.desktop: try to get
@@ -10,7 +18,7 @@ byobu (3.15) unreleased; urgency=low
   * usr/lib/byobu/ip_address: look for the ip address on global scope,
     helps with labeled and tagged interfaces, LP: #685748
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 07 Dec 2010 21:55:52 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 07 Dec 2010 22:19:41 -0600
 
 byobu (3.14-0ubuntu1) natty; urgency=low
 
