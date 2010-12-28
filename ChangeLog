@@ -1,8 +1,29 @@
-byobu (3.19) unreleased; urgency=low
+byobu (3.20) unreleased; urgency=low
+
+  * usr/lib/byobu/network: drop unnecessary unit=kbps
+  * usr/bin/byobu: allow for -xS or the like, LP: #684926
+  * usr/bin/byobu-select-session, usr/share/man/man1/byobu.1,
+    usr/share/man/man1/byobu-select-session.1: support "hiding"
+    sessions, by prepending a "." to the session name, LP: #599334
+  * usr/share/man/man1/byobu-launcher.1: update documentation
+  * usr/bin/byobu-launcher-install, usr/share/man/man1/byobu-launcher-
+    install.1, usr/share/man/man1/byobu-launcher-uninstall.1,
+    usr/share/man/man1/Makefile.am:
+    - add an option for -n|--no-logout to byobu-launcher-install,
+      document changes in new manpages, LP: #604931
+  * usr/lib/byobu/cpu_temp: find the temp monitor, LP: #676080
+  * usr/lib/byobu/battery, usr/share/man/man1/byobu.1: allow for
+    overriding detected BATTERY, LP: #693560
+  * usr/lib/byobu/cpu_temp: test that file exists, is readable, and has
+    size > 0, LP: #696071
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 28 Dec 2010 00:05:13 -0600
+
+byobu (3.19-0ubuntu1) natty; urgency=low
 
   * usr/lib/byobu/network: ensure that up/down and units are always set
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 27 Dec 2010 23:44:05 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 28 Dec 2010 00:05:07 -0600
 
 byobu (3.18-0ubuntu1) natty; urgency=low
 

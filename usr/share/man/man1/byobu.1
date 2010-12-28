@@ -20,7 +20,7 @@ Note that DATA=\fI$HOME/.byobu\fP.
 
 \fBarch\fP \- system architecture; displayed on the lower bar toward the left, in the default text color on the default background color
 
-\fBbattery\fP \- battery information; display on the lower bar toward the right; |\-| indicates discharging, |+| indicates charging, |=| indicates fully charged;  when charging or discharging, the current battery capacity as a percentage is displayed;  the colours green, yellow, and red are used to give further indication of the battery's charge state
+\fBbattery\fP \- battery information; display on the lower bar toward the right; |\-| indicates discharging, |+| indicates charging, |=| indicates fully charged;  when charging or discharging, the current battery capacity as a percentage is displayed;  the colours green, yellow, and red are used to give further indication of the battery's charge state; you may override the detected battery by setting BATTERY=/proc/acpi/battery/BAT0 in \fI$DATA/statusrc\fP
 
 \fBcpu_count\fP \- the number of cpu's or cores on the system; displayed in the lower bar toward the right in the default text color on the default background, followed by a trailing 'x'
 
@@ -90,6 +90,12 @@ Note that DATA=\fI$HOME/.byobu\fP.
 \fBwhoami\fP \- the name of the user who owns the screen session; displayed in the upper bar toward the far right in bold black text on a grey background
 
 \fBwifi_quality\fP \- the connection rate and signal quality of the wifi connection; displayed in the lower bar toward the right in black text on a cyan background; the connection rate is in 'Mb/s' and the signal quality is as a percentage with a trailing '%'
+
+.SH SESSIONS
+
+Byobu name screen sessions "byobu", if unspecified.  To hide sessions from \fBbyobu-select-session\fP(1), prepend a "." to the beginning of the session name, like:
+
+ byobu -S .hidden
 
 .SH WINDOWS
 
