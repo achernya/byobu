@@ -1,4 +1,38 @@
-byobu (3.20) unreleased; urgency=low
+byobu (3.21) unreleased; urgency=low
+
+  [ Dustin Kirkland ]
+  * usr/bin/byobu-select-profile: ensure that $DATA exists, LP: #697724
+  * usr/bin/byobu, usr/bin/byobu-janitor: move the print for window
+    title setting into byobu-janitor, which should ensure that it
+    gets run on F5/refresh operations
+  * usr/share/byobu/keybindings/f-keys, usr/share/byobu/profiles/common:
+    move the "fit" statement to the common profile, which is sourced on
+    profile refresh
+  * usr/share/byobu/keybindings/f-keys: add keybindings for splits in
+    tty; sadly ctrl-f2 (vertical split) not working yet
+  * usr/share/man/man1/byobu.1, usr/share/man/man1/byobu-config.1,
+    usr/share/man/man1/byobu-export.1, usr/share/man/man1/byobu-
+    launcher.1, usr/share/man/man1/byobu-launcher-install.1,
+    usr/share/man/man1/byobu-launcher-uninstall.1,
+    usr/share/man/man1/byobu-reconnect-sockets.1,
+    usr/share/man/man1/byobu-select-profile.1, usr/share/man/man1/byobu-
+    select-session.1, usr/share/man/man1/byobu-status.1,
+    usr/share/man/man1/byobu-status-detail.1,
+    usr/share/man/man1/shell.1: add a url link to the GPL
+  * usr/share/man/man1/byobu.1, usr/share/man/man1/byobu-janitor.1:
+    - clean up the "SEE ALSO" section of a few manpages
+
+  [ Jan Klepek ]
+  * usr/share/man/man1/byobu.1, usr/share/man/man1/byobu-status.1,
+    usr/share/man/man1/byobu-disable.1, usr/share/man/man1/byobu-
+    enable.1, usr/share/man/man1/byobu-janitor.1,
+    usr/share/man/man1/byobu-launch.1, usr/share/man/man1/Makefile.am:
+    - add a few missing manpages
+    - add notes to the location of the GPL on Fedora
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 03 Jan 2011 11:44:19 -0600
+
+byobu (3.20-0ubuntu1) natty; urgency=low
 
   * usr/lib/byobu/network: drop unnecessary unit=kbps
   * usr/bin/byobu: allow for -xS or the like, LP: #684926
@@ -17,7 +51,7 @@ byobu (3.20) unreleased; urgency=low
   * usr/lib/byobu/cpu_temp: test that file exists, is readable, and has
     size > 0, LP: #696071
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 28 Dec 2010 00:05:13 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 03 Jan 2011 11:44:12 -0600
 
 byobu (3.19-0ubuntu1) natty; urgency=low
 

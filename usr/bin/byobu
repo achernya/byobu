@@ -18,7 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 PKG="byobu"
-VERSION=3.20
+VERSION=3.21
 [ -z "$BYOBU_PREFIX" ] && export BYOBU_PREFIX="/usr"
 export BYOBU_PREFIX
 [ -r "/etc/$PKG/socketdir" ] && . "/etc/$PKG/socketdir" || SOCKETDIR="/var/run/screen"
@@ -45,9 +45,6 @@ fi
 
 # Sanitize the environment
 byobu-janitor --force
-
-# Set window title until https://bugs.launchpad.net/bugs/338722 is fixed in screen
-printf "\033]0;${USER}@$(hostname) - ${PKG}\007"
 
 # Allow override of default window list, with BYOBU_WINDOWS environment variable
 CUSTOM_WINDOW_SET=0
