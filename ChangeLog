@@ -1,4 +1,27 @@
-byobu (3.21) unreleased; urgency=low
+byobu (3.23) unreleased; urgency=low
+
+  * README: put byobu dir on the front of the path, if doing a local
+    install (just wanted to update to a newer version on a system that
+    already has byobu, but I'm not an admin)
+  * usr/share/byobu/keybindings/f-keys: when splitting, move the focus
+    in the new split to the first window (rather than that annoying
+    blank screen)
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 06 Jan 2011 12:34:52 -0600
+
+byobu (3.22-0ubuntu1) natty; urgency=low
+
+  * usr/share/byobu/windows/common: should not be executable
+  * usr/share/man/man1/byobu.1, usr/share/man/man1/byobu-select-
+    session.1: escape hyphens
+  * === added directory debian/source, debian/source/format:
+    - fix lintian info, add debian/source/format, 3.0 quilt
+  * usr/bin/byobu, usr/bin/byobu-janitor: move the window title setting
+    back to /usr/bin/byobu (didn't work well in byobu-janitor)
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 06 Jan 2011 12:34:38 -0600
+
+byobu (3.21-0ubuntu1) natty; urgency=low
 
   [ Dustin Kirkland ]
   * usr/bin/byobu-select-profile: ensure that $DATA exists, LP: #697724
@@ -30,7 +53,7 @@ byobu (3.21) unreleased; urgency=low
     - add a few missing manpages
     - add notes to the location of the GPL on Fedora
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 03 Jan 2011 11:44:19 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 06 Jan 2011 11:28:33 -0600
 
 byobu (3.20-0ubuntu1) natty; urgency=low
 
