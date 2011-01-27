@@ -18,7 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 PKG="byobu"
-VERSION=3.26
+VERSION=3.27
 [ -z "$BYOBU_PREFIX" ] && export BYOBU_PREFIX="/usr"
 export BYOBU_PREFIX
 [ -r "/etc/$PKG/socketdir" ] && . "/etc/$PKG/socketdir" || SOCKETDIR="/var/run/screen"
@@ -32,10 +32,14 @@ if [ ! -x "$BYOBU_PREFIX/bin/$PKG" ]; then
 fi
 
 # Add a version argument for debugging purposes
-if [ "$#" = "1" ] && [ "$1" = "-v" ]; then
-	echo "$PKG version $VERSION"
-	screen -v
-	exit 0
+if [ "$#" = "1" ]; then
+	case "$1" in
+		-v|--version)
+			echo "$PKG version $VERSION"
+			screen -v
+			exit 0
+		;;
+	esac
 fi
 
 # Check if we're being autolaunched, and this user explicitly does not want it.

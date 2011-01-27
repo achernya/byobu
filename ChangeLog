@@ -1,4 +1,21 @@
-byobu (3.26) unreleased; urgency=low
+byobu (3.27) unreleased; urgency=low
+
+  * usr/bin/byobu: -v|--version
+  * usr/lib/byobu/fan_speed: drop detail section, nothing interesting here
+  * usr/share/byobu/profiles/common: accommodate for powernap's off- and on-
+    lining of processors dynamically
+  * etc/byobu/statusrc, usr/bin/byobu-config, usr/lib/byobu/network,
+    usr/share/byobu/profiles/common, usr/share/man/man1/byobu.1:
+    - enable the network monitor by default (it seems I *always* turn this
+      on, on every single byobu instance)
+    - only display when traffic is non-zero
+    - move further to the left, so that entire line doesn't jump around
+  * usr/share/byobu/profiles/common: move disk_io further left, so line
+    does jump around so much
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 27 Jan 2011 10:24:10 -0600
+
+byobu (3.26-0ubuntu1) natty; urgency=low
 
   [ Dustin Kirkland ]
   * usr/bin/byobu-reconnect-sockets, usr/lib/byobu/date,
@@ -20,7 +37,7 @@ byobu (3.26) unreleased; urgency=low
   * usr/lib/byobu/fan_speed: add support for /proc/i8k for some other
     systems' fan speeds (e.g. Dell Inspiron), LP: #700204
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 23 Jan 2011 16:28:45 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 27 Jan 2011 10:24:07 -0600
 
 byobu (3.25-0ubuntu1) natty; urgency=low
 
