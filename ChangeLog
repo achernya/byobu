@@ -1,4 +1,37 @@
-byobu (3.27) unreleased; urgency=low
+byobu (3.28) unreleased; urgency=low
+
+  [ Dustin Kirkland ]
+  * usr/lib/byobu/wifi_quality: don't show wifi-quality if connectivity == 0
+  * usr/lib/byobu/disk_io: don't show disk_io if rate = 0
+  * usr/lib/byobu/services: finally fix that nagging, mysterious whitespace
+  * rename:
+    - wastebasket -> trash
+    - uclock -> time_binary
+    - ugraph -> /usr/bin/byobu-ugraph
+    - ulevel -> /usr/bin/byobu-ulevel
+  * usr/share/applications/byobu.desktop: change the "window manager"
+    verbiage to "command line"; looks a little better on desktop
+    applications menu where "window manager" sounds quite different
+  * usr/lib/byobu/date, usr/share/man/man1/byobu.1: fix issues from
+    Question #144881
+
+  [ James Hunt <james.hunt@ubuntu.com> ]
+  * usr/lib/byobu/time_binary: New UTF-8 notification showing time in binary
+    (requires bash for UTF-8 handling) (LP: #705037).
+  * usr/bin/byobu-ugraph: New UTF-8 notification utility showing
+    historical byobu-ugraph data (required bash for UTF-8 handling).
+  * usr/bin/byobu-ulevel: New UTF-8 notification utility which displays
+    some 'level' using various unicode characters (requires bash for
+    UTF-8 handling). Also has an accessibility mode using an option or
+    environment variable to display all values as percentages in ASCII.
+    (LP: #705032).
+  * usr/lib/byobu/trash: New ASCII+UTF-8 notification indicating
+    contents of trash.
+  * usr/lib/byobu/wifi_quality: added UTF-8 icon.
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 28 Jan 2011 17:12:27 -0600
+
+byobu (3.27-0ubuntu1) natty; urgency=low
 
   * usr/bin/byobu: -v|--version
   * usr/lib/byobu/fan_speed: drop detail section, nothing interesting here
@@ -13,7 +46,7 @@ byobu (3.27) unreleased; urgency=low
   * usr/share/byobu/profiles/common: move disk_io further left, so line
     does jump around so much
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 27 Jan 2011 10:24:10 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 28 Jan 2011 17:12:23 -0600
 
 byobu (3.26-0ubuntu1) natty; urgency=low
 
