@@ -73,11 +73,13 @@ Note that DATA=\fI$HOME/.byobu\fP.
 
 \fBrelease\fP \- distribution and version information about the release running on the current system as reported by \fBlsb_release(1)\fP or \fI/etc/issue\fP; displayed in the lower bar in bold black text toward the left on a grey background; you may override the detected release with DISTRO=Whatever in \fI$DATA/statusrc\fP
 
-\fBservices\fP \- users can configure a list of services to monitor, define the SERVICES variable in \fI$DATA/status\fP, a whitespace separated of services, each service should include the init name of the service, then a pipe, and then an abbreviated name or symbol to display when running; displayed in the lower bar toward the center in cyan on a white background
+\fBservices\fP \- users can configure a list of services to monitor, define the SERVICES variable in \fI$DATA/statusrc\fP, a whitespace separated of services, each service should include the init name of the service, then a pipe, and then an abbreviated name or symbol to display when running (e.g. SERVICES="ssh|ssh apache2|http"); displayed in the lower bar toward the center in cyan on a white background
 
 \fBswap\fP \- total swap space and total used as a percentage of the total available; displayed in the lower bar toward the right in white text on a light green background with a trailing '%' sign
 
 \fBtime\fP \- the system time in HH:MM:SS format; displayed in the lower bar on the far right in the default text and default background colors
+
+\fBtime_binary\fP \- only for the hard core geek, the local system time in binary; requires UTF8 support in a VERY recent version of GNU Screen; you must additionally set "UTF8=1" in \fI$DATA/statusrc\fP; displayed in the lower bar on the far right in the default text and background colors
 
 \fBtime_utc\fP \- the UTC system time in HH:MMformat; displayed in the lower bar on the far right in dark text on a light background
 
@@ -89,7 +91,7 @@ Note that DATA=\fI$HOME/.byobu\fP.
 
 \fBwhoami\fP \- the name of the user who owns the screen session; displayed in the upper bar toward the far right in bold black text on a grey background
 
-\fBwifi_quality\fP \- the connection rate and signal quality of the wifi connection; displayed in the lower bar toward the right in black text on a cyan background; the connection rate is in 'Mb/s' and the signal quality is as a percentage with a trailing '%'
+\fBwifi_quality\fP \- the connection rate and signal quality of the wifi connection; displayed in the lower bar toward the right in black text on a cyan background; the connection rate is in 'Mb/s' and the signal quality is as a percentage with a trailing '%'; override the default interface by specifying an alternate interface with MONITORED_NETWORK=wlan0 in \fI$DATA/statusrc\fP
 
 .SH SESSIONS
 
@@ -175,9 +177,14 @@ For Byobu colors to work properly, older versions of GNU Screen require a 1-line
 
 PuTTY users have reported that the F2, F3, and F4 shortcut keys are not working properly.  PuTTY sends the same escape sequences as the linux console for F1-F4 by default.  You can fix this problem in the PuTTY config, Terminal -> Keyboard -> Function keys: Xterm R6.  See: \fIhttp://www.mail-archive.com/screen-users@gnu.org/msg01525.html\fP
 
-Mac OSX terminal users have reported 'flashing text'.  You can fix this in the advanced settings of the terminal application, with 'Declare Terminal As: xterm-color'.
+Apple Mac OSX terminal users have reported 'flashing text'.  You can fix this in the advanced settings of the terminal application, with 'Declare Terminal As: xterm-color'.
+
+Apple Mac keyboard users may need to specify a vt100 terminal by adding this to your OSX profile, in order to get Byobu's function keys and colors to work:
+  alias ssh='TERM=vt100 ssh'
 
 Users of a non-UTF8 locale (such as cs_CZ charset ISO-8859-2), may need to add "defutf8 off" to \fI~/.screenrc\fP, if some characters are rendering as "?".
+
+Users who customize their PS1 prompt need to put this setting in \fI~/.bashrc\fP, rather than \fI~/.profile\fP, in order for it to work correctly with Byobu.
 
 .SH SEE ALSO
 .PD 0

@@ -1,4 +1,35 @@
-byobu (3.28) unreleased; urgency=low
+byobu (3.29) unreleased; urgency=low
+
+  [ Dustin Kirkland ]
+  * usr/share/man/man1/byobu.1: document PS1 workaround, LP: #525552
+  * usr/share/man/man1/byobu.1: fix minor manpage typo, add SERVICES example
+  * usr/lib/byobu/wifi_quality, usr/share/man/man1/byobu.1: support overriding
+    the default wireless interface, LP: #723260
+  * usr/share/man/man1/byobu.1: document TERM=vt100 for Mac keyboard users,
+    LP: #482623
+  * usr/bin/byobu-janitor: use readlink, much more graceful
+  * usr/lib/byobu/time_binary, usr/share/byobu/profiles/common,
+    usr/share/man/man1/byobu.1: fixup a couple of minor issues with the binary
+    clock commit
+  * usr/bin/byobu-status: switch the interpreter from sh to bash; this is
+    needed to support James' time_binary script, which is bash and cannot be
+    simply sourced by byobu-status; if significant performance regressions
+    occur, we will need to back this change out and approach it a different
+    way
+
+  [ James Hunt ]
+  * etc/byobu/statusrc, usr/bin/byobu-config, usr/lib/byobu/time_binary,
+    usr/share/byobu/profiles/common, usr/share/man/man1/byobu.1:
+    - add support for the super-geeky-but-fun binary clock; requires
+      UTF8 support in GNU Screen, LP: #705037
+
+  [ Chow Loong Jin and Dustin Kirkland ]
+  * usr/lib/byobu/disk_io: canonicalize symlinks so that disk_io works
+    with raid, lvm, dm volumes, LP: #709224, #711373, #723187
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 23 Feb 2011 16:24:38 -0600
+
+byobu (3.28-0ubuntu1) natty; urgency=low
 
   [ Dustin Kirkland ]
   * usr/lib/byobu/wifi_quality: don't show wifi-quality if connectivity == 0
@@ -29,7 +60,7 @@ byobu (3.28) unreleased; urgency=low
     contents of trash.
   * usr/lib/byobu/wifi_quality: added UTF-8 icon.
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 28 Jan 2011 17:12:27 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 23 Feb 2011 16:24:26 -0600
 
 byobu (3.27-0ubuntu1) natty; urgency=low
 
