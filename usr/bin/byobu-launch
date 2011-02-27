@@ -17,4 +17,19 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-case "$-" in *i*) byobu-launcher && exit 0; esac;
+PKG="byobu"
+DATA="$HOME/.$PKG"
+case "$-" in
+	*i*)
+		byobu-launcher
+	;;
+esac
+# Wait very briefly for the no-logout flag to get written?
+sleep 0.1
+if [ -e "$DATA/no-logout-on-detach" ] || [ -e "/var/run/screen/S-$USER/byobu.no-logout" ]; then
+	# The user does not want to logout on byobu detach
+	rm -f "/var/run/screen/S-$USER/byobu.no-logout"	# Remove one-time no-logout flag, if it exists
+	true
+else
+	exit 0
+fi

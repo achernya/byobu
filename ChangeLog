@@ -1,4 +1,47 @@
-byobu (3.29) unreleased; urgency=low
+byobu (3.30) unreleased; urgency=low
+
+  [ Dustin Kirkland ]
+  * usr/share/applications/byobu.desktop: fix description
+  * usr/bin/byobu-status-detail: make a couple of minor modifications
+    noticed while investigating the already-fixed LP: #750887
+  * usr/lib/byobu/raid: fix grep that changed recently in Linux's
+    md driver's printing to /proc/mdstat, LP: #760693
+  * usr/share/byobu/profiles/common: preserve splits across detach/reattach,
+    LP: #760696
+  * usr/bin/byobu-launcher: don't disrupt work flow, but rather inform
+    user about launching byobu in a nested screen session, LP: #747649
+  * usr/bin/byobu-launch, usr/bin/byobu-launcher-install: fix handling
+    of logout behavior, when dpkg-configured globally by the sysadmin,
+    LP: #741281
+  * usr/share/byobu/profiles/common: fix bold color intensity, LP: #727466
+  * usr/bin/byobu-janitor, usr/bin/byobu-launch, usr/bin/byobu-launcher-
+    install, usr/bin/byobu-launcher-uninstall,
+    usr/share/byobu/keybindings/f-keys,
+    usr/share/byobu/keybindings/screen-escape-keys,
+    usr/share/man/man1/byobu.1:
+    - add a more permanent fix for LP: #604931
+    - update documentation
+  * usr/share/byobu/keybindings/f-keys,
+    usr/share/byobu/keybindings/screen-escape-keys:
+    - fix ctrl-f5
+  * debian/source/format, === removed directory debian/source: remove these
+    until bzr builddeb bug gets fixed
+  * usr/bin/byobu, usr/share/byobu/profiles/byoburc,
+    usr/share/byobu/profiles/Makefile.am,
+    usr/share/byobu/profiles/screenrc: support using ~/.byoburc, instead of
+    ~/.screenrc, if present; some users seem to want to use byobu and screen
+    separately, and keep their profiles separate, LP: #731529
+  * usr/bin/byobu-janitor: use greadlink on Mac OSX, LP: #740370
+  * usr/bin/byobu-select-session: fix broken path to screen, affects users
+    who build/install byobu locally only, LP: #758177
+
+  [ Chaskiel Grundman ]
+  * debian/postinst: correctly fix old-school screen-profiles era diversions
+    of /usr/bin/screen, LP: #727738
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 27 Feb 2011 10:29:53 -0600
+
+byobu (3.29-0ubuntu1) natty; urgency=low
 
   [ Dustin Kirkland ]
   * usr/share/man/man1/byobu.1: document PS1 workaround, LP: #525552
@@ -27,7 +70,7 @@ byobu (3.29) unreleased; urgency=low
   * usr/lib/byobu/disk_io: canonicalize symlinks so that disk_io works
     with raid, lvm, dm volumes, LP: #709224, #711373, #723187
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 23 Feb 2011 16:24:38 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 27 Feb 2011 10:29:49 -0600
 
 byobu (3.28-0ubuntu1) natty; urgency=low
 

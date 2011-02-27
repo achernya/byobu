@@ -1,7 +1,11 @@
-#!/bin/sh
+###############################################################################
+#    Load:
+#     * the stock byobu profile
+#     * any windows
+#     * and the local .screenrc (instead of .byoburc)
+#    Used at startup but not profile refresh
 #
-#    byobu-status-detail
-#    Copyright (C) 2008 Canonical Ltd.
+#    Copyright (C) 2009-2011 Canonical Ltd.
 #
 #    Authors: Dustin Kirkland <kirkland@canonical.com>
 #
@@ -16,10 +20,8 @@
 #
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+###############################################################################
 
-if which vim >/dev/null && `vim --version | grep -q +folding`; then
-	byobu-status --detail | vim -c "set foldmethod=indent" -c "set foldminlines=0" -c "set foldnestmax=1"  -c "set foldcolumn=2" -R -
-else
-	(which sensible-pager >/dev/null) && PAGER=sensible-pager || PAGER=less
-	byobu-status --detail | $PAGER
-fi
+source $HOME/.byobu/profile
+source $BYOBU_WINDOWS
+source $HOME/.screenrc

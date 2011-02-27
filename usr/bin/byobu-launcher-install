@@ -20,6 +20,7 @@
 
 PKG="byobu"
 DATA="$HOME/.$PKG"
+FLAG="$DATA/no-logout-on-detach"
 
 LOGOUT_ON_DETACH=1
 for i in $@; do
@@ -30,12 +31,16 @@ for i in $@; do
 	esac
 done
 
-install_launcher() {
+update_flag() {
 	if [ "$LOGOUT_ON_DETACH" = "1" ]; then
-		printf "%s\n" 'case "$-" in *i*) byobu-launcher && exit 0; esac;' >> "$1"
+		rm -f "$FLAG"
 	else
-		printf "%s\n" 'case "$-" in *i*) byobu-launcher; esac;' >> "$1"
+		touch "$FLAG"
 	fi
+}
+
+install_launcher() {
+	printf ". \$(which byobu-launch)\n" >> "$1"
 }
 
 # Sanitize the environment
@@ -43,6 +48,9 @@ $PKG-launcher-uninstall || true
 # Hush login, since we will handle motd printing
 touch "$HOME"/.hushlogin
 rm -f "$DATA/disable-autolaunch"
+
+# Update the logout/nologout flag
+update_flag
 
 # Handle bourne shells, if not set globally in /etc/profile.d
 if [ ! -h "/etc/profile.d/Z98-$PKG.sh" ]; then
