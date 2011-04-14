@@ -1,7 +1,16 @@
-byobu (3.30) unreleased; urgency=low
+byobu (3.31) unreleased; urgency=low
+
+  * usr/bin/byobu-select-session:
+    - fix path to screen binary, use os.execvp()
+    - drop use of PREFIX here, rely on byobu being in your path
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 14 Apr 2011 18:11:30 -0500
+
+byobu (3.30-0ubuntu1) natty; urgency=low
 
   [ Dustin Kirkland ]
-  * usr/share/applications/byobu.desktop: fix description
+  * usr/share/applications/byobu.desktop: shorten description
+    to work better in Unity
   * usr/bin/byobu-status-detail: make a couple of minor modifications
     noticed while investigating the already-fixed LP: #750887
   * usr/lib/byobu/raid: fix grep that changed recently in Linux's
@@ -39,7 +48,7 @@ byobu (3.30) unreleased; urgency=low
   * debian/postinst: correctly fix old-school screen-profiles era diversions
     of /usr/bin/screen, LP: #727738
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 27 Feb 2011 10:29:53 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 14 Apr 2011 18:11:27 -0500
 
 byobu (3.29-0ubuntu1) natty; urgency=low
 
