@@ -1,10 +1,18 @@
-byobu (3.31) unreleased; urgency=low
+byobu (3.32) unreleased; urgency=low
 
-  * usr/bin/byobu-select-session:
+  * usr/bin/byobu-launch, usr/bin/byobu-launcher:
+    - fix situation where the profile might exit 0,
+      and prevent a user from logging in
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 15 Apr 2011 13:40:31 -0500
+
+byobu (3.31-0ubuntu1) natty; urgency=low
+
+  * usr/bin/byobu-select-session: LP: #762031
     - fix path to screen binary, use os.execvp()
     - drop use of PREFIX here, rely on byobu being in your path
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 14 Apr 2011 18:11:30 -0500
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 15 Apr 2011 13:40:26 -0500
 
 byobu (3.30-0ubuntu1) natty; urgency=low
 
