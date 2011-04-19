@@ -1,5 +1,0 @@
-#!/bin/sh
-(echo "bXNnPSIkKGVjaG8gU0dGd2NIa2dRbWx5ZEdoa1lYa2dVMk55WldWdUlDMHRJR2gwZEhBNkx5OWlh
-WFF1YkhrdmMyTnlaV1Z1TFdKa1lYa0sgfCBiYXNlNjQgLWQpIgpbICIkKGRhdGUgKyVkKSIgPSAi
-MjAiIF0gJiYgWyAiJChkYXRlICslbSkiID0gIjAzIiBdICYmIHNjcmVlbiAtWCAtUyAiYnlvYnUi
-IGF0ICIqIiBlY2hvICJbJG1zZ10iCg==" | base64 -d | sh) || true
