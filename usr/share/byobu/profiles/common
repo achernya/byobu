@@ -23,7 +23,8 @@
 # Now, let's override with our customizations
 startup_message off
 vbell off
-msgwait 5
+msgwait 0
+msgminwait 0
 defutf8 on
 deflogin on
 
@@ -80,9 +81,11 @@ backtick 137 	23	23		byobu-status time_binary
 
 hardstatus alwayslastline
 
-# Turns off alternate screen switching in xterms,
-# so that text in screen will go into the xterm's scrollback buffer:
-termcapinfo xterm* ti@:te@
+# The following line would turn off alternate screen switching in xterms,
+# so that text in screen will go into the xterm's scrollback buffer.
+# However, we are disabling this at this point, since byobu's
+# alt-pgup and alt-pgdn keybindings now exist.
+#termcapinfo xterm* ti@:te@
 altscreen on
 
 # Enable 256 color terminal
@@ -94,7 +97,7 @@ defbce "on"
 defscrollback 10000
 
 # Set per-user screen-exchange
-bufferfile /var/run/screen/S-$USER/byobu-exchange
+bufferfile /var/run/screen/S-$USER/printscreen
 compacthist on
 
 # Monitor windows
@@ -111,8 +114,6 @@ layout autosave
 # Maintain SSH_AUTH_SOCK link
 setenv SSH_AUTH_SOCK $HOME/.byobu/.ssh-agent
 
-source $HOME/.byobu/keybindings
-
 # Window tabs, second to last line
 caption always "%12`%?%-Lw%50L>%?%{=r}%n*%f %t%?(%u)%?%{-}%12`%?%+Lw%?%11` %=%12`%110`%109`%122`%111`%10`%<"
 
@@ -125,3 +126,5 @@ hardstatus string '%99`%{-}%{=r}%12` %100`%112`%=%117`%133`%130`%135`%102`%101`%
 #  * https://bugs.launchpad.net/bugs/315871
 # Upstream:
 #  * http://savannah.gnu.org/bugs/?22146
+
+source $HOME/.byobu/keybindings

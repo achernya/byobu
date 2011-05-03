@@ -1,4 +1,63 @@
-byobu (3.34) unreleased; urgency=low
+byobu (4.0) unreleased; urgency=low
+
+  * usr/bin/byobu-config, usr/share/byobu/keybindings/f-keys,
+    usr/share/byobu/keybindings/screen-escape-keys,
+    usr/share/doc/byobu/help.txt, usr/bin/Makefile.am,
+    usr/bin/byobu-ctrl-a: LP: #776743
+    - use ctrl-^ as the default escape character
+    - bind F12 to printing the escape character
+    - adjust everything accordingly
+  * usr/share/byobu/keybindings/f-keys,
+    usr/share/byobu/keybindings/screen-escape-keys: LP: #776743
+    - the first time a user presses ctrl-a, prompt them with a choice
+      as to their preference of behavior (emacs vs. screen)
+    - preserve this choice
+  * usr/share/byobu/keybindings/f-keys: LP: #776740
+    - improve alt-pgup / alt-pgdown
+  * usr/share/byobu/profiles/common: LP: #776742
+    - disable xterm/gnome-terminal's scrollback buffer
+    - it seems we should be able to do this, at this point since byobu
+      now has keybindings for alt-pgup and alt-pgdn
+    - note that this commit does, however, revert the fix for an older bug
+  * usr/share/byobu/keybindings/f-keys:
+    - fix regression in rename F8 functionality, use <home> key
+  * usr/lib/byobu/.notify_osd, usr/share/byobu/keybindings/f-keys,
+    usr/share/byobu/profiles/common: LP: #776742, #776740
+    - set msgwait and msginwait to both 0, to turn down the verbosity of
+      screen's messaging, and speed up some byobu operations
+    - improve scrollback (alt-pgup and alt-pgdn) by disabling screen's
+      status message updates about 'copy mode', etc.
+    - speed up the printscreen functionality
+    - when running printscreen, open the result with the user's default
+      viewer in a new window entitled PRINTSCREEN
+  * usr/bin/byobu: LP: #777888
+    - enable users to disable the title printing at launch (helpful for
+      those launching byobu detached from cron, e.g.)
+  * usr/share/byobu/tests/byobu-time-notifications:
+    - fixup notification testing
+  * usr/bin/byobu-status: minor performance improvement
+  * usr/share/doc/byobu/help.txt: rearrange and update documentation
+  * usr/bin/byobu-ctrl-a, usr/share/byobu/tests/byobu-time-
+    notifications: update doc message
+  * usr/bin/byobu-launch: LP: #780430, support a BYOBU_DISABLE environment
+    variable, that ssh clients could export and globally disable launching
+    byobu on ssh logins (note that this will require whitelisting that
+    variable on the ssh client and server)
+  * usr/share/byobu/profiles/common: fix printscreen screen exchange file
+  * usr/share/byobu/keybindings/f-keys,
+    usr/share/byobu/keybindings/screen-escape-keys:
+    - simplify all calls to the screen escape key
+  * usr/bin/byobu-quiet, usr/bin/byobu-status, usr/bin/Makefile.am,
+    usr/share/byobu/profiles/common: LP: #780380
+    - add a byobu-quiet utility, to silence eyecandy
+  * usr/share/man/man1/byobu-ctrl-a.1, usr/share/man/man1/byobu-quiet.1,
+    usr/share/man/man1/Makefile.am: document the new tools
+  * usr/bin/byobu-config: ensure that escape key changing through byobu-config
+    continues to work
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 03 May 2011 12:11:10 -0500
+
+byobu (3.34-0ubuntu1) oneiric; urgency=low
 
   [ Baptiste Jonglez ]
   * usr/lib/byobu/updates_available: add support for ArchLinux in the
@@ -7,7 +66,7 @@ byobu (3.34) unreleased; urgency=low
   [ Jeffrey William Edwards ]
   * usr/lib/byobu/.notify_osd: fix minor regex error, LP: #764813
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 19 Apr 2011 16:34:35 -0400
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 03 May 2011 12:11:07 -0500
 
 byobu (3.33-0ubuntu1) natty; urgency=low
 
