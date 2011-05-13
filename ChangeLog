@@ -1,4 +1,51 @@
-byobu (4.1) unreleased; urgency=low
+byobu (4.2) unreleased; urgency=low
+
+  [ Dustin Kirkland ]
+  * usr/bin/byobu-config: remove debug output, LP: #782372
+  * usr/lib/byobu/disk_io: fix minor bug in 'command' call
+  * usr/lib/byobu/.shutil (properties changed: -x to +x): fix perm
+  * usr/bin/byobu-janitor: fix regression, ensure we can run from
+    a clean setup
+  * etc/byobu/statusrc:
+    - turn on battery, disk_io, users, wifi, as nothing is displayed
+      if we have none
+  * usr/lib/byobu/disk: add trailing whitespace
+  * usr/bin/byobu-silent, usr/bin/Makefile.am: add a total silence
+    mode for Byobu
+  * usr/share/man/man1/byobu-quiet.1, usr/share/man/man1/byobu-silent.1:
+    - add a manpage for byobu-silent.1, and update byobu-silent.1
+  * usr/lib/byobu/disk_io:
+    - support super fast next generation SSD hard drives
+
+  [ Scott Moser ]
+  * usr/bin/byobu, usr/bin/byobu-reconnect-sockets,
+    usr/lib/byobu/.shutil:
+    - source _shutil
+    - exec screen -v rather than waiting and exiting
+    - use HOSTNAME if set (it is set in bash), avoiding the fork for 'hostname'
+    - use 'uncommented_lines' function in _shutil rather than grep
+    - use 'command -v' (posix sh shell builtin) rather than 'which'
+    - mention that byobu-janitor should not be called every time
+  * usr/bin/byobu, usr/bin/byobu-reconnect-sockets,
+    usr/bin/byobu-status, usr/lib/byobu/.shutil,
+    usr/lib/byobu/battery, usr/lib/byobu/cpu_freq,
+    usr/lib/byobu/cpu_temp, usr/lib/byobu/custom,
+    usr/lib/byobu/date, usr/lib/byobu/disk,
+    usr/lib/byobu/disk_io, usr/lib/byobu/fan_speed,
+    usr/lib/byobu/ip_address, usr/lib/byobu/load_average,
+    usr/lib/byobu/mem_available, usr/lib/byobu/mem_used,
+    usr/lib/byobu/network, usr/lib/byobu/raid,
+    usr/lib/byobu/release, usr/lib/byobu/swap,
+    usr/lib/byobu/updates_available, usr/lib/byobu/uptime,
+    usr/lib/byobu/wifi_quality:
+    - lots of performance improvements
+    - define a few helpers
+    - use 'read' for obtaining input from file
+    - use built-in math functions for computation
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 13 May 2011 18:58:03 +0200
+
+byobu (4.1-0ubuntu1) oneiric; urgency=low
 
   [ Dustin Kirkland ]
   * usr/bin/byobu-ctrl-a: fix ctrl-a in screen-mode
@@ -33,7 +80,7 @@ byobu (4.1) unreleased; urgency=low
   * usr/bin/byobu-janitor:
     - performance improvements, save a few forks
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 10 May 2011 23:34:58 +0200
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 13 May 2011 18:57:57 +0200
 
 byobu (4.0-0ubuntu1) oneiric; urgency=low
 

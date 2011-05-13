@@ -1,9 +1,9 @@
-#!/bin/sh -e
+#!/bin/sh
 #
-#    date - print the date in YYYY-MM-DD format
-#    Copyright (C) 2008 Canonical Ltd.
+#    byobu-silence - disable the hardstatus, all indicators, and the window list
+#    Copyright (C) 2011 Canonical Ltd.
 #
-#    Authors: Dustin Kirkland <kirkland@canonical.com>
+#    Authors: Dustin Kirkland <kirkland@ubuntu.com>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -17,18 +17,16 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-case "$1" in
-	--detail)
-		date
-	;;
-	--short)
-		date +%Y-%m-%d
-	;;
-	*)
-		bd=$(date "+%m%d")
-		[ "$bd" = "0320" ] &&
-			msg="$(echo SGFwcHkgQmlydGhkYXkgU2NyZWVuIC0tIGh0dHA6Ly9iaXQubHkvc2NyZWVuLWJkYXkK | base64 -di)" &&
-			screen -X -S "byobu" at "*" echo "[$msg]"
-		printf "\005Y-\005m-\005d "
-	;;
-esac
+
+PKG="byobu"
+FLAG="$HOME/.$PKG/status.disable"
+
+# Clean up environment
+sed -i "/caption/d" "$HOME/.$PKG/keybindings" || true
+if [ "$1" = "--undo" ]; then
+	rm -f "$FLAG"
+else
+	touch "$FLAG"
+	echo "caption splitonly ''" >> "$HOME/.$PKG/keybindings"
+fi
+exec byobu-quiet "$@"
