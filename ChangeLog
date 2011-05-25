@@ -1,10 +1,47 @@
-byobu (4.3) unreleased; urgency=low
+byobu (4.4) unreleased; urgency=low
 
+  [ Dustin Kirkland ]
   * usr/lib/byobu/uptime: fix string bug in uptime introduced by smoser's
     changes
   * usr/lib/byobu/disk_io: fix scaling, LP: #787773
+  * usr/bin/byobu-disable, usr/bin/byobu-select-session, usr/bin/shell:
+    - fix some of the messaging
+    - add a welcome message with the toggle on/off info
+    - fix the motd display at auto launch, which was broken recently
+  * usr/lib/byobu/mem_available:
+    - fix MB display bug
+  * etc/byobu/statusrc, usr/lib/byobu/disk_io, usr/lib/byobu/network,
+    usr/share/man/man1/byobu.1:
+    - add support for a network threshold setting; set to 20kbps by default,
+      ignore network traffic less than threshold, less busy status
+    - add support for a disk threshold setting; set to 50kB/s by default,
+      ignore disk traffic less than threshold, less busy status
+  * usr/bin/byobu-janitor:
+    - on initial setup, if it looks like we're running in ec2, enable
+      ec2_cost monitor
+  * usr/share/byobu/ec2/Makefile.am, usr/share/byobu/ec2/rates.ap_si,
+    usr/share/byobu/ec2/rates.ap_to, usr/share/byobu/ec2/rates.eu_ie,
+    usr/share/byobu/ec2/rates.us_ca, usr/share/byobu/ec2/rates.us_va:
+    - update AWS prices, add the two new AP zones
+  * usr/lib/byobu/ec2_cost, usr/share/byobu/ec2/Makefile.am,
+    usr/share/byobu/ec2/rates.ap_si => usr/share/byobu/ec2/rates.ap-
+    southeast-1, usr/share/byobu/ec2/rates.ap_to =>
+    usr/share/byobu/ec2/rates.ap-northeast-1,
+    usr/share/byobu/ec2/rates.eu_ie => usr/share/byobu/ec2/rates.eu-
+    west-1, usr/share/byobu/ec2/rates.us_ca => usr/share/byobu/ec2/us-
+    west-1, usr/share/byobu/ec2/rates.us_va =>
+    usr/share/byobu/ec2/rates.us-east-1, usr/bin/byobu-janitor:
+    - rework ec2_cost entirely, using metaservice; much more accurate
+  * usr/lib/byobu/ec2_cost, usr/share/byobu/ec2/Makefile.am,
+    usr/share/byobu/ec2/us-west-1 => usr/share/byobu/ec2/rates.us-west-
+    1: fix a couple of bugs
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 23 May 2011 19:21:36 -0500
+  [ Scott Moser ]
+  * usr/lib/byobu/.shutil: fix rounding across a decimal point in fpdiv()
+  * usr/lib/byobu/swap: update to address fix in fpdiv
+  * usr/lib/byobu/mem_used: use fpdiv to round free memory properly
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 25 May 2011 19:34:47 -0500
 
 byobu (4.2-0ubuntu1) oneiric; urgency=low
 

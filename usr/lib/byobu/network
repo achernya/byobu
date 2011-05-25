@@ -31,6 +31,10 @@ else
 	while read cn other; do interface=$cn; done < /proc/net/route
 fi
 
+# By default, we won't bug the user with the display of network traffic
+# below NETWORK_THRESHOLD in kbps; override in $DATA/status
+[ -n "$NETWORK_THRESHOLD" ] || NETWORK_THRESHOLD=20
+
 if [ "$1" = "--detail" ]; then
 	LC_ALL=C /sbin/ifconfig "$interface" | sed 's/\s*$//'
 	exit 0
@@ -57,12 +61,15 @@ for i in up down; do
 			fi
 		done < /proc/net/dev
 		echo "$x2" > "$cache"
-		rate=$((($x2 - $x1) / ($t2 - $t1) / 1024))
-		if [ "$rate" -lt 0 ]; then
-			rate=0
+		rate=$((8*($x2 - $x1) / ($t2 - $t1) / 1024))  # in kbps
+		[ "$rate" -lt 0 ] && rate=0
+		if [ $rate -lt $NETWORK_THRESHOLD ]; then
+			# Below threshold, exit immediately!
+			exit 0
 		fi
 		case "$NETWORK_UNITS" in
 			bytes)
+				rate=$(($rate/8))
 				if [ "$rate" -gt 1048576 ]; then
 					fpdiv "$rate" 1048576 1
 					rate=${_RET}
@@ -77,7 +84,6 @@ for i in up down; do
 			;;
 			*)
 				# Default to bps
-				rate=$(($rate*8))
 				# Why 1000 and not 1024?  http://en.wikipedia.org/wiki/Data_rate_units
 				if [ "$rate" -gt 1000000 ]; then
 					fpdiv "$rate" 1000000 1
@@ -91,7 +97,7 @@ for i in up down; do
 			;;
 		esac
 	fi
-	if [ "$rate" != "0" ]; then
+	if [ "$rate" -gt 0 ]; then
 		color b m w; printf "%s%s" "$symbol" "$rate"; color -; color m w; printf "%s" "$unit"; color --
 	fi
 done
