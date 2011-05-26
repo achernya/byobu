@@ -1,4 +1,25 @@
-byobu (4.5) unreleased; urgency=low
+byobu (4.6) unreleased; urgency=low
+
+  * usr/bin/byobu-select-session:
+    - fix select session, when there is only 1 session to attach to
+  * usr/share/byobu/keybindings/f-keys:
+    - use shift-F6 (in both ssh and tty) for detach, but don't logout
+    - seems that ctrl-F6 doesn't work in tty right now
+  * usr/bin/byobu-launch:
+    - merge history
+  * usr/bin/byobu-launch:
+    - move the location of the BYOBU_DISABLE test
+  * debian/rules, usr/bin/byobu, usr/bin/byobu-janitor,
+    usr/bin/Makefile.am, usr/bin/shell => usr/bin/byobu-shell,
+    usr/share/byobu/windows/common, usr/share/man/man1/Makefile.am,
+    usr/share/man/man1/shell.1 => usr/share/man/man1/byobu-shell.1:
+    - byobu installing "/usr/bin/shell" might be a little egregious from
+      a namespace perspective;  so call it "byobu-shell" and just update
+      the window title when calling it
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 26 May 2011 15:14:52 -0500
+
+byobu (4.5-0ubuntu1) oneiric; urgency=low
 
   * usr/lib/byobu/custom, usr/share/byobu/keybindings/f-keys:
     - fix regression in custom scripts
@@ -9,7 +30,7 @@ byobu (4.5) unreleased; urgency=low
   * usr/bin/byobu:
     - fix logic error in showing user@host in gnome-terminal tabs
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 25 May 2011 19:37:18 -0500
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 26 May 2011 15:14:50 -0500
 
 byobu (4.4-0ubuntu1) oneiric; urgency=low
 

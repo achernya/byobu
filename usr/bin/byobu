@@ -18,7 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 PKG="byobu"
-VERSION=4.5
+VERSION=4.6
 [ -z "$BYOBU_PREFIX" ] && export BYOBU_PREFIX="/usr"
 export BYOBU_PREFIX
 [ -r "/etc/$PKG/socketdir" ] && . "/etc/$PKG/socketdir" || SOCKETDIR="/var/run/screen"
@@ -69,7 +69,7 @@ fi
 export BYOBU_WINDOWS
 
 # Launch shell, unless the user has default windows set to launch
-uncommented_lines < "$BYOBU_WINDOWS" && DEFAULT_WINDOW= || DEFAULT_WINDOW="shell"
+uncommented_lines < "$BYOBU_WINDOWS" && DEFAULT_WINDOW= || DEFAULT_WINDOW="-t ${SHELL##*/} byobu-shell"
 
 # Check if our terminfo supports 256 colors
 if command -v tput >/dev/null; then
