@@ -1,6 +1,18 @@
-byobu (4.6) unreleased; urgency=low
+byobu (4.7) unreleased; urgency=low
 
-  * usr/bin/byobu-select-session:
+  * usr/lib/byobu/network:
+    - fix shell comparator bug when number has decimal
+  * etc/byobu/statusrc:
+    - revert recent change which enabled disk_io by default
+  * close bug LP: #789408, which was fixed in the previous release
+  * usr/lib/byobu/custom:
+    - ensure that you can run more than one custom script, LP: #789647
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Sat, 28 May 2011 12:58:05 -0500
+
+byobu (4.6-0ubuntu1) oneiric; urgency=low
+
+  * usr/bin/byobu-select-session: LP: #789408
     - fix select session, when there is only 1 session to attach to
   * usr/share/byobu/keybindings/f-keys:
     - use shift-F6 (in both ssh and tty) for detach, but don't logout
@@ -17,7 +29,7 @@ byobu (4.6) unreleased; urgency=low
       a namespace perspective;  so call it "byobu-shell" and just update
       the window title when calling it
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 26 May 2011 15:14:52 -0500
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Sat, 28 May 2011 12:57:58 -0500
 
 byobu (4.5-0ubuntu1) oneiric; urgency=low
 
