@@ -1,4 +1,26 @@
-byobu (4.11) unreleased; urgency=low
+byobu (4.12) unreleased; urgency=low
+
+  * usr/bin/byobu-launch:
+    - support users who chose to set LC_BYOBU=0, since
+      LC_* are passed over SSH by default in Debian/Ubuntu
+  * usr/lib/byobu/network:
+    - fix network threshold handling, which was not working properly
+  * usr/share/byobu/keybindings/f-keys, usr/share/man/man1/byobu.1:
+    - LP: #797442
+    - ctrl-F6 kills this split
+    - update docs to reflect reality
+  * usr/share/byobu/profiles/tmux:
+    - added an early draft of a tmux profile
+  * usr/lib/byobu/hostname, usr/lib/byobu/ip_address:
+    - in EC2, use metadata for ip and hostname, far more useful
+      in that environment
+  * === added directory experimental, experimental/byobu-aggregate-
+    status:
+    - working on an experimental status aggregator
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 12 Jun 2011 23:37:24 -0500
+
+byobu (4.11-0ubuntu1) oneiric; urgency=low
 
   [ Dustin Kirkland ]
   * debian/postinst: LP: #796422
@@ -8,7 +30,7 @@ byobu (4.11) unreleased; urgency=low
   * usr/share/byobu/keybindings/screen-escape-keys: LP: #796134
     - fix refresh keybinding (missing eval)
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Sat, 11 Jun 2011 09:42:07 -0400
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 12 Jun 2011 23:37:20 -0500
 
 byobu (4.10-0ubuntu1) oneiric; urgency=low
 
