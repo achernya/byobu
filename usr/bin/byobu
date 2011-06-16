@@ -18,7 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 PKG="byobu"
-VERSION=4.12
+VERSION=4.13
 [ -z "$BYOBU_PREFIX" ] && export BYOBU_PREFIX="/usr"
 export BYOBU_PREFIX
 [ -r "/etc/$PKG/socketdir" ] && . "/etc/$PKG/socketdir" || SOCKETDIR="/var/run/screen"
@@ -117,3 +117,5 @@ else
 	# Launch with command line args
 	exec screen $SCREEN_TERM $NAME $PROFILE "$@"
 fi
+
+# vi: syntax=sh ts=4 noexpandtab
