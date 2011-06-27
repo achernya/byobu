@@ -1,3 +1,26 @@
+#!/bin/sh
+#
+#    .shutil: some shared utilities used by all status scripts
+#
+#    Copyright (C) 2011 Dustin Kirkland
+#
+#    Authors: Dustin Kirkland <kirkland@ubuntu.com>
+#             Scott Moser <smoser@ubuntu.com>
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, version 3 of the License.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+color 2>/dev/null || color() { true; }
+
 # uncommented_lines(char=#)
 # does the standard input have lines that do not start with 'char'?
 uncommented_lines() {
@@ -79,6 +102,62 @@ readfile() {
 	IFS=$OIFS
 	_RET=${r}
 	return 0
+}
+
+metadata_available() {
+	# This is really ugly.  We need a reliable, fast way of determining
+	# if a metadata service is available, that does NOT slow down non-ec2
+	# machines.
+	if grep -qs "^domain ec2.internal" /etc/resolv.conf; then
+		wget -q -O- --timeout=1 http://169.254.169.254
+	else
+		false
+	fi
+}
+
+status_freq() {
+	case "$1" in
+		apport)_RET=67 ;;
+		arch)_RET=9999999 ;;
+		battery)_RET=61 ;;
+		color)_RET=9999999 ;;
+		cpu_count) _RET=5 ;;
+		cpu_freq) _RET=2 ;;
+		cpu_temp) _RET=19 ;;
+		custom) _RET=5 ;;
+		date) _RET=28793 ;;
+		disk) _RET=13 ;;
+		disk_io) _RET=3 ;;
+		ec2_cost) _RET=601 ;;
+		fan_speed) _RET=23 ;;
+		hostname) _RET=607 ;;
+		ip_address) _RET=127 ;;
+		load_average) _RET=2 ;;
+		logo) _RET=9999999 ;;
+		mail) _RET=5 ;;
+		mem_available) _RET=47 ;;
+		mem_used) _RET=13 ;;
+		menu) _RET=9999999 ;;
+		network) _RET=3 ;;
+		notify_osd) _RET=0 ;;
+		processes) _RET=7 ;;
+		raid) _RET=7 ;;
+		rcs_cost) _RET=613 ;;
+		reboot_required) _RET=5 ;;
+		release) _RET=599 ;;
+		services) _RET=53 ;;
+		swap) _RET=19 ;;
+		time) _RET=9999999 ;;
+		time_binary) _RET=23 ;;
+		time_utc) _RET=11 ;;
+		trash) _RET=9999999 ;;
+		updates_available) _RET=7 ;;
+		uptime) _RET=29 ;;
+		users) _RET=11 ;;
+		whoami) _RET=86029 ;;
+		wifi_quality) _RET=17 ;;
+		*) _RET=9999999 ;;
+	esac
 }
 
 # vi: syntax=sh ts=4 noexpandtab

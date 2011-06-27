@@ -1,12 +1,10 @@
-#!/bin/sh -e
+#!/bin/sh
 #
-#    notify_osd: print notify-osd messages in screen's notification buffer
+#    .constants: some constant values needed by all library status scripts
 #
-#    Copyright (C) 2010 Canonical Ltd.
 #    Copyright (C) 2011 Dustin Kirkland
 #
 #    Authors: Dustin Kirkland <kirkland@ubuntu.com>
-#             with help from Mathias Gug <mathias.gug@canonical.com>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -20,18 +18,35 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-NOTIFY_OSD_LOG="$HOME"/.cache/notify-osd.log
+PKG="byobu"
+CONFIG_DIR="$HOME/.$PKG"
+mkdir -p "$CONFIG_DIR"
+if mkdir -p "/var/run/screen/S-$USER/$PKG/cache" 2>/dev/null; then
+	CACHE_DIR="/var/run/screen/S-$USER/$PKG/cache"
+else
+	mkdir -p "$CONFIG_DIR/cache"
+	CACHE_DIR="$CONFIG_DIR/cache"
+fi
+[ -n "$BYOBU_PREFIX" ] || BYOBU_PREFIX="/usr"
 
-__notify_osd_detail() {
-	cat "$NOTIFY_OSD_LOG" || true
-}
-
-__notify_osd() {
-	# This line operates basically as a daemon, watching the notify-osd log file,
-	# processing new messages and sending them to screen
-	CMD="tail --pid $PPID -n 0 -F $NOTIFY_OSD_LOG"
-	pkill -f "$CMD" || true
-	$CMD | $BYOBU_PREFIX/lib/byobu/.notify_osd "$PPID" &
-}
-
-# vi: syntax=sh ts=4 noexpandtab
+if [ "$UTF8" = "1" ]; then
+	ICON_C="℃"
+	ICON_F="℉"
+	ICON_RD="◀"
+	ICON_WR="▶"
+	ICON_MAIL="⍌"
+	ICON_UP="▲"
+	ICON_DN="▼"
+	ICON_TRASH="♸"
+	ICON_WIFI=ICON="⚚"
+else
+	ICON_C="C"
+	ICON_F="F"
+	ICON_RD="<"
+	ICON_WR=">"
+	ICON_MAIL="[M]"
+	ICON_UP="^"
+	ICON_DN="v"
+	ICON_TRASH="T"
+	ICON_WIFI=
+fi

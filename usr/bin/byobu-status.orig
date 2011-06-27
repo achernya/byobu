@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/bash -e
 #
 #    byobu-status
 #    Copyright (C) 2008 Canonical Ltd.
@@ -20,19 +20,19 @@
 PKG="byobu"
 DATA="$HOME/.$PKG"
 [ -z "$BYOBU_PREFIX" ] && export BYOBU_PREFIX="/usr" || export BYOBU_PREFIX
-[ -d "/var/run/screen/S-$USER" ] && RUNDIR="/var/run/screen/S-$USER" || RUNDIR="$DATA"
 
-if ! . "${BYOBU_PREFIX}/lib/${PKG}/.shutil"; then
-	echo "failed to source ${BYOBU_PREFIX}/lib/${PKG}/.shutil" 2>&1
-	echo "If you have installed elsewhere, export BYOBU_PREFIX in your shell" 2>&1
-	exit 1
-fi
-
-if ! . "${BYOBU_PREFIX}/lib/${PKG}/.constants"; then
-	echo "failed to source ${BYOBU_PREFIX}/lib/${PKG}/.constants" 2>&1
-	echo "If you have installed elsewhere, export BYOBU_PREFIX in your shell" 2>&1
-	exit 1
-fi
+find_script () {
+	# Allow for local status scripts
+	if [ -x "$DATA/bin/$1" ]; then
+		echo "$DATA/bin/$1"
+	elif [ -x "$BYOBU_PREFIX/lib/$PKG/$1" ]; then
+		echo "$BYOBU_PREFIX/lib/$PKG/$1"
+	elif [ -x "$BYOBU_PREFIX/libexec/$PKG/$1" ]; then
+		echo "$BYOBU_PREFIX/libexec/$PKG/$1"
+	else
+		echo "/dev/null"
+	fi
+}
 
 # Define colors
 ESC="\005"
@@ -40,7 +40,6 @@ color() {
 	case "$1" in
 		"") return 0 ;;
 		-)   printf "$ESC{-}" ;;
-		--)   printf "$ESC{-} " ;;
 		esc)    printf "$ESC" ;;
 		bold1)  printf "$ESC{=b }" ;;
 		bold2)  printf "$ESC{+b }" ;;
@@ -66,21 +65,19 @@ export P="$1"
 case "$P" in
 	--detail)
 		VER=
-		if command -v dpkg-query >/dev/null; then
+		if which dpkg-query >/dev/null; then
 			VER=$(set -- $(dpkg-query --show $PKG); echo "$2")
 		fi
 		printf "$PKG-$VER Detailed Status Navigation\n"
-		if command -v vim >/dev/null && `vim --version | grep -q +folding`; then
+		if which vim >/dev/null && `vim --version | grep -q +folding`; then
 			printf "  Expand all - zr\t\tCollapse all - zm\n  Expand one - zo\t\tCollapse one - zc\n\n"
 		fi
-		for i in "$BYOBU_PREFIX/lib/$PKG"/*; do
+		for i in "$BYOBU_PREFIX/lib/$PKG"/* "$DATA/bin"/*; do
 			i=${i##*/}
-			case "$i" in
-				menu|notify_osd|time_binary) continue ;;
-			esac
-			find_script "$i" && . "${_RET}"
-			short=$(eval "__${i}" | sed -e 's/^\s*//' -e 's/\s*$//' -e 's/.{[^}]*}//g')
-			detail=$(eval "__${i}_detail" 2>/dev/null | sed -e '/^$/d' -e 's/^/\t/g')
+			[ "$i" = "menu" ] && continue
+			script=`find_script $i`
+			short=`$script --short | sed -e 's/^\s*//' -e 's/\s*$//' -e 's/.{[^}]*}//g'` || true
+			detail=`$script --detail 2>/dev/null | sed -e '/^$/d' -e 's/^/\t/g'` || true
 			printf "%s\n\t(%s)\n" "$short" "$i"
 			[ -n "$detail" ] && printf "%s\n" "$detail"
 		done
@@ -95,9 +92,6 @@ case "$P" in
 		eval x="\$$P" || exit 1
 		[ "$x" = "1" ] || exit 0
 		shift
-		find_script "$P" && . "${_RET}"
-		eval "__${P}"
+		. $(find_script "$P") "$@"
 	;;
 esac
-
-# vi: syntax=sh ts=4 noexpandtab
