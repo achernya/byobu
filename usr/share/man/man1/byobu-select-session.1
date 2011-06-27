@@ -7,15 +7,15 @@ byobu\-select\-session \- select and connect to a byobu session
 
 If an invalid selection is chosen 3 times in a row, the user is connected to the youngest session.
 
-By default, if only one session exists, the user is connected to that session, and if no sessions exist, a new session is created -- such that there is no interactive prompt in the normal behavior.  However, some users may choose to always be prompted, by touching the file $DATA/.always-select.
+By default, if only one session exists, the user is connected to that session, and if no sessions exist, a new session is created -- such that there is no interactive prompt in the normal behavior.  However, some users may choose to always be prompted, by touching the file $BYOBU_CONFIG_DIR/.always-select.
 
-Note that DATA=$HOME/.byobu.
+Note that BYOBU_CONFIG_DIR=$HOME/.byobu.
 
 Named sessions that begin with a "." are "hidden" from \fBbyobu\-select\-session\fP(1).  This is useful, for instance, if you do not want a session to be automatically selected at login.  Example:
   byobu \-S .hidden
 
 .SH "FILES"
-\fI$DATA/.always-select\fP
+\fI$BYOBU_CONFIG_DIR/.always-select\fP
 
 .SH "SEE ALSO"
 .PD 0
@@ -27,6 +27,6 @@ Named sessions that begin with a "." are "hidden" from \fBbyobu\-select\-session
 .PD
 
 .SH AUTHOR
-This manpage and the utility were written by Dustin Kirkland <kirkland@canonical.com> for Ubuntu systems (but may be used by others).  Permission is granted to copy, distribute and/or modify this document and the utility under the terms of the GNU General Public License, Version 3 published by the Free Software Foundation.
+This manpage and the utility were written by Dustin Kirkland <kirkland@ubuntu.com> for Ubuntu systems (but may be used by others).  Permission is granted to copy, distribute and/or modify this document and the utility under the terms of the GNU General Public License, Version 3 published by the Free Software Foundation.
 
 The complete text of the GNU General Public License can be found in \fI/usr/share/common-licenses/GPL\fP on Debian/Ubuntu systems, or in \fI/usr/share/doc/fedora-release-*/GPL\fP on Fedora systems, or on the web at \fIhttp://www.gnu.org/licenses/gpl.txt\fP.

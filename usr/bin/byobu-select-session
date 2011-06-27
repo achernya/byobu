@@ -3,7 +3,7 @@
 #    byobu-select-session
 #    Copyright (C) 2010 Canonical Ltd.
 #
-#    Authors: Dustin Kirkland <kirkland@canonical.com>
+#    Authors: Dustin Kirkland <kirkland@ubuntu.com>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -23,6 +23,7 @@ import commands, os, re, sys
 PKG = "byobu"
 SHELL = os.getenv("SHELL", "/bin/bash")
 HOME=os.getenv("HOME")
+BYOBU_CONFIG_DIR=os.getenv("BYOBU_CONFIG_DIR")
 choice = ""
 sessions = []
 text = []
@@ -39,7 +40,7 @@ if output:
 			sessions.append(items[1])
 			i += 1
 
-show_shell = os.path.exists("%s/.%s/.always-select" % (HOME, PKG))
+show_shell = os.path.exists("%s/.always-select" % (BYOBU_CONFIG_DIR))
 if i>1 or show_shell:
 	sessions.append("NEW")
 	text.append("Create a new Byobu session")
@@ -73,7 +74,8 @@ if len(sessions) > 1:
 			choice = ""
 			sys.stderr.write("\nERROR: Invalid input\n");
 elif len(sessions) == 1:
-	os.execvp("byobu", ["", "-AOxRR"])
+ 	# Attach to the chosen session; must use the 'screen' binary
+	os.execvp("screen", ["", "-AOxRR"])
 
 if choice:
 	if sessions[choice-1] == "NEW":

@@ -17,9 +17,11 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-
 PKG="byobu"
-keybindings="$HOME/.$PKG/keybindings"
+[ -z "${BYOBU_PREFIX}" ] && export BYOBU_PREFIX="/usr" || export BYOBU_PREFIX
+. "${BYOBU_PREFIX}/lib/${PKG}/.common"
+
+keybindings="$BYOBU_CONFIG_DIR/keybindings"
 touch "$keybindings"
 
 while true; do
@@ -29,6 +31,7 @@ while true; do
 	echo "When you press ctrl-a in Byobu, do you want it to operate in:"
 	echo "    (1) Emacs mode  (go to beginning of line)"
 	echo "    (2) Screen mode (screen's default escape sequence)"
+	echo
 	echo "Note that:"
 	echo "  - F12 also operates as Screen escape in Byobu"
 	echo "  - You can press F9 and choose your escape character"
@@ -54,7 +57,7 @@ while true; do
 		;;
 	esac
 done
-screen -X at 0 source "$HOME/.$PKG/profile"
+screen -X at 0 source "$BYOBU_CONFIG_DIR/profile"
 echo "To modify this behavior again later, run 'byobu-ctrl-a'"
 echo
 

@@ -3,7 +3,7 @@
 #    byobu-launch - call the launcher if we're in an interactive shell
 #    Copyright (C) 2010 Canonical Ltd.
 #
-#    Authors: Dustin Kirkland <kirkland@canonical.com>
+#    Authors: Dustin Kirkland <kirkland@ubuntu.com>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -18,7 +18,8 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 PKG="byobu"
-DATA="$HOME/.$PKG"
+[ -z "${BYOBU_PREFIX}" ] && export BYOBU_PREFIX="/usr" || export BYOBU_PREFIX
+. "${BYOBU_PREFIX}/lib/${PKG}/.common"
 
 # Respect an environment variable passable over SSH to disable
 # Byobu launch.  This put that configurability on the SSH client,
@@ -37,12 +38,17 @@ if [ "$LC_BYOBU" != "0" ] && [ "$BYOBU_DISABLE" != "1" ]; then
 			# Attempt to merge shell history across sessions/windows (works with a few exceptions)
 			shopt -s histappend || true
 			[ -n "$PROMPT_COMMAND" ] && PROMPT_COMMAND="$PROMPT_COMMAND;history -a" || PROMPT_COMMAND="history -a"
+			# Source profile, as long as we won't recurse
+			if [ -r "$HOME/.profile" ] && [ "$BYOBU_SOURCED_PROFILE" != "1" ]; then
+				BYOBU_SOURCED_PROFILE=1
+				. "$HOME/.profile"
+			fi
 			if byobu-launcher; then
 				# Wait very briefly for the no-logout flag to get written?
 				sleep 0.1
-				if [ -e "$DATA/no-logout-on-detach" ] || [ -e "/var/run/screen/S-$USER/byobu.no-logout" ]; then
+				if [ -e "$BYOBU_CONFIG_DIR/no-logout-on-detach" ] || [ -e "$BYOBU_RUN_DIR/no-logout" ]; then
 					# The user does not want to logout on byobu detach
-					rm -f "/var/run/screen/S-$USER/byobu.no-logout"	# Remove one-time no-logout flag, if it exists
+					rm -f "$BYOBU_RUN_DIR/no-logout"	# Remove one-time no-logout flag, if it exists
 					true
 				else
 					exit 0

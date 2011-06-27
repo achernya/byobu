@@ -3,7 +3,7 @@
 #    byobu-status
 #    Copyright (C) 2008 Canonical Ltd.
 #
-#    Authors: Dustin Kirkland <kirkland@canonical.com>
+#    Authors: Dustin Kirkland <kirkland@ubuntu.com>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -18,9 +18,8 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 PKG="byobu"
-DATA="$HOME/.$PKG"
-[ -z "$BYOBU_PREFIX" ] && export BYOBU_PREFIX="/usr" || export BYOBU_PREFIX
-[ -d "/var/run/screen/S-$USER" ] && RUNDIR="/var/run/screen/S-$USER" || RUNDIR="$DATA"
+[ -z "${BYOBU_PREFIX}" ] && export BYOBU_PREFIX="/usr" || export BYOBU_PREFIX
+. "${BYOBU_PREFIX}/lib/${PKG}/.common"
 
 if ! . "${BYOBU_PREFIX}/lib/${PKG}/.shutil"; then
 	echo "failed to source ${BYOBU_PREFIX}/lib/${PKG}/.shutil" 2>&1
@@ -57,10 +56,10 @@ color() {
 }
 
 # Source configurations
-[ -r "$DATA/color" ] && . "$DATA/color"
+[ -r "$BYOBU_CONFIG_DIR/color" ] && . "$BYOBU_CONFIG_DIR/color"
 [ -r "/etc/$PKG/statusrc" ] && . "/etc/$PKG/statusrc"
-[ -r "$DATA/status" ] && . "$DATA/status"
-[ -r "$DATA/statusrc" ] && . "$DATA/statusrc"
+[ -r "$BYOBU_CONFIG_DIR/status" ] && . "$BYOBU_CONFIG_DIR/status"
+[ -r "$BYOBU_CONFIG_DIR/statusrc" ] && . "$BYOBU_CONFIG_DIR/statusrc"
 
 export P="$1"
 case "$P" in
@@ -91,7 +90,7 @@ case "$P" in
 		printf "$ESC{= $BACKGROUND$FOREGROUND}"
 	;;
 	*)
-		[ -f "$HOME/.$PKG/status.disable" ] && exit 0
+		[ -f "$BYOBU_CONFIG_DIR/status.disable" ] && exit 0
 		eval x="\$$P" || exit 1
 		[ "$x" = "1" ] || exit 0
 		shift

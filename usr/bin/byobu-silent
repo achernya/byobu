@@ -17,17 +17,19 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-
 PKG="byobu"
-FLAG="$HOME/.$PKG/status.disable"
+[ -z "${BYOBU_PREFIX}" ] && export BYOBU_PREFIX="/usr" || export BYOBU_PREFIX
+. "${BYOBU_PREFIX}/lib/${PKG}/.common"
+
+FLAG="$BYOBU_CONFIG_DIR/status.disable"
 
 # Clean up environment
-sed -i "/caption/d" "$HOME/.$PKG/keybindings" || true
+sed -i "/caption/d" "$BYOBU_CONFIG_DIR/keybindings" || true
 if [ "$1" = "--undo" ]; then
 	rm -f "$FLAG"
 else
 	touch "$FLAG"
-	echo "caption splitonly ''" >> "$HOME/.$PKG/keybindings"
+	echo "caption splitonly ''" >> "$BYOBU_CONFIG_DIR/keybindings"
 fi
 exec byobu-quiet "$@"
 
