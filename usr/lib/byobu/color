@@ -1,10 +1,10 @@
 #!/bin/sh -e
 #
-#    byobu-launcher-uninstall
-#    Copyright (C) 2008 Canonical Ltd.
+#    color: print the background/foreground color escape codes
 #
-#    Authors: Nick Barcet <nick.barcet@ubuntu.com>
-#             Dustin Kirkland <kirkland@ubuntu.com>
+#    Copyright (C) 2011 Dustin Kirkland
+#
+#    Authors: Dustin Kirkland <kirkland@ubuntu.com>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -18,23 +18,21 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-PKG="byobu"
-[ -z "${BYOBU_PREFIX}" ] && export BYOBU_PREFIX="/usr" || export BYOBU_PREFIX
-. "${BYOBU_PREFIX}/lib/${PKG}/.common"
-
-remove_launcher() {
-	dest=$1
-	if [ -w "$dest" ]; then
-		$SED -i -e "/ $PKG-launch/d" -e "/ screen-launch/d" "$dest"
-	fi
+__color_detail() {
+	true
 }
 
-for i in ".profile" ".bashrc" ".bash_profile" ".zprofile"; do
-	remove_launcher "$HOME/$i"
-done
-mkdir -p "$BYOBU_CONFIG_DIR"
-touch "$BYOBU_CONFIG_DIR/disable-autolaunch"
-# install disabled motd printing; re-enable
-rm -f "$HOME"/.hushlogin
+__color() {
+	case "$BYOBU_BACKEND" in
+		tmux)
+			true
+		;;
+		*)
+			[ -z "$FOREGROUND" ] && FOREGROUND="w"
+			[ -z "$BACKGROUND" ] && BACKGROUND="k"
+			printf "\005{= $BACKGROUND$FOREGROUND}"
+		;;
+	esac
+}
 
 # vi: syntax=sh ts=4 noexpandtab

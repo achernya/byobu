@@ -32,7 +32,7 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-subdir = usr/share/byobu/profiles
+subdir = usr/share/byobu/status
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.ac
@@ -64,8 +64,8 @@ am__nobase_list = $(am__nobase_strip_setup); \
 am__base_list = \
   sed '$$!N;$$!N;$$!N;$$!N;$$!N;$$!N;$$!N;s/\n/ /g' | \
   sed '$$!N;$$!N;$$!N;$$!N;s/\n/ /g'
-am__installdirs = "$(DESTDIR)$(profilesdir)"
-DATA = $(profiles_DATA)
+am__installdirs = "$(DESTDIR)$(statusdir)"
+DATA = $(status_DATA)
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = @ACLOCAL@
 AMTAR = @AMTAR@
@@ -139,8 +139,8 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-profilesdir = $(datadir)/@PACKAGE@/profiles
-profiles_DATA = byoburc  screenrc  common  tmux  NONE
+statusdir = $(datadir)/@PACKAGE@/status
+status_DATA = 1 2 3 4 status statusrc
 all: all-am
 
 .SUFFIXES:
@@ -153,9 +153,9 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu usr/share/byobu/profiles/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu usr/share/byobu/status/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu usr/share/byobu/profiles/Makefile
+	  $(AUTOMAKE) --gnu usr/share/byobu/status/Makefile
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
@@ -174,26 +174,26 @@ $(top_srcdir)/configure:  $(am__configure_deps)
 $(ACLOCAL_M4):  $(am__aclocal_m4_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 $(am__aclocal_m4_deps):
-install-profilesDATA: $(profiles_DATA)
+install-statusDATA: $(status_DATA)
 	@$(NORMAL_INSTALL)
-	test -z "$(profilesdir)" || $(MKDIR_P) "$(DESTDIR)$(profilesdir)"
-	@list='$(profiles_DATA)'; test -n "$(profilesdir)" || list=; \
+	test -z "$(statusdir)" || $(MKDIR_P) "$(DESTDIR)$(statusdir)"
+	@list='$(status_DATA)'; test -n "$(statusdir)" || list=; \
 	for p in $$list; do \
 	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
 	  echo "$$d$$p"; \
 	done | $(am__base_list) | \
 	while read files; do \
-	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(profilesdir)'"; \
-	  $(INSTALL_DATA) $$files "$(DESTDIR)$(profilesdir)" || exit $$?; \
+	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(statusdir)'"; \
+	  $(INSTALL_DATA) $$files "$(DESTDIR)$(statusdir)" || exit $$?; \
 	done
 
-uninstall-profilesDATA:
+uninstall-statusDATA:
 	@$(NORMAL_UNINSTALL)
-	@list='$(profiles_DATA)'; test -n "$(profilesdir)" || list=; \
+	@list='$(status_DATA)'; test -n "$(statusdir)" || list=; \
 	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
 	test -n "$$files" || exit 0; \
-	echo " ( cd '$(DESTDIR)$(profilesdir)' && rm -f" $$files ")"; \
-	cd "$(DESTDIR)$(profilesdir)" && rm -f $$files
+	echo " ( cd '$(DESTDIR)$(statusdir)' && rm -f" $$files ")"; \
+	cd "$(DESTDIR)$(statusdir)" && rm -f $$files
 tags: TAGS
 TAGS:
 
@@ -235,7 +235,7 @@ check-am: all-am
 check: check-am
 all-am: Makefile $(DATA)
 installdirs:
-	for dir in "$(DESTDIR)$(profilesdir)"; do \
+	for dir in "$(DESTDIR)$(statusdir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: install-am
@@ -283,7 +283,7 @@ info: info-am
 
 info-am:
 
-install-data-am: install-profilesDATA
+install-data-am: install-statusDATA
 
 install-dvi: install-dvi-am
 
@@ -327,7 +327,7 @@ ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-profilesDATA
+uninstall-am: uninstall-statusDATA
 
 .MAKE: install-am install-strip
 
@@ -336,11 +336,11 @@ uninstall-am: uninstall-profilesDATA
 	install install-am install-data install-data-am install-dvi \
 	install-dvi-am install-exec install-exec-am install-html \
 	install-html-am install-info install-info-am install-man \
-	install-pdf install-pdf-am install-profilesDATA install-ps \
-	install-ps-am install-strip installcheck installcheck-am \
+	install-pdf install-pdf-am install-ps install-ps-am \
+	install-statusDATA install-strip installcheck installcheck-am \
 	installdirs maintainer-clean maintainer-clean-generic \
 	mostlyclean mostlyclean-generic pdf pdf-am ps ps-am uninstall \
-	uninstall-am uninstall-profilesDATA
+	uninstall-am uninstall-statusDATA
 
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.

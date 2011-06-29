@@ -140,7 +140,7 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 etcdir = $(datadir)/@PACKAGE@/profiles
-etc_DATA = statusrc socketdir
+etc_DATA = socketdir
 all: all-am
 
 .SUFFIXES:

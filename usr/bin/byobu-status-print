@@ -1,10 +1,10 @@
-#!/bin/sh -e
+#!/bin/sh
 #
-#    byobu-launcher-uninstall
-#    Copyright (C) 2008 Canonical Ltd.
+#    byobu-status-print: concatenate the status cache
 #
-#    Authors: Nick Barcet <nick.barcet@ubuntu.com>
-#             Dustin Kirkland <kirkland@ubuntu.com>
+#    Copyright (C) 2011 Dustin Kirkland
+#
+#    Authors: Dustin Kirkland <kirkland@ubuntu.com>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -20,21 +20,13 @@
 
 PKG="byobu"
 [ -z "${BYOBU_PREFIX}" ] && export BYOBU_PREFIX="/usr" || export BYOBU_PREFIX
-. "${BYOBU_PREFIX}/lib/${PKG}/.common"
+. "${BYOBU_PREFIX}/lib/${PKG}/.dirs"
 
-remove_launcher() {
-	dest=$1
-	if [ -w "$dest" ]; then
-		$SED -i -e "/ $PKG-launch/d" -e "/ screen-launch/d" "$dest"
+while read i; do
+	cache="$BYOBU_RUN_DIR/status/$i"
+	if [ -s "$cache" ]; then
+		IFS=
+		read c < "$cache"
+		printf "%s" "$c"
 	fi
-}
-
-for i in ".profile" ".bashrc" ".bash_profile" ".zprofile"; do
-	remove_launcher "$HOME/$i"
-done
-mkdir -p "$BYOBU_CONFIG_DIR"
-touch "$BYOBU_CONFIG_DIR/disable-autolaunch"
-# install disabled motd printing; re-enable
-rm -f "$HOME"/.hushlogin
-
-# vi: syntax=sh ts=4 noexpandtab
+done < "$BYOBU_CONFIG_DIR/status.$1"

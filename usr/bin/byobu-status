@@ -21,18 +21,6 @@ PKG="byobu"
 [ -z "${BYOBU_PREFIX}" ] && export BYOBU_PREFIX="/usr" || export BYOBU_PREFIX
 . "${BYOBU_PREFIX}/lib/${PKG}/.common"
 
-if ! . "${BYOBU_PREFIX}/lib/${PKG}/.shutil"; then
-	echo "failed to source ${BYOBU_PREFIX}/lib/${PKG}/.shutil" 2>&1
-	echo "If you have installed elsewhere, export BYOBU_PREFIX in your shell" 2>&1
-	exit 1
-fi
-
-if ! . "${BYOBU_PREFIX}/lib/${PKG}/.constants"; then
-	echo "failed to source ${BYOBU_PREFIX}/lib/${PKG}/.constants" 2>&1
-	echo "If you have installed elsewhere, export BYOBU_PREFIX in your shell" 2>&1
-	exit 1
-fi
-
 # Define colors
 ESC="\005"
 color() {
@@ -56,10 +44,9 @@ color() {
 }
 
 # Source configurations
-[ -r "$BYOBU_CONFIG_DIR/color" ] && . "$BYOBU_CONFIG_DIR/color"
-[ -r "/etc/$PKG/statusrc" ] && . "/etc/$PKG/statusrc"
-[ -r "$BYOBU_CONFIG_DIR/status" ] && . "$BYOBU_CONFIG_DIR/status"
-[ -r "$BYOBU_CONFIG_DIR/statusrc" ] && . "$BYOBU_CONFIG_DIR/statusrc"
+for i in "${BYOBU_PREFIX}/share/$PKG/status/status" "${BYOBU_PREFIX}/share/$PKG/status/statusrc" "$BYOBU_CONFIG_DIR/status" "$BYOBU_CONFIG_DIR/statusrc" "$BYOBU_CONFIG_DIR/color"; do
+	[ -r "$i" ] && . "$i"
+done
 
 export P="$1"
 case "$P" in
@@ -78,8 +65,8 @@ case "$P" in
 				menu|notify_osd|time_binary) continue ;;
 			esac
 			find_script "$i" && . "${_RET}"
-			short=$(eval "__${i}" | sed -e 's/^\s*//' -e 's/\s*$//' -e 's/.{[^}]*}//g')
-			detail=$(eval "__${i}_detail" 2>/dev/null | sed -e '/^$/d' -e 's/^/\t/g')
+			short=$(eval "__${i}" | $SED -e 's/^\s*//' -e 's/\s*$//' -e 's/.{[^}]*}//g')
+			detail=$(eval "__${i}_detail" 2>/dev/null | $SED -e '/^$/d' -e 's/^/\t/g')
 			printf "%s\n\t(%s)\n" "$short" "$i"
 			[ -n "$detail" ] && printf "%s\n" "$detail"
 		done

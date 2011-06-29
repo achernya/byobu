@@ -1,6 +1,6 @@
 #!/bin/sh -e
 #
-#    byobu - screen wrapper script
+#    byobu - wrapper script
 #    Copyright (C) 2008-2009 Canonical Ltd.
 #
 #    Authors: Dustin Kirkland <kirkland@ubuntu.com>
@@ -17,20 +17,18 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-VERSION=4.17
+VERSION=4.18
 
 PKG="byobu"
 [ -z "${BYOBU_PREFIX}" ] && export BYOBU_PREFIX="/usr" || export BYOBU_PREFIX
-. "${BYOBU_PREFIX}/lib/${PKG}/.shutil"
-. "${BYOBU_PREFIX}/lib/${PKG}/.constants"
-
+. "${BYOBU_PREFIX}/lib/${PKG}/.common"
 
 # Add a version argument for debugging purposes
 if [ "$#" = "1" ]; then
 	case "$1" in
 		-v|--version)
 			echo "$PKG version $VERSION"
-			exec screen -v
+			exec $BYOBU_BACKEND $BYOBU_ARG_VERSION
 			exit 0
 		;;
 	esac
@@ -76,24 +74,24 @@ if [ -S "$SSH_AUTH_SOCK" ] && [ ! -h "$SSH_AUTH_SOCK" ]; then
 	ln -sf "$SSH_AUTH_SOCK" "$BYOBU_CONFIG_DIR/.ssh-agent"
 fi
 
-# Some users want to maintain a separate ~/.byoburc from ~/.screenrc,
-# if they use both screen and byobu on the same system
+# Some users want to maintain separate configurations
+# if they use both GNU Screen and byobu on the same system
 if [ -r "$HOME/.byoburc" ]; then
 	PROFILE="-c $BYOBU_PREFIX/share/$PKG/profiles/byoburc"
 else
 	PROFILE="-c $BYOBU_PREFIX/share/$PKG/profiles/screenrc"
 fi
 NAME="-S $PKG"
-# Zero out $NAME if user has specified a screen session name
+# Zero out $NAME if user has specified a session name
 for i in "$@"; do
-	case $i in -r|-*S|-ls|-list) NAME= ;; esac
+	case $i in -*r*|-*d*|-*D*|-*S*|-ls|-list) NAME= ;; esac
 done
-# Now let's execute screen!
+# Now let's execute the backend!
 if [ "$#" = "0" ]; then
-	out=$(screen -wipe 2>/dev/null) || true
+	out=$($BYOBU_BACKEND -wipe 2>/dev/null) || true
 	if [ "$CUSTOM_WINDOW_SET" = "1" ]; then
 		# Start new custom window set session
-		exec screen $SCREEN_TERM $NAME $PROFILE
+		exec $BYOBU_BACKEND $SCREEN_TERM $NAME $PROFILE
 	else
 		case "$out" in
 			*\(*\)*)
@@ -102,13 +100,13 @@ if [ "$#" = "0" ]; then
 			;;
 			*)
 				# Start new default session
-				exec screen $SCREEN_TERM $NAME $PROFILE $DEFAULT_WINDOW
+				exec $BYOBU_BACKEND $SCREEN_TERM $NAME $PROFILE $DEFAULT_WINDOW
 			;;
 		esac
 	fi
 else
 	# Launch with command line args
-	exec screen $SCREEN_TERM $NAME $PROFILE "$@"
+	exec $BYOBU_BACKEND $SCREEN_TERM $NAME $PROFILE "$@"
 fi
 
 # vi: syntax=sh ts=4 noexpandtab

@@ -24,7 +24,7 @@ PKG="byobu"
 FLAG="$BYOBU_CONFIG_DIR/status.disable"
 
 # Clean up environment
-sed -i "/hardstatus/d" "$BYOBU_CONFIG_DIR/keybindings" || true
+$SED -i "/hardstatus/d" "$BYOBU_CONFIG_DIR/keybindings" || true
 if [ "$1" = "--undo" ]; then
 	rm -f "$FLAG"
 else
@@ -33,6 +33,6 @@ else
 	status="$USER@$(hostname)"
 	echo "hardstatus lastline '$status'" >> "$BYOBU_CONFIG_DIR/keybindings"
 fi
-screen -X at 0 source "$BYOBU_CONFIG_DIR/profile"
+$BYOBU_BACKEND -X at 0 source "$BYOBU_CONFIG_DIR/profile"
 
 # vi: syntax=sh ts=4 noexpandtab

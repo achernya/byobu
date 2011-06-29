@@ -1,4 +1,149 @@
-byobu (4.17) unreleased; urgency=low
+byobu (4.18) unreleased; urgency=low
+
+  [ Dustin Kirkland ]
+  * usr/bin/byobu, usr/bin/byobu-status:
+    - remove some redundancies
+  * usr/bin/byobu, usr/bin/byobu-config, usr/bin/byobu-ctrl-a,
+    usr/bin/byobu-disable, usr/bin/byobu-launcher, usr/bin/byobu-quiet,
+    usr/bin/byobu-reconnect-sockets, usr/bin/byobu-select-profile,
+    usr/bin/byobu-select-session, usr/lib/byobu/.constants:
+    - use a BYOBU_BACKEND environment variable, to support both screen
+      and tmux
+  * etc/byobu/socketdir, usr/bin/byobu, usr/lib/byobu/date,
+    usr/lib/byobu/notify_osd, usr/share/byobu/keybindings/f-keys,
+    usr/share/byobu/keybindings/screen-escape-keys,
+    usr/share/byobu/profiles/common, usr/share/byobu/profiles/NONE,
+    usr/share/byobu/profiles/tmux, usr/share/byobu/windows/common:
+    - use a BYOBU_BACKEND environment variable, to support both screen
+      and tmux
+  * usr/lib/byobu/.common, usr/lib/byobu/.constants:
+    - ensure that libraries only get included once
+  * === removed directory usr/sbin, usr/sbin/byobu-classroom =>
+    experimental/byobu-classroom:
+    - move the classroom to experimental (about to be an ensemble formula)
+  * etc/byobu/backend, usr/lib/byobu/.constants:
+    - add support for storing byobu backend configuration (screen|tmux)
+  * debian/control: start suggesting tmux
+  * usr/bin/byobu, usr/lib/byobu/.constants:
+    - support tmux -V version
+  * usr/lib/byobu/.shutil:
+    - update ec2 detection method
+  * === added directory usr/share/byobu/status, configure.ac,
+    etc/byobu/statusrc, experimental/byobu-status-all => usr/bin/byobu-
+    statusd, Makefile.am, usr/bin/byobu-janitor, usr/bin/byobu-status-
+    print, usr/bin/Makefile.am, usr/lib/byobu/color,
+    usr/lib/byobu/.constants, usr/lib/byobu/Makefile.am,
+    usr/lib/byobu/.shutil, usr/share/byobu/profiles/common,
+    usr/share/byobu/status/1, usr/share/byobu/status/2,
+    usr/share/byobu/status/3, usr/share/byobu/status/4,
+    usr/share/byobu/status/Makefile.am:
+    - add shared configurations for status ordering
+    - install symlinks to status ordering
+    - add status script for status colors
+    - move color function to shared utils
+    - add stub for tmux color support
+    - add byobu-statusd, daemon to cache and update status information in the
+      run directory as the information expires
+    - add byobu-status-print, script to concatenate status per ordered
+      configuration
+    - move byobu backend support below BYOBU_CONFIG_DIR determination
+    - move status frequencies to a shared utility function
+    - drop the backtick commands for all the individual status functions
+    - add the backtick commands for the 4 quadrants of status
+    - update the hardstatus line accordingly
+  * usr/bin/byobu-select-session, usr/lib/byobu/.common,
+    usr/lib/byobu/.constants, usr/lib/byobu/.dirs,
+    usr/lib/byobu/Makefile.am, usr/share/byobu/profiles/common,
+    usr/share/byobu/status/1, usr/share/byobu/status/2:
+    - fix string bug in select session
+    - re-add a couple of necessary backticks
+    - update caption line to use new statusd cache
+    - significantly reduce the number of mkdir -p commands
+  * usr/bin/byobu-status-print:
+    - save a few forks
+  * usr/lib/byobu/battery, usr/lib/byobu/color, usr/lib/byobu/date,
+    usr/lib/byobu/.shutil, usr/lib/byobu/time,
+    usr/share/byobu/profiles/Makefile.am, usr/share/byobu/profiles/tmux:
+    - create tmux color mappings and functions
+    - get date/time working in tmux (need to figure out how to get
+      tmux to interpret the time format sequence)
+    - install the tmux profile
+    - get the tmux profile using the new status print methodology
+  * experimental/byobu-classroom, usr/bin/byobu-statusd, usr/bin/byobu-
+    status-print, usr/lib/byobu/battery,
+    usr/share/byobu/profiles/classroom:
+    - fixup byobu-classroom
+    - fix whitespace printing in byobu-status-print
+  * usr/lib/byobu/logo:
+    - print trailing whitespace
+  * usr/lib/byobu/network
+    - initialize and localize variables
+  * usr/share/byobu/profiles/common:
+    - switch to run-one, from run-this-one
+  * usr/share/byobu/profiles/common:
+  * usr/share/byobu/profiles/byoburc, usr/share/byobu/profiles/common,
+    usr/share/byobu/profiles/screenrc:
+    - move byobu-statusd to the rc profiles, as we don't want to run again
+      on profile reload
+  * usr/bin/byobu-janitor, usr/bin/byobu-launcher-uninstall,
+    usr/lib/byobu/.constants, usr/lib/byobu/disk_io:
+    - move the MacOSX support to constants
+  * usr/bin/byobu-ctrl-a, usr/bin/byobu-janitor, usr/bin/byobu-quiet,
+    usr/bin/byobu-silent, usr/bin/byobu-status, usr/lib/byobu/cpu_temp,
+    usr/lib/byobu/custom, usr/lib/byobu/ec2_cost, usr/lib/byobu/logo,
+    usr/lib/byobu/menu, usr/lib/byobu/network,
+    usr/lib/byobu/updates_available, usr/share/byobu/keybindings/f-keys:
+    - comprehensively use $SED for MacOSX compatibility, LP: #812973
+  * usr/bin/byobu-launch: LP: #809525
+    - no need to search path on sourcing (thanks, Scott Moser)
+  * usr/bin/byobu-launcher-install: LP: #809525
+    - prevent profile from getting sourced twice (thanks, Scott Moser)
+  * usr/bin/byobu-launch: LP: #806609
+    - support zsh history append
+  * debian/install, etc/byobu/Makefile.am, etc/byobu/statusrc =>
+    usr/share/byobu/status/statusrc, usr/bin/byobu-janitor,
+    usr/bin/byobu-status, usr/bin/byobu-statusd,
+    usr/share/byobu/status/Makefile.am, usr/share/byobu/status/status:
+    - LP: #803509
+    - rework usage of status and statusrc
+    - status now contains the enable/disable bits for each status item
+    - statusrc contains auxiliary configuration information
+    - remove this stuff from /etc/byobu/statusrc altogether, and move
+      it to /usr/share
+    - standardize the seeding of the local user's configuration
+  * usr/bin/byobu-status, usr/bin/byobu-statusd, usr/lib/byobu/logo:
+    - re-source constants in case of upgrades
+  * usr/share/byobu/keybindings/f-keys,
+    usr/share/byobu/profiles/byoburc, usr/share/byobu/profiles/common,
+    usr/share/byobu/profiles/screenrc:
+    - killall byobu-statusd owned by user before refreshing
+  * usr/bin/byobu-statusd:
+    - check that file is readable before sourcing
+  * usr/lib/byobu/mem_available:
+    - no need to source status here any more
+  * usr/share/byobu/keybindings/f-keys, usr/share/byobu/profiles/common:
+    - move the kill of statusd to the profile, near the launching of
+      statusd
+
+  [ James Spencer ]
+  * usr/lib/byobu/.constants:
+    - fix syntax error
+  * usr/bin/byobu:
+    - byobu shouldn't overwrite the screen name if given options to pass
+      onto screen which explicitly set the screen name. This patch stops
+      this for all the relevant options that I could see in the screen
+      manpage.
+
+  [ James Hunt ]
+  * usr/bin/byobu-ulevel:
+    - Added faces_2 theme.
+    - Allow permissive mode to be set via command-line ('-p').
+  * usr/lib/byobu/time_binary: remove stray trailing space character in
+    output.
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 29 Jun 2011 02:26:28 +0000
+
+byobu (4.17-0ubuntu1) oneiric; urgency=low
 
   * usr/bin/byobu-launch: LP: #802646
     - ensure that .profile gets sourced if launching byobu by default,
@@ -55,7 +200,7 @@ byobu (4.17) unreleased; urgency=low
   * debian/control:
     - modernized description
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 27 Jun 2011 14:14:17 +0000
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 29 Jun 2011 02:26:23 +0000
 
 byobu (4.16-0ubuntu1) oneiric; urgency=low
 
@@ -108,7 +253,7 @@ byobu (4.14-0ubuntu1) oneiric; urgency=low
     usr/lib/byobu/ip_address:
     - use wget instead of host to check for metadata
 
- -- Dustin Kirkland <kirkland@ubuntu.com>   Thu, 16 Jun 2011 16:16:29 -0500
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 16 Jun 2011 16:16:29 -0500
 
 byobu (4.13-0ubuntu1) oneiric; urgency=low
 
