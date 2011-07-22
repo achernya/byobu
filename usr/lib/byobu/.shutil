@@ -257,4 +257,17 @@ status_freq() {
 	esac
 }
 
+get_now() {
+	if [ -n "${BASH_VERSION}" ] && [ -n "${SECONDS}" ]; then
+		_RET=${SECONDS}
+	elif [ -r /proc/cpuinfo ]; then
+		# return the integer part of the first item in /proc/uptime
+		local s c
+		read s c < /proc/uptime
+		_RET=${s%.*}
+	else
+		_RET=$(date +%s);
+	fi
+}
+
 # vi: syntax=sh ts=4 noexpandtab

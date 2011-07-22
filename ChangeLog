@@ -1,10 +1,28 @@
-byobu (4.20) unreleased; urgency=low
+byobu (4.22) unreleased; urgency=low
+
+  * usr/bin/byobu-statusd, usr/lib/byobu/.shutil:
+    - clean up a regression caused by Scott's last patch (for the once
+      run 99999999 notifications)
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 22 Jul 2011 11:14:37 -0500
+
+byobu (4.21-0ubuntu1) oneiric; urgency=low
+
+  [ Scott Moser ]
+  * usr/bin/byobu-ctrl-a:
+    - support taking an argument screen|emacs on the command line
+  * usr/bin/byobu-statusd, usr/lib/byobu/.shutil:
+    - avoid forks on the $(date) command
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 22 Jul 2011 11:14:34 -0500
+
+byobu (4.20-0ubuntu1) oneiric; urgency=low
 
   * debian/control:
     - add Antoine Beaupré <anarcat@koumbit.org> as uploader so that he can
       sync and upload new Byobu versions to Debian
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 20 Jul 2011 08:47:50 -0500
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 20 Jul 2011 08:57:48 -0500
 
 byobu (4.19-0ubuntu1) oneiric; urgency=low
 
