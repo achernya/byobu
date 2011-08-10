@@ -17,7 +17,7 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-VERSION=4.26
+VERSION=4.27
 
 PKG="byobu"
 [ -z "${BYOBU_PREFIX}" ] && export BYOBU_PREFIX="/usr" || export BYOBU_PREFIX
@@ -33,6 +33,17 @@ if [ "$#" = "1" ]; then
 		;;
 	esac
 fi
+
+case "$0" in
+	*byobu-screen)
+		export BYOBU_BACKEND="screen"
+		exec $PKG "$@"
+	;;
+	*byobu-tmux)
+		export BYOBU_BACKEND="tmux"
+		exec $PKG "$@"
+	;;
+esac
 
 # Check if we're being autolaunched, and this user explicitly does not want it.
 if [ "$0" = "/etc/profile.d/Z98-$PKG.sh" ] && [ -r "$BYOBU_CONFIG_DIR/disable-autolaunch" ]; then
