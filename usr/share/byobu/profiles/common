@@ -75,7 +75,7 @@ backtick 131 	53	53		byobu-status services
 backtick 132 	11	11		byobu-status time_utc
 backtick 133 	3	3		byobu-status disk_io
 backtick 134 	613	613		byobu-status rcs_cost
-backtick 135 	7	7		byobu-status raid
+backtick 135 	59	59		byobu-status raid
 backtick 136 	19	19		byobu-status swap
 backtick 137 	23	23		byobu-status time_binary
 
@@ -89,7 +89,7 @@ hardstatus alwayslastline
 altscreen on
 
 # Enable 256 color terminal
-attrcolor b ".i"
+attrcolor b ".I"
 termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
 defbce "on"
 
@@ -124,3 +124,4 @@ hardstatus string '%99`%{-}%{=r}%12` %100`%112`%=%117`%133`%130`%135`%102`%101`%
 #  * http://savannah.gnu.org/bugs/?22146
 
 source $BYOBU_CONFIG_DIR/keybindings
+source $BYOBU_CONFIG_DIR/backticks
