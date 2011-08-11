@@ -27,63 +27,75 @@ color_screen() {
 		-)   printf "$ESC{-}" ;;
 		--)   printf "$ESC{-} " ;;
 		esc)    printf "$ESC" ;;
-		bold1)  printf "$ESC{=b }" ;;
-		bold2)  printf "$ESC{+b }" ;;
+		bold1)  [ -n "$BYOBU_COLOR" ] && printf "$ESC{=b }" || printf "$ESC{= }" ;;
+		bold2)  [ -n "$BYOBU_COLOR" ] && printf "$ESC{+b }" || printf "$ESC{= }" ;;
 		none)   printf "$ESC{= }" ;;
 		invert) printf "$ESC{=r }" ;;
 		*)
-			if [ "$#" = "2" ]; then
-				[ "$MONOCHROME" = "1" ] && printf "$ESC{= }"   || printf "$ESC{= $1$2}"
-			else
-				[ "$MONOCHROME" = "1" ] && printf "$ESC{=$1 }" || printf "$ESC{=$1 $2$3}"
-			fi
+			local attr fg bg
+			case $# in
+				2)
+					attr= ; fg=$1 ; bg=$2
+				;;
+				3)
+					attr= ; fg=$2 ; bg=$3
+				;;
+			esac
+			[ "$MONOCHROME" = "1" ] && (fg= ; bg= )
+			[ -n "$BYOBU_COLOR" ] || attr=
+			printf "$ESC{=$attr $fg$bg}"
 		;;
 	esac
 }
 
 color_map() {
+	local mod=
+	[ -n "$BYOBU_COLOR" ] && mod=",dim"
 	case "$1" in
-		k) _RET=black ;;
-		r) _RET=red ;;
-		g) _RET=green ;;
-		y) _RET=yellow ;;
-		b) _RET=blue ;;
-		m) _RET=magenta ;;
-		c) _RET=cyan ;;
-		w) _RET=white ;;
-		d) _RET=color0 ;;
-		K) _RET=black,bold ;;
-		R) _RET=red,bold ;;
-		G) _RET=green,bold ;;
-		Y) _RET=yellow,bold ;;
-		B) _RET=blue,bold ;;
-		M) _RET=magenta,bold ;;
-		C) _RET=cyan,bold ;;
-		W) _RET=white,bold ;;
+		k) _RET="black$mod" ;;
+		r) _RET="red$mod" ;;
+		g) _RET="green$mod" ;;
+		y) _RET="yellow$mod" ;;
+		b) _RET="blue$mod" ;;
+		m) _RET="magenta$mod" ;;
+		c) _RET="cyan$mod" ;;
+		w) _RET="white$mod" ;;
+		d) _RET="color0$mod" ;;
+		K) _RET="#555555" ;;
+		R) _RET="#FF0000" ;;
+		G) _RET="#00FF00" ;;
+		Y) _RET="#FFFF00" ;;
+		B) _RET="#0000FF" ;;
+		M) _RET="#FF00FF" ;;
+		C) _RET="#00FFFF" ;;
+		W) _RET="#FFFFFF" ;;
 		*) _RET= ;;
 	esac
 }
 
 attr_map() {
 	case "$1" in
-		d)	_RET=,dim ;;
-		u)	_RET=,underline ;;
-		b)	_RET=,bold ;;
-		r)	_RET=,reverse ;;
-		s)	_RET=,standout ;;
-		B)	_RET=,blinking ;;
-		*)	_RET= ;;
+		d) _RET=,dim ;;
+		u) _RET=,underscore ;;
+		b) _RET=,bold ;;
+		r) _RET=,reverse ;;
+		s) _RET=,standout ;;
+		B) _RET=,blinking ;;
+		h) _RET=,hidden ;;
+		i) _RET=,italics ;;
+		*) _RET= ;;
 	esac
+	[ -n "$BYOBU_COLOR" ] || _RET=
 }
 
 color_tmux() {
-	ESC="\005"
+	local back fore attr
 	case "$1" in
 		"") return 0 ;;
 		-)   printf "#[default]" ;;
 		--)   printf "#[default] " ;;
 		esc)    printf "" ;;
-		bold*)  printf "#[fg=bold]" ;;
+		bold*)  [ -n "$BYOBU_COLOR" ] && printf "#[fg=bold]" ;;
 		none)   printf "#[default]" ;;
 		invert) printf "#[reverse]" ;;
 		*)
@@ -232,13 +244,12 @@ status_freq() {
 		load_average)	_RET=2 ;;
 		logo)		_RET=9999999 ;;
 		mail)		_RET=5 ;;
-		mem_available)	_RET=47 ;;
-		mem_used)	_RET=13 ;;
+		memory)		_RET=13 ;;
 		menu)		_RET=9999999 ;;
 		network)	_RET=3 ;;
 		notify_osd)	_RET=9999999 ;;
 		processes)	_RET=7 ;;
-		raid)		_RET=7 ;;
+		raid)		_RET=59 ;;
 		rcs_cost)	_RET=613 ;;
 		reboot_required) _RET=5 ;;
 		release)	_RET=599 ;;
@@ -260,7 +271,7 @@ status_freq() {
 get_now() {
 	if [ -n "${BASH_VERSION}" ] && [ -n "${SECONDS}" ]; then
 		_RET=${SECONDS}
-	elif [ -r /proc/cpuinfo ]; then
+	elif [ -r /proc/uptime ]; then
 		# return the integer part of the first item in /proc/uptime
 		local s c
 		read s c < /proc/uptime

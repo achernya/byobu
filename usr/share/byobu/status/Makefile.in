@@ -140,7 +140,7 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 statusdir = $(datadir)/@PACKAGE@/status
-status_DATA = 1 2 3 4 status statusrc
+status_DATA = status statusrc
 all: all-am
 
 .SUFFIXES:
