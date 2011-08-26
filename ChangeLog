@@ -1,4 +1,31 @@
-byobu (4.32) unreleased; urgency=low
+byobu (4.33) unreleased; urgency=low
+
+  * usr/lib/byobu/updates_available:
+    - localize variables
+    - save a fork
+    - fix detection of updates, which only worked when there were security
+      updates
+  * usr/lib/byobu/.shutil: LP: #844994
+    - the wget --timeout=1 was not working as desired, without the --tries=1
+      option too; so local boots of ubuntu ec2 images that don't have a
+      working metadata service might take several minutes for byobu to start
+      while that wget tries repeatedly to reach the metadata service;
+      big thanks to Ben Howard for helping triage and fix ;-)
+  * usr/lib/byobu/apport: LP: #842113
+    - fix broken detection of apport bug reports, thanks to lp:~masterpatricko
+      for the suggested fix
+  * etc/byobu/backend, usr/bin/byobu, usr/lib/byobu/.common,
+    usr/lib/byobu/.dirs, usr/share/byobu/status/status,
+    usr/share/man/man1/byobu.1: LP: #836090
+    - fix handling of byobu backend (screen|tmux) handling; thanks to
+      lp:~zorun-42 for the fix
+  * usr/lib/byobu/swap: LP: #843446
+    - make swap status behave like disk and memory (display usage even if
+      zero)
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 26 Aug 2011 19:07:32 -0500
+
+byobu (4.32-0ubuntu1) oneiric; urgency=low
 
   * usr/bin/byobu-launcher: LP: #835130
     - silence message that some users found noisy
@@ -10,7 +37,7 @@ byobu (4.32) unreleased; urgency=low
   * usr/lib/byobu/.dirs: LP: #833780
     - save a fork
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 23 Aug 2011 23:23:49 -0500
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 26 Aug 2011 19:07:29 -0500
 
 byobu (4.31-0ubuntu1) oneiric; urgency=low
 
