@@ -1,10 +1,79 @@
-byobu (4.37) unreleased; urgency=low
+byobu (4.41) released; urgency=low
+
+  * usr/share/byobu/profiles/tmux:
+    - shift-[left,right,up,down] move between panes
+    - ctrl-[left,right,up,down] resize panes
+    - alt-[left,right] move between windows
+    - alt-[up,down] move between sessions
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 10 Oct 2011 09:01:48 -0500
+
+byobu (4.40-0ubuntu1) precise; urgency=low
+
+  * usr/bin/byobu-janitor, usr/share/byobu/profiles/tmux:
+    - use screen keys by default (should probably make this configurable)
+    - allow local overrides in local tmux.conf
+  * usr/lib/byobu/battery, usr/lib/byobu/cpu_freq, usr/lib/byobu/disk,
+    usr/lib/byobu/memory, usr/share/man/man1/byobu.1:
+    - save a few characters on the status line
+  * usr/bin/byobu:
+    - support detection of tmux sessions
+  * usr/bin/byobu-select-session: LP: #869390
+    - fix select session to obey BYOBU_BACKEND
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 10 Oct 2011 09:01:45 -0500
+
+byobu (4.39-0ubuntu1) oneiric; urgency=low
+
+  * usr/lib/byobu/logo:
+    - use the new Ubuntu unicode logo where possible
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 05 Oct 2011 18:05:28 -0400
+
+byobu (4.38-0ubuntu1) oneiric; urgency=low
+
+  * usr/share/byobu/profiles/tmux:
+    - add window resizing keybindings
+    - get scrollback alt-pageup working \o/
+    - set history limit to match byobu/screen
+    - display pane numbers for 150ms when moving between panes
+    - set the pane listing colors
+    - set the inactive pane to light grey/white
+    - set the clock color
+    - get next/prev split working with c-f3/c-f4 and s-f3/s-f4
+    - default mode keys to vi (to match screen/byobu)
+    - explicitly set a couple of colors, highlight active pane a bit
+    - fix broken 256-color detection, use it by default, allow override
+    - swap panes around slightly more sensibly
+    - shift-f6 detach but don't logout
+    - shift-f5 rotate through preset layouts
+    - ctrl-f6 kill a pane
+    - use magenta/magenta for focused pane
+    - s-up -> prev pane; s-down -> next pane
+  * usr/lib/byobu/distro, usr/lib/byobu/Makefile.am,
+    usr/lib/byobu/release, usr/lib/byobu/.shutil,
+    usr/share/byobu/status/status, usr/share/man/man1/byobu.1:
+    - split the OS distribution name and version to two separate status
+      items;  enable the version (but not the name) in the compact tmux
+      status line
+  * usr/lib/byobu/raid:
+    - fix raid rebuild percentage formatting
+  * usr/share/byobu/profiles/tmux:
+  * usr/bin/byobu:
+  * usr/share/byobu/profiles/tmux:
+  * usr/share/byobu/profiles/tmux:
+  * usr/share/byobu/profiles/tmux:
+  * usr/share/byobu/profiles/tmux:
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 05 Oct 2011 17:42:57 -0400
+
+byobu (4.37-0ubuntu1) oneiric; urgency=low
 
   * usr/lib/byobu/ec2_cost: LP: #862655
     - fix ec2 cost estimator on OpenStack instances by falling back to
       the approximation calculator
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 27 Sep 2011 10:59:05 -0400
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 29 Sep 2011 14:46:56 -0400
 
 byobu (4.36-0ubuntu1) oneiric; urgency=low
 
