@@ -25,13 +25,19 @@ PKG="byobu"
 remove_launcher() {
 	dest=$1
 	if [ -w "$dest" ]; then
-		$SED -i -e "/ $PKG-launch/d" -e "/ screen-launch/d" "$dest"
+		# keep any comments, and remove lines invoking byobu:
+		$SED -i -e '/^\s*#/n' -e "/\b$PKG-launch\$/d" -e "/ screen-launch/d" "$dest"
 	fi
 }
 
-for i in ".profile" ".bashrc" ".bash_profile" ".zprofile"; do
-	remove_launcher "$HOME/$i"
-done
+if [ -f "$1" ]; then
+		remove_launcher "$1"
+else
+	for i in ".profile" ".bashrc" ".bash_profile" ".bash_login" ".zprofile"; do
+		remove_launcher "$HOME/$i"
+	done
+fi
+
 mkdir -p "$BYOBU_CONFIG_DIR"
 touch "$BYOBU_CONFIG_DIR/disable-autolaunch"
 # install disabled motd printing; re-enable

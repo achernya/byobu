@@ -694,7 +694,8 @@ AC_PROVIDE_IFELSE([AC_PROG_OBJC],
 m4trace:configure.ac:6: -2- _AM_MANGLE_OPTION([no-dependencies])
 m4trace:configure.ac:6: -1- _AM_IF_OPTION([silent-rules], [AC_REQUIRE([AM_SILENT_RULES])])
 m4trace:configure.ac:6: -2- _AM_MANGLE_OPTION([silent-rules])
-m4trace:configure.ac:18: -1- _m4_warn([obsolete], [AC_OUTPUT should be used without arguments.
+m4trace:configure.ac:7: -1- m4_pattern_allow([^LN_S$])
+m4trace:configure.ac:19: -1- _m4_warn([obsolete], [AC_OUTPUT should be used without arguments.
 You should run autoupdate.], [])
-m4trace:configure.ac:18: -1- m4_pattern_allow([^LIB@&t@OBJS$])
-m4trace:configure.ac:18: -1- m4_pattern_allow([^LTLIBOBJS$])
+m4trace:configure.ac:19: -1- m4_pattern_allow([^LIB@&t@OBJS$])
+m4trace:configure.ac:19: -1- m4_pattern_allow([^LTLIBOBJS$])

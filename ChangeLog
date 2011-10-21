@@ -1,4 +1,41 @@
-byobu (4.42) released; urgency=low
+byobu (4.43) released; urgency=low
+
+  [ Dustin Kirkland ]
+  * usr/bin/byobu, usr/lib/byobu/ip_address, usr/share/man/man1/byobu.1:
+    - support IP_EXTERNAL fetching, LP: #873736
+    - put ip address in the terminal title bar, since we ran out of room
+      for it in tmux
+  * usr/bin/byobu-select-session: LP: #869390
+    - fix select session to obey BYOBU_BACKEND
+  * configure.ac, usr/bin/Makefile.am: LP: #869377
+    - provide byobu-tmux and byobu-screen symlinks
+  * configure.ac, README: LP: #861291
+    - configure should not change files under vcs control
+    - compiling users need to ensure that BYOBU_PREFIX is set in
+      their environment
+  * usr/bin/byobu-launcher-install, usr/bin/byobu-launcher-uninstall:
+    - LP: #861534
+    - ensure launcher command removed from each file before installing
+  * usr/lib/byobu/.dirs:
+    - use /dev/shm for cache, LP: #872551, #869279
+    - search and use a shared dir when possible
+  * usr/lib/byobu/battery: LP: #851100
+    - rework the battery logic to use /sys instead of /proc
+  * usr/share/man/man1/byobu.1: LP: #713879
+    - note too many files open ulimit error in documentation
+
+  [ Daniel Hahler ]
+  * usr/bin/byobu, usr/bin/byobu-launcher-install, usr/bin/byobu-
+    launcher-uninstall: Use BYOBU_PREFIX explicitly, LP: #861302
+  * debian/rules, README: LP: #854868
+    - refactor autoconf into debian/rules
+
+  [Scott Moser]
+  * usr/lib/byobu/.shutil: fix rounding error in fpdiv, LP: #869282
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 21 Oct 2011 13:43:57 -0500
+
+byobu (4.42-0ubuntu1) precise; urgency=low
 
   [ Dustin Kirkland ]
   * usr/lib/byobu/.constants, usr/lib/byobu/reboot_required:
@@ -20,7 +57,7 @@ byobu (4.42) released; urgency=low
   [Scott Moser]
   * usr/lib/byobu/.shutil: fix rounding error in fpdiv
 
- -- Scott Moser <smoser@brickies>  Fri, 21 Oct 2011 13:31:59 -0400
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 21 Oct 2011 13:43:53 -0500
 
 byobu (4.41-0ubuntu1) precise; urgency=low
 
