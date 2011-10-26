@@ -1,4 +1,33 @@
-byobu (4.43) released; urgency=low
+byobu (4.45) released; urgency=low
+
+  * usr/share/byobu/profiles/tmux:
+    - shift-F11 -> breaks pane out to its own window
+  * usr/lib/byobu/.constants:
+    - comment out utf8 characters that don't look very good
+  * usr/bin/byobu-select-backend, usr/bin/Makefile.am,
+    usr/share/man/man1/byobu-select-backend.1,
+    usr/share/man/man1/Makefile.am:
+    - add a utility to select default byobu backend (screen or tmux)
+  * usr/share/man/man1/byobu.1, usr/share/man/man1/byobu-select-
+    backend.1:
+    - document backend selection
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 26 Oct 2011 10:05:01 -0500
+
+byobu (4.44-0ubuntu1) precise; urgency=low
+
+  [ Dustin Kirkland ]
+  * usr/lib/byobu/battery:
+    - protect against division by zero
+
+  [ Daniel Hahler ]
+  * usr/lib/byobu/battery, usr/lib/byobu/.shutil,
+    usr/share/byobu/profiles/tmux, usr/share/byobu/status/statusrc:
+    - various fixes and documentation enhancements
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 26 Oct 2011 10:04:58 -0500
+
+byobu (4.43-0ubuntu1) precise; urgency=low
 
   [ Dustin Kirkland ]
   * usr/bin/byobu, usr/lib/byobu/ip_address, usr/share/man/man1/byobu.1:
@@ -33,7 +62,7 @@ byobu (4.43) released; urgency=low
   [Scott Moser]
   * usr/lib/byobu/.shutil: fix rounding error in fpdiv, LP: #869282
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 21 Oct 2011 13:43:57 -0500
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Sat, 22 Oct 2011 03:21:43 -0500
 
 byobu (4.42-0ubuntu1) precise; urgency=low
 
