@@ -1,4 +1,40 @@
-byobu (4.45) released; urgency=low
+byobu (4.46) released; urgency=low
+
+  * debian/control: LP: #887344
+    - promote tmux to a 'recommends';  will 'depend' on it soon
+  * === added directory etc/profile.d, etc/byobu/Makefile.am,
+    etc/profile.d/Makefile.am, etc/profile.d/Z97-byobu.sh, Makefile.am:
+    - LP: #586546
+    - Enable any user to remotely opt into launching byobu by default,
+      using an LC_BYOBU=1 environment variable, which is transmitted over
+      SSH
+  * configure.ac, debian/install, etc/byobu/Makefile.am,
+    etc/profile.d/Makefile.am:
+    - fix installations to /etc
+  * usr/bin/byobu, usr/bin/byobu-reconnect-sockets,
+    usr/share/byobu/profiles/tmux: LP: #883637
+    - fix reconnection to SESSION_MANAGER and DBUS_SESSION_BUS_ADDRESS
+    - add C-F5 key to tmux profile
+  * usr/bin/byobu-ctrl-a, usr/share/byobu/profiles/tmux: LP: #887387
+    - support F12 as escape key in tmux mode
+    - reorder byobu-ctrl-a to offer screen first, then emacs mode
+    - make byobu-ctrl-a slighty more compatible with tmux (not quite
+      there yet...)
+  * usr/bin/byobu: LP: #713879
+    - add ulimit checks to byobu -v
+  * usr/lib/byobu/.constants:
+    - don't use UTF8 C an F for now
+  * usr/lib/byobu/network: LP: #880410
+    - localize some variables, fix variable colision with cpu_temp
+  * debian/control:
+    - bump standards version
+  * debian/install, debian/rules, etc/byobu/Makefile.am,
+    etc/profile.d/Makefile.am:
+    - fighting with autoconf to get shtuff installing in /etc, argh
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 31 Oct 2011 09:46:46 -0400
+
+byobu (4.45-0ubuntu1) precise; urgency=low
 
   * usr/share/byobu/profiles/tmux:
     - shift-F11 -> breaks pane out to its own window
@@ -12,7 +48,7 @@ byobu (4.45) released; urgency=low
     backend.1:
     - document backend selection
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 26 Oct 2011 10:05:01 -0500
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 31 Oct 2011 09:46:41 -0400
 
 byobu (4.44-0ubuntu1) precise; urgency=low
 

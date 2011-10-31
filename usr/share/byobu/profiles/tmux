@@ -30,6 +30,9 @@ source /usr/share/doc/tmux/examples/screen-keys.conf
 # On Archlinux, this file is not under the same directory
 source /usr/share/tmux/screen-keys.conf
 
+# Add F12 to the prefix list
+set -g prefix ^A,F12
+
 # Byobu's Keybindings
 bind-key -n F1 new-window -k -t config byobu-config
 bind-key -n F2 new-window
@@ -64,6 +67,7 @@ bind-key -n M-right next-window
 bind-key -n M-Up choose-session \; send-keys Up \; send-keys Enter
 bind-key -n M-Down choose-session \; send-keys Down \; send-keys Enter
 bind-key -n S-F11 break-pane
+bind-key -n C-F5 send-keys ". $BYOBU_PREFIX/bin/byobu-reconnect-sockets" \; send-keys Enter
 
 set-option -g set-titles on
 set-option -g set-titles-string '#(whoami)@#H - byobu (#S)'

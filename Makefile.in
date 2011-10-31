@@ -171,6 +171,7 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 SUBDIRS = etc/byobu \
+	etc/profile.d \
 	usr/share/applications \
 	usr/share/byobu/ec2 \
 	usr/share/byobu/keybindings \
