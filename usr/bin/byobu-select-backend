@@ -20,7 +20,7 @@
 
 PKG="byobu"
 [ -z "${BYOBU_PREFIX}" ] && export BYOBU_PREFIX="/usr" || export BYOBU_PREFIX
-. "${BYOBU_PREFIX}/lib/${PKG}/.common"
+. "${BYOBU_PREFIX}/lib/${PKG}/include/common"
 
 usage () {
 	cat <<EOT
@@ -38,7 +38,7 @@ prompt() {
 	echo "  1. screen"
 	echo "  2. tmux"
 	echo
-	echo -n "Choose 1-2 [2]: "
+	printf "Choose 1-2 [2]: "
 	choice=$(head -n1)
 	case $choice in
 		1) _RET="screen" ;;

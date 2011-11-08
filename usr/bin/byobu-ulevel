@@ -37,7 +37,7 @@
 
 PKG="byobu"
 [ -z "${BYOBU_PREFIX}" ] && export BYOBU_PREFIX="/usr" || export BYOBU_PREFIX
-. "${BYOBU_PREFIX}/lib/${PKG}/.common"
+. "${BYOBU_PREFIX}/lib/${PKG}/include/common"
 
 circles_2=(○ ●)
 diamonds_2=(◇ ◆)
@@ -371,7 +371,7 @@ list_theme()
   echo
   for c in $content
   do
-    echo -n "$c "
+    printf "$c "
   done
   echo -e "\n"
 }

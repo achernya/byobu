@@ -1,10 +1,98 @@
-byobu (4.46) released; urgency=low
+byobu (4.47) released; urgency=low
+
+  * etc/profile.d/Z97-byobu.sh:
+    - remove unnecessary 'true'
+  * usr/share/byobu/ec2/Makefile.am, usr/share/byobu/ec2/rates.ap-
+    northeast-1, usr/share/byobu/ec2/rates.ap-southeast-1,
+    usr/share/byobu/ec2/rates.eu-west-1, usr/share/byobu/ec2/rates.us-
+    east-1, usr/share/byobu/ec2/rates.us-west-1,
+    usr/share/byobu/ec2/rates.us-west-2: LP: #888196
+    - added new us-west-2 (Oregon) pricing region
+  * close LP: #888106, fixed in last release
+  * usr/share/byobu/profiles/tmux, usr/share/doc/byobu/help.tmux.txt,
+    usr/share/doc/byobu/Makefile.am:
+    - add a tmux keybinding help screen, bind to Shift-F1
+  * usr/share/byobu/profiles/tmux, usr/share/doc/byobu/help.tmux.txt:
+    - add a keybinding Ctrl-Shift-F2 to create a new session
+  * usr/share/byobu/profiles/tmux:
+    - rearrange to match help text;  would be good to keep these
+      coordinated
+  * usr/share/byobu/profiles/tmux, usr/share/doc/byobu/help.tmux.txt:
+    - Alt-F11 breaks split into new window
+    - Shift-F11 puts window into a horizontal split in previous window
+    - Ctrl-F11 puts window into a vertical split in previous window
+  * usr/share/doc/byobu/help.tmux.txt:
+    - fix typo
+  * usr/share/byobu/keybindings/f-keys.tmux,
+    usr/share/byobu/keybindings/f-keys.tmux.disable,
+    usr/share/byobu/keybindings/Makefile.am,
+    usr/share/byobu/profiles/tmux, usr/share/doc/byobu/help.tmux.txt:
+    - LP: #888247
+    - Add Shift-F12 to toggle keybindings on/off
+    - Split tmux keybindings to separate file to source
+  * usr/bin/byobu-status-detail, usr/lib/byobu/.constants,
+    usr/share/byobu/keybindings/f-keys.tmux:
+    - set a BYOBU_PAGER environment variable
+    - use BYOBU_PAGER in places we need a pager
+  * === added directory usr/lib/byobu/include, experimental/byobu-
+    classroom, usr/bin/byobu, usr/bin/byobu-ctrl-a, usr/bin/byobu-
+    disable, usr/bin/byobu-enable, usr/bin/byobu-export, usr/bin/byobu-
+    janitor, usr/bin/byobu-launch, usr/bin/byobu-launcher,
+    usr/bin/byobu-launcher-install, usr/bin/byobu-launcher-uninstall,
+    usr/bin/byobu-quiet, usr/bin/byobu-reconnect-sockets, usr/bin/byobu-
+    select-backend, usr/bin/byobu-select-profile, usr/bin/byobu-shell,
+    usr/bin/byobu-silent, usr/bin/byobu-status, usr/bin/byobu-status-
+    detail, usr/bin/byobu-ugraph, usr/bin/byobu-ulevel,
+    usr/lib/byobu/.common => usr/lib/byobu/include/common (properties
+    changed: -x to +x), usr/lib/byobu/.constants =>
+    usr/lib/byobu/include/constants, usr/lib/byobu/.dirs =>
+    usr/lib/byobu/include/dirs, usr/lib/byobu/Makefile.am,
+    usr/lib/byobu/notify_osd, usr/lib/byobu/.notify_osd =>
+    usr/lib/byobu/include/notify_osd, usr/lib/byobu/.shutil =>
+    usr/lib/byobu/include/shutil, configure.ac, Makefile.am,
+    usr/lib/byobu/include/Makefile.am:
+    - LP: #833768
+    - move dotfiles out of usr/lib/byobu and into usr/lib/byobu/include
+    - this was triggering some chrootkit warnings
+  * usr/share/doc/byobu/help.tmux.txt:
+    - reorder some documentation
+  * usr/bin/byobu-launcher-install:
+    - close LP: #854764, which was recently fixed
+  * usr/bin/byobu-config: LP: #888247
+    - deprecate the keybinding set selection from the config menu
+    - no additional keybindg sets ever showed up, so this option
+      is not worth having
+    - deprecate background/foreground color selection; once, this was a
+      primary feature of byobu :-)  It's not really any more;  it's
+      trivial to change these in ~/.byobu/color now
+    - deprecate window management from byobu-config; hard to get this
+      right for both screen and tmux;  and I don't perceive that this
+      is any longer one of byobu's main features (?)
+    - standardize title formatting
+    - clean up some whitespace and text
+  * usr/bin/byobu-config, usr/share/doc/byobu/help.tmux.txt,
+    usr/share/doc/byobu/help.txt => usr/share/doc/byobu/help.screen.txt,
+    usr/share/doc/byobu/Makefile.am:
+    - show tmux help in tmux, screen help in screen
+  * experimental/byobu-classroom, usr/bin/byobu-ctrl-a, usr/bin/byobu-
+    enable, usr/bin/byobu-select-backend, usr/bin/byobu-select-profile,
+    usr/bin/byobu-ulevel, usr/lib/byobu/custom, usr/lib/byobu/disk,
+    usr/share/byobu/tests/byobu-time-notifications: LP: #882814
+    - use printf instead of "echo -n" for portability to Mac OSX
+  * experimental/byobu-classroom: LP: #882813
+    - fix minor use $SED
+  * usr/bin/byobu-ctrl-a, usr/bin/byobu-janitor: LP: #882435
+    - use BYOBU_PREFIX in a couple of places to allow better portability
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 08 Nov 2011 19:16:15 -0600
+
+byobu (4.46-0ubuntu1) precise; urgency=low
 
   * debian/control: LP: #887344
     - promote tmux to a 'recommends';  will 'depend' on it soon
   * === added directory etc/profile.d, etc/byobu/Makefile.am,
     etc/profile.d/Makefile.am, etc/profile.d/Z97-byobu.sh, Makefile.am:
-    - LP: #586546
+    - LP: #586546, #888106
     - Enable any user to remotely opt into launching byobu by default,
       using an LC_BYOBU=1 environment variable, which is transmitted over
       SSH
@@ -32,7 +120,7 @@ byobu (4.46) released; urgency=low
     etc/profile.d/Makefile.am:
     - fighting with autoconf to get shtuff installing in /etc, argh
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 31 Oct 2011 09:46:46 -0400
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 08 Nov 2011 19:16:13 -0600
 
 byobu (4.45-0ubuntu1) precise; urgency=low
 
