@@ -11,6 +11,7 @@ and some convenient keybindings:
   F3/F4                         Move focus among windows
     Shift-F3/F4                 Move focus among splits
     Ctrl-F3/F4                  Move a split
+    Ctrl-Shift-F3/F4            Move a window
     Alt-Left/Right              Move focus among windows
     Alt-Up/Down                 Move focus among sessions
     Shift-Left/Right/Up/Down    Move focus among splits
@@ -23,7 +24,8 @@ and some convenient keybindings:
     Ctrl-F6                     Kill split in focus
   F7                            Enter scrollback history
     Alt-PageUp/PageDown         Enter and move through scrollback
-  F8                            Rename the current window
+  F8                            Change the current window's name
+    Ctrl-F8                     Change status bar's color randomly
   F9                            Launch byobu-config window
   F10                           * Used by X11 *
   F11                           * Used by X11 *

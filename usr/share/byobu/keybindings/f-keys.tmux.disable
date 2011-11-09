@@ -39,6 +39,8 @@ unbind-key -n S-Left
 unbind-key -n S-Right
 unbind-key -n C-F3
 unbind-key -n C-F4
+unbind-key -n C-S-F3
+unbind-key -n C-S-F4
 unbind-key -n C-Up
 unbind-key -n C-Down
 unbind-key -n C-Left
@@ -53,6 +55,7 @@ unbind-key -n F7
 unbind-key -n M-NPage
 unbind-key -n M-PPage
 unbind-key -n F8
+unbind-key -n C-F8
 unbind-key -n F9
 unbind-key -n M-F11
 unbind-key -n C-F11
