@@ -1,4 +1,11 @@
-byobu (4.48) released; urgency=low
+byobu (4.49) released; urgency=low
+
+  * usr/bin/byobu-select-session:
+    - fix 256-color tmux reattaches
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 14 Nov 2011 17:43:02 -0600
+
+byobu (4.48-0ubuntu1) precise; urgency=low
 
   * debian/control, usr/lib/byobu/updates_available: LP: #878547
     - recommend run-one, MIR pending
@@ -30,7 +37,7 @@ byobu (4.48) released; urgency=low
       on the systems hostname, ip address, or just at random
     - map this to Ctrl-F8
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 09 Nov 2011 17:54:11 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 14 Nov 2011 17:42:59 -0600
 
 byobu (4.47-0ubuntu1) precise; urgency=low
 
