@@ -1,9 +1,41 @@
-byobu (4.49) released; urgency=low
+byobu (4.50) released; urgency=low
+
+  * usr/bin/byobu-mondrian:
+    - clean up code, fix idempotence
+  * usr/bin/byobu-mondrian => usr/lib/byobu/include/modrian,
+    usr/lib/byobu/include/Makefile.am, usr/share/byobu/keybindings/f-
+    keys.tmux, usr/share/byobu/keybindings/f-keys.tmux.disable,
+    usr/share/doc/byobu/help.tmux.txt:
+    - install modrian
+  * usr/share/byobu/profiles/tmux:
+    - fix action bar color
+  * usr/lib/byobu/include/mondrian:
+  * usr/lib/byobu/ec2_cost, usr/lib/byobu/hostname,
+    usr/lib/byobu/include/shutil, usr/lib/byobu/ip_address: LP: #894038
+    - background all wgets, as these can be expensive (cough OpenStack cough)
+    - sleep for 0.02 seconds after each wget, as most EC2 wgets take less
+      than 0.01 seconds, but some might take longer
+    - after backgrounded wget and sleep, attempt to read the results of the
+      wget from a cache file;  if this succeeds, proceed and use it
+    - if not, fail through gracefully, and pick up the results from the
+      cach file on the next run
+  * usr/share/byobu/keybindings/f-keys.tmux,
+    usr/share/byobu/keybindings/f-keys.tmux.disable,
+    usr/share/man/man1/byobu.1: LP: #888248
+    - add Alt-Insert in tmux for "paste"
+    - document scrollback/copy/paste procedures
+  * usr/bin/byobu-janitor: LP: #867746
+    - create a whitelist of distros carrying the LP: #315871 fix
+    - default to monochrome for other distros on initial profile creation
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 18 Nov 2011 15:41:36 -0600
+
+byobu (4.49-0ubuntu1) precise; urgency=low
 
   * usr/bin/byobu-select-session:
     - fix 256-color tmux reattaches
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 14 Nov 2011 17:43:02 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 18 Nov 2011 15:41:32 -0600
 
 byobu (4.48-0ubuntu1) precise; urgency=low
 
