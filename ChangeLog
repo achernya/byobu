@@ -1,4 +1,20 @@
-byobu (4.50) released; urgency=low
+byobu (4.51) released; urgency=low
+
+  * usr/bin/byobu-janitor: LP: #894430
+    - whitelist archlinux for status colors
+    - if tmux exists, then don't bother with color disabling
+  * usr/lib/byobu/include/mondrian: LP: #894432
+    - drop dependency on 'rand' command
+  * usr/lib/byobu/include/mondrian, usr/share/byobu/keybindings/f-
+    keys.tmux: LP: #894432
+    - fix two old references to /usr/bin/byobu-mondrian
+  * usr/bin/byobu-select-session, usr/share/byobu/keybindings/f-
+    keys.tmux, usr/share/byobu/profiles/tmux: LP: #894440
+    - fix a few hardcoded references to /usr -> $BYOBU_PREFIX
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 23 Nov 2011 13:41:31 -0600
+
+byobu (4.50-0ubuntu1) precise; urgency=low
 
   * usr/bin/byobu-mondrian:
     - clean up code, fix idempotence
@@ -28,7 +44,7 @@ byobu (4.50) released; urgency=low
     - create a whitelist of distros carrying the LP: #315871 fix
     - default to monochrome for other distros on initial profile creation
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 18 Nov 2011 15:41:36 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 23 Nov 2011 13:41:26 -0600
 
 byobu (4.49-0ubuntu1) precise; urgency=low
 
