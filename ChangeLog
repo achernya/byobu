@@ -1,4 +1,17 @@
-byobu (4.53) released; urgency=low
+byobu (4.54) released; urgency=low
+
+  * usr/lib/byobu/include/layout, usr/lib/byobu/include/Makefile.am,
+    usr/share/byobu/keybindings/f-keys.tmux,
+    usr/share/byobu/keybindings/f-keys.tmux.disable,
+    usr/share/doc/byobu/help.tmux.txt: LP: #902416
+    - new feature to save layouts using ctrl-shift-F8, and restore layouts
+      using shift-F8
+  * usr/bin/Makefile.am: LP: #901904
+    - ensure re-installation works
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 08 Dec 2011 12:15:18 -0600
+
+byobu (4.53-0ubuntu1) precise; urgency=low
 
   [ Dustin Kirkland ]
   * usr/share/byobu/profiles/common: LP: #900812
@@ -37,7 +50,7 @@ byobu (4.53) released; urgency=low
   * usr/bin/byobu-status: LP: #898801
     - fix status detailing, skip include, as it's a directory
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 05 Dec 2011 08:59:08 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 08 Dec 2011 12:15:15 -0600
 
 byobu (4.52-0ubuntu1) precise; urgency=low
 
