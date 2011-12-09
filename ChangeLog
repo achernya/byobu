@@ -1,4 +1,28 @@
-byobu (4.54) released; urgency=low
+byobu (4.55) released; urgency=low
+
+  [ Dustin Kirkland ]
+  * usr/lib/byobu/entropy, usr/lib/byobu/include/shutil,
+    usr/lib/byobu/Makefile.am, usr/share/byobu/status/status,
+    usr/share/man/man1/byobu.1:
+    - add a system entropy status item
+    - must use cat, can't use read in dash here
+    - use yellow on grey
+  * usr/bin/byobu-janitor: LP: #867746
+    - revert previous change, don't automatically set monochrome mode
+      until we have a better way of detecting it
+  * usr/lib/byobu/menu: LP: #881993
+    - fix escape key determination
+  * usr/bin/byobu-janitor: LP: #899271
+    - clean up some old upgrade cruft
+    - sed -i -e changes symlinks to local files, avoid this with readlink
+
+  [ Will Ellwood ]
+  * usr/lib/byobu/disk: LP: #904824
+    - fix escaping issue
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 09 Dec 2011 20:38:02 -0600
+
+byobu (4.54-0ubuntu1) precise; urgency=low
 
   * usr/lib/byobu/include/layout, usr/lib/byobu/include/Makefile.am,
     usr/share/byobu/keybindings/f-keys.tmux,
@@ -9,7 +33,7 @@ byobu (4.54) released; urgency=low
   * usr/bin/Makefile.am: LP: #901904
     - ensure re-installation works
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 08 Dec 2011 12:15:18 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 09 Dec 2011 20:37:56 -0600
 
 byobu (4.53-0ubuntu1) precise; urgency=low
 
