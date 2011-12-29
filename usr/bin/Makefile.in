@@ -140,7 +140,7 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-bin_SCRIPTS = byobu  byobu-config  byobu-ctrl-a  byobu-disable  byobu-enable  byobu-export  byobu-janitor  byobu-launch  byobu-launcher  byobu-launcher-install  byobu-launcher-uninstall  byobu-quiet  byobu-reconnect-sockets  byobu-select-backend  byobu-select-profile  byobu-select-session  byobu-silent  byobu-status  byobu-status-detail  byobu-shell
+bin_SCRIPTS = byobu  byobu-config  byobu-ctrl-a  byobu-disable  byobu-enable  byobu-export  byobu-janitor  byobu-launch  byobu-launcher  byobu-launcher-install  byobu-launcher-uninstall  byobu-layout  byobu-quiet  byobu-reconnect-sockets  byobu-select-backend  byobu-select-profile  byobu-select-session  byobu-silent  byobu-status  byobu-status-detail  byobu-shell
 all: all-am
 
 .SUFFIXES:
