@@ -360,7 +360,7 @@ uninstall-am: uninstall-binSCRIPTS
 
 install-exec-hook:
 	cd $(DESTDIR)$(bindir) && rm -f byobu-screen && $(LN_S) byobu byobu-screen
-	cd $(DESTDIR)$(bindir) && rm -f byobu-screen && $(LN_S) byobu byobu-tmux
+	cd $(DESTDIR)$(bindir) && rm -f byobu-tmux   && $(LN_S) byobu byobu-tmux
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
