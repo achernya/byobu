@@ -1,3 +1,13 @@
+byobu (4.37-1) unstable; urgency=low
+
+  * Syncing from Ubuntu.
+  * Switch to dh short syntax
+  * Change maintainer (adopting this package)
+  * Added a substvar ${perl:Depends} dependency into debian/control
+  * Bump standards version to 3.9.2, no changes
+
+ -- Alexander Chernyakhovsky <achernya@mit.edu>  Sun, 02 Oct 2011 19:04:37 -0400
+
 byobu (4.37-0ubuntu1) oneiric; urgency=low
 
   * usr/lib/byobu/ec2_cost: LP: #862655
