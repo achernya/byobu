@@ -1,3 +1,11 @@
+byobu (5.2-1) unstable; urgency=low
+
+  * Syncing from Ubuntu. Remaining changes:
+    - Switch to dh short syntax
+    - Added a substvar ${perl:Depends} dependency into debian/control
+
+ -- Alexander Chernyakhovsky <achernya@mit.edu>  Wed, 11 Jan 2012 19:37:34 -0500
+
 byobu (5.2-0ubuntu1) precise; urgency=low
 
   [ Dustin Kirkland ]
@@ -531,6 +539,16 @@ byobu (4.38-0ubuntu1) oneiric; urgency=low
   * usr/share/byobu/profiles/tmux:
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 05 Oct 2011 17:42:57 -0400
+
+byobu (4.37-1) unstable; urgency=low
+
+  * Syncing from Ubuntu.
+  * Switch to dh short syntax
+  * Change maintainer (adopting this package)
+  * Added a substvar ${perl:Depends} dependency into debian/control
+  * Bump standards version to 3.9.2, no changes
+
+ -- Alexander Chernyakhovsky <achernya@mit.edu>  Sun, 02 Oct 2011 19:04:37 -0400
 
 byobu (4.37-0ubuntu1) oneiric; urgency=low
 
