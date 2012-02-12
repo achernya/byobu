@@ -1,4 +1,18 @@
-byobu (5.8) released; urgency=low
+byobu (5.9) released; urgency=low
+
+  * usr/bin/byobu-status:
+    - fix broken status expiration, which wasn't working and probably
+      had a huge performance penalty :-(
+  * usr/bin/byobu-ctrl-a, usr/share/byobu/keybindings/f-keys.tmux,
+    usr/share/byobu/keybindings/f-keys.tmux.disable,
+    usr/share/byobu/profiles/tmuxrc: LP: #923134
+    - get byobu-ctrl-a working within tmux, like screen
+    - prompt the user for ctrl-a to work in Screen/escape mode, or emacs
+      mode
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 12 Feb 2012 10:01:36 -0600
+
+byobu (5.8-0ubuntu1) precise; urgency=low
 
   [ Daniel Hahler ]
   * debian/rules:
@@ -35,7 +49,7 @@ byobu (5.8) released; urgency=low
       where N is the number of characters from the front of the release
       string to display
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 30 Jan 2012 18:12:49 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 12 Feb 2012 10:01:31 -0600
 
 byobu (5.7-0ubuntu1) precise; urgency=low
 
