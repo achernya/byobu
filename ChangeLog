@@ -1,9 +1,25 @@
-byobu (5.10) released; urgency=low
+byobu (5.11) released; urgency=low
+
+  [ Ryan Thompson ]
+  * usr/bin/byobu-reconnect-sockets, usr/bin/byobu-select-session: LP: #924545
+    - add to the list of environment variables to update on reconnect
+
+  [ Dustin Kirkland ]
+  * usr/bin/byobu-status:
+    - clear first window name
+  * usr/share/byobu/status/status:
+    - disable a few status items in the first tmux status line to ensure
+      that the status line fits in 80x25 terminals
+    - press shift-f5 for more status
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 14 Feb 2012 14:37:49 -0600
+
+byobu (5.10-0ubuntu1) precise; urgency=low
 
   * usr/bin/byobu-ctrl-a: LP: #931345
     - fix ctrl-a support for tmux 1.5 and 1.6
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 12 Feb 2012 11:07:46 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 14 Feb 2012 14:37:47 -0600
 
 byobu (5.9-0ubuntu1) precise; urgency=low
 
