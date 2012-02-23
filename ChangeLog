@@ -1,4 +1,13 @@
-byobu (5.14) released; urgency=low
+byobu (5.15) released; urgency=low
+
+  * usr/bin/byobu, usr/lib/byobu/include/constants:
+    - fix 256 color support
+    - default to colors specified in the Ubuntu brand guidelines
+      + http://design.canonical.com/the-toolkit/ubuntu-brand-guidelines/
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 23 Feb 2012 08:04:07 -0600
+
+byobu (5.14-0ubuntu1) precise; urgency=low
 
   * usr/bin/byobu-status, usr/lib/byobu/battery, usr/lib/byobu/cpu_freq,
     usr/lib/byobu/custom, usr/lib/byobu/disk, usr/lib/byobu/disk_io,
@@ -12,7 +21,7 @@ byobu (5.14) released; urgency=low
     - this fixes byobu status on some slower systems
     - use the last cached status, if the current one doesn't return
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 21 Feb 2012 23:22:38 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 23 Feb 2012 08:04:04 -0600
 
 byobu (5.13-0ubuntu1) precise; urgency=low
 
