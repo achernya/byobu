@@ -1,52 +1,70 @@
-# Spanish translation for byobu
+# byobu po-debconf translation to Spanish
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the byobu package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
+# Changes:
+# - Initial translation
+#  DiegoJ <diegojromerolopez@gmail.com>, 2010
+# - Translation update and review
+#       Javier Fernández-Sanguino <jfs@debian.org> , 2012
+#
+#
+#  Traductores, si no conoce el formato PO, merece la pena leer la 
+#  documentación de gettext, especialmente las secciones dedicadas a este
+#  formato, por ejemplo ejecutando:
+#         info -n '(gettext)PO Files'
+#         info -n '(gettext)Header Entry'
+#
+# Equipo de traducción al español, por favor lean antes de traducir
+# los siguientes documentos:
+#
+# - El proyecto de traducción de Debian al español
+#   http://www.debian.org/intl/spanish/
+#   especialmente las notas y normas de traducción en
+#   http://www.debian.org/intl/spanish/notas
+#
+# - La guía de traducción de po's de debconf:
+#   /usr/share/doc/po-debconf/README-trans
+#   o http://www.debian.org/intl/l10n/po-debconf/README-trans
+#
+# Si tiene dudas o consultas sobre esta traducción consulte con el último
+# traductor (campo Last-Translator) y ponga en copia a la lista de
+# traducción de Debian al español (<debian-l10n-spanish@lists.debian.org>)
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: byobu\n"
 "Report-Msgid-Bugs-To: byobu@packages.debian.org\n"
-"POT-Creation-Date: 2013-01-24 18:31-0600\n"
-"PO-Revision-Date: 2010-03-27 18:26+0000\n"
-"Last-Translator: DiegoJ <diegojromerolopez@gmail.com>\n"
-"Language-Team: Spanish <es@li.org>\n"
+"POT-Creation-Date: 2012-09-10 18:19-0400\n"
+"PO-Revision-Date: 2012-09-27 02:07+0200\n"
+"Last-Translator: Javier Fernández-Sanguino <jfs@debian.org>\n"
+"Language-Team: Debian Spanish <debian-l10n-spanish@lists.debian.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-03-28 03:47+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-POFile-SpellExtra: profile Byobu byobu disable SSH config\n"
 
 #. Type: boolean
 #. Description
-#: ../templates:1001
-msgid "Do you want to launch Byobu at shell login for all users?"
-msgstr ""
-"¿Quiere lanzar Byobu cuando cualquier usuario inicie sesión por terminal?"
+#: ../templates:2001
+msgid "Launch Byobu at shell login for all users?"
+msgstr "¿Desea ejecutar Byobu en el inicio de la sesión de terminal de todos los usuarios?"
 
 #. Type: boolean
 #. Description
-#: ../templates:1001
+#: ../templates:2001
 msgid ""
-"Byobu can launch automatically at login (e.g. console, ssh), providing an "
-"attachable/detachable window manager on the command line."
-msgstr ""
-"Byobu puede lanzarse automáticamente al iniciar sesión (por ejemplo, "
-"consola, ssh), proporcionando un gestor de ventanas acoplable/desacoplable "
-"en la línea de órdenes."
+"Byobu can be launched automatically on all shell logins (via the console, "
+"SSH, etc.), to provide a screen session manager."
+msgstr "Byobu puede lanzarse automáticamente al iniciarse una sesión de terminal (a través de consola, SSH, etc.) para ofrecer un gestor de sesiones de ventanas."
 
 #. Type: boolean
 #. Description
-#: ../templates:1001
+#: ../templates:2001
 msgid ""
-"If you select this option, Byobu will install a symlink in /etc/profile.d. "
-"This setting is system-wide, for all users logging into the system. "
-"Individual users can disable this by touching ~/.byobu/disable-autolaunch, "
-"or configuring with 'byobu-config'."
-msgstr ""
-"Si selecciona esta opción, Byobu instalará un enlace simbólico en /etc/"
-"profile.d. Esta opción es global al sistema, para todos los usuarios que se "
-"registren en el sistema. Los usuarios individuales pueden deshabilitar esta "
-"opción tocando ~/.byobu/disable-autolaunch o accediendo a la configuración "
-"con «byobu-config»."
+"If you select this option, a symlink will be created in /etc/profile.d. This "
+"setting is system-wide, for all user logins. Individual users can opt out by "
+"using the utility \"byobu-config\" or by creating the file \"disable-"
+"autolaunch\" in their byobu configuration directory."
+msgstr "Si selecciona esta opción, se creará un enlace simbólico en «/etc/profile.d». Esta opción aplica a todo el sistema, para todos los usuarios que accedan al mismo. Los usuarios pueden deshabilitar esta opción de forma individual utilizando la herramienta «byobu-config» o creando el archivo «disable-autolaunch» en su directorio de configuración de byobu."
