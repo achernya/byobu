@@ -1,17 +1,17 @@
-# Portuguese translation for byobu's debconf messages
-# Copyright (C) 2012 THE PACKAGE'S COPYRIGHT HOLDER
+# Danish translation byobu.
+# Copyright (C) 2012 byobu & nedenstående oversættere.
 # This file is distributed under the same license as the byobu package.
-# Miguel Figueiredo, <elmig@debianpt.org>, 2012.
+# Joe Hansen (joedalton2@yahoo.dk), 2012.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: byobu\n"
 "Report-Msgid-Bugs-To: byobu@packages.debian.org\n"
 "POT-Creation-Date: 2012-09-10 18:19-0400\n"
-"PO-Revision-Date: 2012-09-17 21:11+0100\n"
-"Last-Translator: Miguel Figueiredo <elmig@debianpt.org>\n"
-"Language-Team: Portuguese <traduz@debianpt.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2012-09-16 12:42+0000\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
+"Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
+"Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,7 +20,7 @@ msgstr ""
 #. Description
 #: ../templates:2001
 msgid "Launch Byobu at shell login for all users?"
-msgstr "Lançar o Byobu após o login na shell para todos os utilizadores?"
+msgstr "Start Byobu op ved skallogind for alle brugere?"
 
 #. Type: boolean
 #. Description
@@ -29,9 +29,8 @@ msgid ""
 "Byobu can be launched automatically on all shell logins (via the console, "
 "SSH, etc.), to provide a screen session manager."
 msgstr ""
-"O Byobu pode ser automaticamente lançado em todos os logins de shell "
-"(através da consola, SSH, etc.), para disponibilizar um gestor de sessão de "
-"ecrã."
+"Byobu kan startes op automatisk på alle skal-logind'er (via konsollen, "
+"SSH, etc.) for at tilbyde en skærmsessionshåndtering."
 
 #. Type: boolean
 #. Description
@@ -42,9 +41,8 @@ msgid ""
 "using the utility \"byobu-config\" or by creating the file \"disable-"
 "autolaunch\" in their byobu configuration directory."
 msgstr ""
-"Se escolher esta opção, será criado um symlink em /etc/profile.d. Esta "
-"definição é para todo o sistema, para todos os logins de utilizador. "
-"Utilizadores individuais podem optar por não utilizar, para isso utilizando "
-"o utilitário \"byobu-config\" ou criando o symlink \"disable-autolaunch\" "
-"no seu directório de configuração do byobu."
+"Hvis du vælger denne indstilling vil en symbolsk henvisning blive oprettet "
+"i /etc/profile.d. Denne indstilling gælder for hele systemet. Individuelle "
+"brugere kan fravælge ved at bruge redskabet »byobu-config« eller ved at "
+"oprette filen »disable-autolaunch« i deres konfigurationsmappe for byobu."
 

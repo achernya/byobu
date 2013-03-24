@@ -1,3 +1,24 @@
+byobu (5.16-1.1) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Proofread templates by debian-l10n-english list, thanks to Justin B Rye
+    and Christian Perrier. (Closes: #686313)
+
+  [ debconf translations ]
+  * Remove useless en_GB translation.
+  * Russian, Yuri Kozlov (closes: #687321)
+  * Polish, Michał Kułach (closes: #687553)
+  * Czech, Michal Šimůnek (closes: #687716)
+  * Danish, Joe Hansen (closes: #687820)
+  * French, Cédric Boutillier (closes: #687946)
+  * Portuguese, Miguel Figueiredo (closes: #687984)
+  * Japanese, victory (closes: #688176)
+  * German, Martin Eberhard Schauer (closes: #688036)
+  * Swedish, Martin Bagge (closes: #688429)
+  * Spanish, Rafael Ernesto Rivas
+
+ -- David Prévot <taffit@debian.org>  Sun, 28 Oct 2012 17:22:21 -0400
+
 byobu (5.16-1) unstable; urgency=low
 
   * Syncing from Ubuntu.
