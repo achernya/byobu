@@ -1,3 +1,12 @@
+byobu (5.34-2) unstable; urgency=low
+
+  * Perform sed from "/usr/bin/env python" to "/usr/bin/python" at
+    build-time, not compile-time. (Closes: #703955)
+  * Update standards version to 3.9.4.
+  * Rebuild debconf templates.
+
+ -- Alexander Chernyakhovsky <achernya@mit.edu>  Wed, 03 Apr 2013 01:32:17 -0400
+
 byobu (5.34-1) unstable; urgency=low
 
   * Syncing from Ubuntu. (Closes: #682958)

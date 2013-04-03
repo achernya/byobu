@@ -2,11 +2,11 @@ Source: byobu
 Section: misc
 Priority: optional
 Maintainer: Alexander Chernyakhovsky <achernya@mit.edu>
-DM-Upload-Allowed: yes
-Standards-Version: 3.9.3
+Standards-Version: 3.9.4
 Build-Depends: debhelper (>= 7.0.50~), gettext-base, automake, autoconf, pep8
 Homepage: http://byobu.co
 Vcs-git: git://github.com/achernya/byobu.git
+Vcs-browser: https://github.com/achernya/byobu
 
 Package: byobu
 Architecture: all
