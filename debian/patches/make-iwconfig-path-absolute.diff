@@ -1,0 +1,13 @@
+diff --git a/usr/lib/byobu/wifi_quality b/usr/lib/byobu/wifi_quality
+index d2c664c..8dfd442 100755
+--- a/usr/lib/byobu/wifi_quality
++++ b/usr/lib/byobu/wifi_quality
+@@ -29,7 +29,7 @@ __wifi_quality() {
+ 	#    Bit Rate=54 Mb/s   Tx-Power=15 dBm
+ 	#    Link Quality=60/70  Signal level=-50 dBm
+ 	# the awk below tokenizes the output and prints shell evalable results
+-	out=`iwconfig $MONITORED_NETWORK 2>/dev/null |
++	out=`/sbin/iwconfig $MONITORED_NETWORK 2>/dev/null |
+ 		awk '$0 ~ /[ ]*Link Quality./ {
+    sub(/.*=/,"",$2); split($2,a,"/");
+    printf "quality=%.0f\n", 100*a[1]/a[2] };

@@ -1,12 +1,12 @@
 Source: byobu
 Section: misc
 Priority: optional
-Maintainer: Dustin Kirkland <kirkland@ubuntu.com>
-Uploaders: Antoine Beaupré <anarcat@koumbit.org>
+Maintainer: Alexander Chernyakhovsky <achernya@mit.edu>
 Standards-Version: 3.9.6
-Build-Depends: debhelper (>= 7.0.50~), gettext-base, automake, autoconf, pep8
-Homepage: http://byobu.org
-Vcs-Bzr: http://bazaar.launchpad.net/~kirkland/byobu/trunk
+Build-Depends: debhelper (>= 7.0.50~), gettext-base, automake, autoconf
+Homepage: http://byobu.co
+Vcs-git: git://github.com/achernya/byobu.git
+Vcs-browser: https://github.com/achernya/byobu
 
 Package: byobu
 Architecture: all
@@ -14,8 +14,8 @@ Depends:
  ${misc:Depends}, ${perl:Depends}, ${python:Depends},
  debconf (>= 0.5) | debconf-2.0,
  gettext-base,
- python3|python,
- python3-newt|python-newt,
+ python,
+ python-newt,
  tmux (>= 1.5) | screen,
  gawk
 Recommends:
