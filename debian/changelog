@@ -1,3 +1,14 @@
+byobu (5.87-1) unstable; urgency=medium
+
+  * Syncing from Ubuntu. Notable upstream changes:
+    - Rewrite of session selector (Closes: #633873)
+    - Better /proc/net/route handling (Closes: #671792)
+    - Improve keybindings support (Closes: #681351, #650292, #692724)
+    - Make date/time visibility configurable (Closes: #750711)
+  * Fully qualify path to iwconfig (Closes: #760711)
+
+ -- Alexander Chernyakhovsky <achernya@mit.edu>  Sat, 04 Oct 2014 17:11:51 -0400
+
 byobu (5.87-0ubuntu1) utopic; urgency=medium
 
   [ Fazle AREFIN ]
@@ -138,6 +149,14 @@ byobu (5.78-0ubuntu1) unstable; urgency=medium
     - revert r2317 as this is breaking ctrl-a in byobu-screen in a bad way
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 23 Apr 2014 18:24:21 -0500
+
+byobu (5.77-1) unstable; urgency=medium
+
+  * Syncing from Ubuntu.
+  * Remote python3 dependencies since not all are available in
+    Debian (Closes: #742300)
+
+ -- Alexander Chernyakhovsky <achernya@mit.edu>  Sat, 05 Apr 2014 02:45:18 -0400
 
 byobu (5.77-0ubuntu1) trusty; urgency=medium
 
@@ -327,6 +346,12 @@ byobu (5.71-0ubuntu1) trusty; urgency=low
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 10 Feb 2014 15:38:22 -0600
 
+byobu (5.70-1) unstable; urgency=medium
+
+  * Syncing from Ubuntu
+
+ -- Alexander Chernyakhovsky <achernya@mit.edu>  Sun, 26 Jan 2014 23:03:27 -0500
+
 byobu (5.70-0ubuntu1) trusty; urgency=low
 
   * usr/share/byobu/keybindings/f-keys.tmux:
@@ -503,6 +528,12 @@ byobu (5.61-0ubuntu1) unstable; urgency=low
       run in a nested session
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 18 Oct 2013 16:29:54 -0500
+
+byobu (5.60-1) unstable; urgency=low
+
+  * Syncing from Ubuntu
+
+ -- Alexander Chernyakhovsky <achernya@mit.edu>  Sat, 28 Sep 2013 15:29:54 -0400
 
 byobu (5.60-0ubuntu1) saucy; urgency=low
 
@@ -789,6 +820,12 @@ byobu (5.42-0ubuntu1) saucy; urgency=low
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 22 May 2013 18:01:26 -0500
 
+byobu (5.41-1) unstable; urgency=low
+
+  * Syncing from Ubuntu.
+
+ -- Alexander Chernyakhovsky <achernya@mit.edu>  Sat, 11 May 2013 13:24:39 -0400
+
 byobu (5.41-0ubuntu1) saucy; urgency=low
 
   * usr/share/byobu/profiles/tmux:
@@ -903,6 +940,22 @@ byobu (5.35-0ubuntu1) raring; urgency=low
     - fix degraded raid detection regression
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 26 Mar 2013 11:24:36 -0500
+
+byobu (5.34-2) unstable; urgency=low
+
+  * Perform sed from "/usr/bin/env python" to "/usr/bin/python" at
+    build-time, not compile-time. (Closes: #703955)
+  * Update standards version to 3.9.4.
+  * Rebuild debconf templates.
+
+ -- Alexander Chernyakhovsky <achernya@mit.edu>  Wed, 03 Apr 2013 01:32:17 -0400
+
+byobu (5.34-1) unstable; urgency=low
+
+  * Syncing from Ubuntu. (Closes: #682958)
+  * Import new debconf spanish translation. (Closes: #688922)
+
+ -- Alexander Chernyakhovsky <achernya@mit.edu>  Sat, 23 Mar 2013 21:14:26 -0400
 
 byobu (5.34-0ubuntu1) raring; urgency=low
 
@@ -1373,6 +1426,33 @@ byobu (5.17-0ubuntu1) precise; urgency=low
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 03 Apr 2012 19:22:02 -0500
 
+byobu (5.16-1.1) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Proofread templates by debian-l10n-english list, thanks to Justin B Rye
+    and Christian Perrier. (Closes: #686313)
+
+  [ debconf translations ]
+  * Remove useless en_GB translation.
+  * Russian, Yuri Kozlov (closes: #687321)
+  * Polish, Michał Kułach (closes: #687553)
+  * Czech, Michal Šimůnek (closes: #687716)
+  * Danish, Joe Hansen (closes: #687820)
+  * French, Cédric Boutillier (closes: #687946)
+  * Portuguese, Miguel Figueiredo (closes: #687984)
+  * Japanese, victory (closes: #688176)
+  * German, Martin Eberhard Schauer (closes: #688036)
+  * Swedish, Martin Bagge (closes: #688429)
+  * Spanish, Rafael Ernesto Rivas
+
+ -- David Prévot <taffit@debian.org>  Sun, 28 Oct 2012 17:22:21 -0400
+
+byobu (5.16-1) unstable; urgency=low
+
+  * Syncing from Ubuntu.
+
+ -- Alexander Chernyakhovsky <achernya@mit.edu>  Mon, 12 Mar 2012 00:57:42 -0400
+
 byobu (5.16-0ubuntu1) precise; urgency=low
 
   * usr/lib/byobu/updates_available: LP: #942469
@@ -1606,6 +1686,14 @@ byobu (5.4-0ubuntu1) precise; urgency=low
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 17 Jan 2012 12:56:18 -0600
 
+byobu (5.3-1) unstable; urgency=low
+
+  * Syncing from Ubuntu. Remaining changes:
+    - Switch to dh short syntax
+    - Added a substvar ${perl:Depends} dependency into debian/control
+
+ -- Alexander Chernyakhovsky <achernya@mit.edu>  Wed, 11 Jan 2012 19:37:00 -0500
+
 byobu (5.3-0ubuntu1) precise; urgency=low
 
   [ Daniel Hahler ]
@@ -1651,6 +1739,14 @@ byobu (5.3-0ubuntu1) precise; urgency=low
     - improve support for importing X11 environment variables
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 15 Jan 2012 13:54:14 -0600
+
+byobu (5.2-1) unstable; urgency=low
+
+  * Syncing from Ubuntu. Remaining changes:
+    - Switch to dh short syntax
+    - Added a substvar ${perl:Depends} dependency into debian/control
+
+ -- Alexander Chernyakhovsky <achernya@mit.edu>  Wed, 11 Jan 2012 19:37:34 -0500
 
 byobu (5.2-0ubuntu1) precise; urgency=low
 
@@ -2185,6 +2281,16 @@ byobu (4.38-0ubuntu1) oneiric; urgency=low
   * usr/share/byobu/profiles/tmux:
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 05 Oct 2011 17:42:57 -0400
+
+byobu (4.37-1) unstable; urgency=low
+
+  * Syncing from Ubuntu.
+  * Switch to dh short syntax
+  * Change maintainer (adopting this package)
+  * Added a substvar ${perl:Depends} dependency into debian/control
+  * Bump standards version to 3.9.2, no changes
+
+ -- Alexander Chernyakhovsky <achernya@mit.edu>  Sun, 02 Oct 2011 19:04:37 -0400
 
 byobu (4.37-0ubuntu1) oneiric; urgency=low
 
