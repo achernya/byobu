@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: byobu\n"
 "Report-Msgid-Bugs-To: byobu@packages.debian.org\n"
-"POT-Creation-Date: 2013-01-24 18:31-0600\n"
+"POT-Creation-Date: 2013-04-03 01:49-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,24 +19,24 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../templates:1001
-msgid "Do you want to launch Byobu at shell login for all users?"
+#: ../templates:2001
+msgid "Launch Byobu at shell login for all users?"
 msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../templates:1001
+#: ../templates:2001
 msgid ""
-"Byobu can launch automatically at login (e.g. console, ssh), providing an "
-"attachable/detachable window manager on the command line."
+"Byobu can be launched automatically on all shell logins (via the console, "
+"SSH, etc.), to provide a screen session manager."
 msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../templates:1001
+#: ../templates:2001
 msgid ""
-"If you select this option, Byobu will install a symlink in /etc/profile.d. "
-"This setting is system-wide, for all users logging into the system. "
-"Individual users can disable this by touching ~/.byobu/disable-autolaunch, "
-"or configuring with 'byobu-config'."
+"If you select this option, a symlink will be created in /etc/profile.d. This "
+"setting is system-wide, for all user logins. Individual users can opt out by "
+"using the utility \"byobu-config\" or by creating the file \"disable-"
+"autolaunch\" in their byobu configuration directory."
 msgstr ""
