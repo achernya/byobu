@@ -1,7 +1,20 @@
+byobu (5.112-1.1) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Obvious lintian fixes:
+    -possible-missing-colon-in-closes
+    -script-needs-depends-on-sensible-utils
+  * Add Debconf translations:
+    -pt_BR from Adriano Rafael Gomes (Closes: #804096)
+    -nl from Frans Spiesschaert (Closes: #835134)
+    -it from Beatrice Torracca (Closes: #712398)
+
+ -- Helge Kreutzmann <debian@helgefjell.de>  Fri, 22 Jun 2018 19:31:54 +0200
+
 byobu (5.112-1) unstable; urgency=medium
 
   * Syncing from Ubuntu.
-  * Remove pep8 from build process (Closes #844960)
+  * Remove pep8 from build process (Closes: #844960)
 
  -- Alexander Chernyakhovsky <achernya@mit.edu>  Sun, 20 Nov 2016 19:13:02 -0500
 

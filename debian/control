@@ -17,7 +17,8 @@ Depends:
  python,
  python-newt,
  tmux (>= 1.5) | screen,
- gawk
+ gawk,
+ sensible-utils
 Recommends:
  pastebinit,
  screen,
